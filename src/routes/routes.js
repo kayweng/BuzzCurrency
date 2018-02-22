@@ -1,3 +1,6 @@
+// Landing page
+import Home from 'src/pages/Home/Home.vue'
+
 import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue'
 // GeneralViews
 import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'
@@ -196,6 +199,10 @@ let lockPage = {
 const routes = [
   {
     path: '/',
+    component: Home,
+  },
+  {
+    path: '/overview',
     redirect: '/admin/overview'
   },
   componentsMenu,

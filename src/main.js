@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LightBootstrap from './light-bootstrap-main'
+import './assets/css/common.css'
+
 // Plugins
 import App from './App.vue'
 

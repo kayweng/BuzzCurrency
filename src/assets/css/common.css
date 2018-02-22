@@ -1,0 +1,39 @@
+/* button style */
+.btn-circle{
+    width: 80px;
+    color: white;
+    border-color: white;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.42;
+    border-radius: 15px;
+}
+
+/* font style */
+.italic{
+    font-style: italic;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.small{
+    font-size: small
+}
+
+.smaller{
+    font-size: smaller
+}
+
+/* color */
+.white{
+    color: white;
+}
+
+/* element style */
+a:hover{
+    color: darkblue;
+}
