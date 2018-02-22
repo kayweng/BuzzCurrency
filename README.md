@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # [Vue Light Bootstrap Dashboard PRO](https://github.com/creativetimofficial/vue-light-bootstrap-dashboard-pro) [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
 
 > Admin dashboard based on paper dashboard UI template + vue-router
@@ -27,3 +28,6 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 [CHANGELOG]: ./CHANGELOG.md
 [version-badge]: https://img.shields.io/badge/version-1.0.0-blue.svg
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+=======
+# BuzzCurrency
+>>>>>>> 54a24b1b45aba42cf6f6bb328b628e816fdb3520
