@@ -2,20 +2,20 @@
     <div class="container-fluid bg">
         <div>
             <div class="bg-div">
-                <i class="fa fa-gg" style="font-size:16px;color:white;"></i>
+                <i class="fa fa-forumbee" style="font-size:16px;color:white;"></i>
                 <label>Buzz Currency</label>
-                <div class="bg-buttons">
+                <div class="auth">
                     <button class="btn btn-circle sign-up">Sign Up</button>
                     &nbsp;
                     <button class="btn btn-circle">Sign In</button>
                 </div>
             </div>
         </div>
-        <div class="bg-space">&nbsp;</div>
+        <div class="empty-row">&nbsp;</div>
         <div class="bg-div">
             <h2>EASY EXCHANGE YOUR CURRENCY</h2>
-            <div>
-                <span class="italic small">New to Buzz Currency ? &nbsp;</span>
+            <div style="padding-bottom: 10px;">
+                <small>New to Buzz Currency ? </small>
                 <i class="fa fa-book" style="font-size:16px;color:white;"></i>
                 <a class="white small" href="#">Learn More</a>
             </div>
@@ -43,16 +43,13 @@
         font-weight: 900;
     }
 
-    .bg-buttons {
+    .auth {
         display: inline;
         float: right;
     }
 
     .btn {
         background-color: transparent;
-    }
-    .sign-up{
-        border-color: orangered;
     }
 
     h2{
@@ -67,7 +64,7 @@
         .bg{
              min-height: 400px;
         }
-        .bg-space{
+        .empty-row{
             height: 200px;
         }
     }
@@ -77,7 +74,7 @@
         .bg{
              min-height: 300px;
         }
-        .bg-space{
+        .empty-row{
             height: 150px;
         }
     }
@@ -87,7 +84,7 @@
         .bg{
              min-height: 200px;
         }
-        .bg-space{
+        .empty-row{
             height: 120px;
         }
     }
@@ -97,7 +94,7 @@
         .bg{
              min-height: 100px;
         }
-        .bg-space{
+        .empty-row{
             height: 70px;
         }
     }
@@ -107,7 +104,7 @@
         .bg{
              min-height: 120px;
         }
-        .bg-space{
+        .empty-row{
             height: 30px;
         }
     }
