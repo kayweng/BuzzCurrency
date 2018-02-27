@@ -21,6 +21,7 @@
         margin-left: 100px;
         background-color: #CB4335;
         height: 40px;
+        box-shadow: 2px 4px grey;
     }
 
     .get-started-info{

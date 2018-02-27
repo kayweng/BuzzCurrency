@@ -54,8 +54,8 @@
             return {
                 items: [
                     {img: 'genuine_user.png', message: 'Exchange currency with genuine users'},
-                    {img: 'currency_rate.png', message: 'Choose your preferable currency rate'},
-                    {img: 'meetup.png', message: 'Meet up with your buddy for exchange'},
+                    {img: 'currency_rate.png', message: 'Choose your comfortable currency rates'},
+                    {img: 'meetup.png', message: 'Meet up with each other for face to face exchange'},
                     {img: 'aml.png', message: 'Prevent money laundering activity'},
                 ]
             }
