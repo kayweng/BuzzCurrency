@@ -6,7 +6,7 @@
                 authenticate yourself to be genuine user to enjoy more features.</p>
         </div>
         <div class="row">
-            <button class="btn">Get Started</button>
+            <button class="btn">Getting Started</button>
         </div>
     </div>
 </template>

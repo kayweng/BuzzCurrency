@@ -8,9 +8,11 @@
                 </button>
             </div>
             <div class="currencies">
-                <div style="display:inline-block;" v-for="curr in currencies" :key="curr.id">
-                    <rate :rate="curr"></rate>
-                </div>
+                <transition-group name="fade" tag="div">
+                    <div style="display:inline-block;" v-for="curr in currencies" :key="curr.id">
+                        <rate-box :rate="curr"></rate-box>
+                    </div>
+                </transition-group>
             </div>
             <div class="chevron">
                 <button class="btn">
@@ -28,6 +30,7 @@
 </template>
 
 <style scoped>
+    
     h3 {
         padding-top: 15px;
         padding-bottom: 15px;
@@ -84,41 +87,25 @@
 </style>
 
 <script>
-    import rate from 'src/components/Rates/RateCell.vue'
+    import { mapGetters, mapMutations, mapActions } from 'vuex';
+    import rateBox from 'src/components/Rates/RateCell.vue'
 
     export default {
-        data(){
-            return {
-                currencies: [
-                    { id: 1, code: 'USD', rate: '1.4320' },
-                    { id: 2, code: 'SGD', rate: '1.0000' },
-                    { id: 3, code: 'MYR', rate: '2.9594' },
-                    { id: 4, code: 'JPN', rate: '10.9002' },
-                    { id: 5, code: 'USD', rate: '1.4320' },
-                    { id: 6, code: 'SGD', rate: '1.0000' },
-                    { id: 7, code: 'MYR', rate: '2.9594' },
-                    { id: 8, code: 'JPN', rate: '10.9002' },
-                    { id: 9, code: 'USD', rate: '1.4320' },
-                    { id: 10, code: 'SGD', rate: '1.0000' },
-                    { id: 11, code: 'MYR', rate: '2.9594' },
-                    { id: 12, code: 'JPN', rate: '10.9002' },
-                    { id: 13, code: 'USD', rate: '1.4320' },
-                    { id: 14, code: 'SGD', rate: '1.0000' },
-                    { id: 15, code: 'MYR', rate: '2.9594' },
-                    { id: 16, code: 'JPN', rate: '10.9002' },
-                    { id: 17, code: 'MYR', rate: '2.9594' },
-                    { id: 19, code: 'JPN', rate: '10.9002' },
-                    { id: 20, code: 'MYR', rate: '2.9594' },
-                    { id: 21, code: 'JPN', rate: '10.9002' },
-                    { id: 22, code: 'MYR', rate: '2.9594' },
-                    { id: 23, code: 'JPN', rate: '10.9002' },
-                    { id: 24, code: 'MYR', rate: '2.9594' },
-                    { id: 25, code: 'JPN', rate: '10.9002' },
-                ]
-            }
-        },
         components: {
-            rate: rate,
+            rateBox: rateBox,
+        },
+        methods: {
+            ...mapActions([
+                'getCurrencies'
+            ])
+        },
+        computed: {
+            ...mapGetters([
+                'currencies',
+            ])
+        },
+        mounted(){
+            this.getCurrencies(24);
         }
     }
 </script>

@@ -7,7 +7,7 @@
                 <div class="auth">
                     <button class="btn btn-circle sign-up">Sign Up</button>
                     &nbsp;
-                    <button class="btn btn-circle">Sign In</button>
+                    <button class="btn btn-circle" @click="$modal.show('modal-login')">Sign In</button>
                 </div>
             </div>
         </div>
@@ -20,6 +20,7 @@
                 <a class="white small" href="#">Learn More</a>
             </div>
         </div>
+        <app-login></app-login>
     </div>
 </template>
 
@@ -113,7 +114,11 @@
 
 
 <script>
+    import Login from 'src/components/Login.vue';
+
     export default {
-        
+        components: {
+            appLogin: Login
+        }
     }
 </script>
