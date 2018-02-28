@@ -2,12 +2,7 @@
     <div class="container-fluid bg">
         <div>
             <div class="bg-div">
-                <i class="fa fa-forumbee" style="font-size:16px;color:white;"></i>
-                <label>Buzz Currency</label>
-                <div class="button-inline">
-                     <button class="btn btn-round ">Sign Up</button>
-                     <button class="btn btn-outline btn-round ">Sign In</button>
-                </div>
+                <sign-up></sign-up>
             </div>
         </div>
         <div class="empty-row">&nbsp;</div>
@@ -36,17 +31,6 @@
     .bg-div{
         padding: 15px 25px 0px 15px;
         color: white;
-    }
-
-    .bg-div label{
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-size: medium;
-        font-weight: 900;
-    }
-
-    .button-inline {
-        display: inline;
-        float: right;
     }
 
     h2{
@@ -108,11 +92,12 @@
 
 </style>
 
-
 <script>
+    import SignUp from 'src/components/SignUp.vue'
+
     export default {
         components: {
-           
+           signUp: SignUp
         }
     }
 </script>

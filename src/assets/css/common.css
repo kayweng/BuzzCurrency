@@ -73,3 +73,10 @@ body{
 .border-white{
     border-color: white !important;
 }
+
+/*button*/
+.btn-home{
+    color: #0976b4;
+    background-color: transparent;
+    border: 1px solid #0976b4;
+}

@@ -1,5 +1,7 @@
 // Landing page
 import Home from 'src/pages/Home/Home.vue'
+// Login page
+import UserLogin from 'src/pages/Login/Login.vue'
 
 import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue'
 // GeneralViews
@@ -11,7 +13,7 @@ import Stats from 'src/pages/Dashboard/Dashboard/Stats.vue'
 // Pages
 import User from 'src/pages/Dashboard/Pages/UserProfile.vue'
 import TimeLine from 'src/pages/Dashboard/Pages/TimeLinePage.vue'
-import Login from 'src/pages/Dashboard/Pages/Login.vue'
+//import Login from 'src/pages/Dashboard/Pages/Login.vue'
 import Register from 'src/pages/Dashboard/Pages/Register.vue'
 import Lock from 'src/pages/Dashboard/Pages/Lock.vue'
 
@@ -181,7 +183,7 @@ let pagesMenu = {
 let loginPage = {
   path: '/login',
   name: 'Login',
-  component: Login
+  component: UserLogin
 }
 
 let registerPage = {
