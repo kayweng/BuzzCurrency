@@ -2,19 +2,6 @@ body{
     overflow-x: hidden;
 }
 
-/* button style */
-.btn-circle{
-    width: 80px;
-    color: white;
-    border-color: white;
-    text-align: center;
-    padding: 6px 0;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 1.42;
-    border-radius: 15px;
-}
-
 /* font style */
 .italic{
     font-style: italic;
@@ -26,7 +13,15 @@ body{
 
 /* color */
 .white{
-    color: white;
+    color: white !important;
+}
+
+.grey{
+    color: grey !important;
+}
+
+.bg-orangered{
+    background-color: orangered !important;
 }
 
 /* shadow */
@@ -37,11 +32,10 @@ body{
 }
 
 .one-edge-shadow {
-    box-shadow: 0 6px 6px -6px grey;
+    box-shadow: 0 10px 6px -6px grey;
 }
 
 /*Position*/
-
 .center{
     text-align: center;
 }
@@ -69,4 +63,13 @@ body{
     line-height: 1.5;
     outline: none;
     text-align: center;
+}
+
+/*border*/
+.border-orangered{
+    border-color: orangered !important;
+}
+
+.border-white{
+    border-color: white !important;
 }

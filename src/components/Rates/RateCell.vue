@@ -15,7 +15,7 @@
     .currency{
        border: 0;
        padding: 4px;
-       background: #F2F3F4;
+       background: white;
        min-height: 60px;
        display: table;
        margin-right: 20px;
@@ -35,7 +35,7 @@
     }
 
     span.rate{
-        color: blue;
+        color: #2980B9;
         padding-left: 15px;
     }
 </style>

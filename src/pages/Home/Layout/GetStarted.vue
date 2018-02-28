@@ -1,19 +1,19 @@
 <template>
     <div class="container-fluid bg">
         <div class="get-started-info row white">
-            <h3>Start exchange your currencies<br/>with buzz currency today</h3>
+            <h3>Start exchange your currencies with buzz currency today</h3>
             <p>Register an account to explores various currency exchange posts and <br/>
                 authenticate yourself to be genuine user to enjoy more features.</p>
         </div>
         <div class="row">
-            <button class="btn">Getting Started</button>
+            <button class="btn btn-primary btn-wd">Getting Started</button>
         </div>
     </div>
 </template>
 
 <style scoped>
     .bg{
-        background-color: #17A589;
+        background-color: #2874A6;
         min-height: 250px;
     }
 
@@ -21,12 +21,13 @@
         margin-left: 100px;
         background-color: #CB4335;
         height: 40px;
-        box-shadow: 2px 4px grey;
+        box-shadow: 1px 2px grey;
     }
 
     .get-started-info{
         padding-top: 15px; 
         padding-left: 100px;
+        padding-right: 100px;
     }
 
     .get-started-info > p{

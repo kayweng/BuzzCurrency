@@ -12,6 +12,7 @@ import FadeRenderTransition from './Transitions/FadeRenderTransition.vue'
 import Card from './Cards/Card.vue'
 import ChartCard from './Cards/ChartCard.vue'
 import StatsCard from './Cards/StatsCard.vue'
+import InfoCard from './Cards/InfoCard.vue'
 
 import Breadcrumb from './Breadcrumb/Breadcrumb.vue'
 import BreadcrumbItem from './Breadcrumb/BreadcrumbItem.vue'
@@ -30,6 +31,7 @@ let components = {
   Card,
   ChartCard,
   StatsCard,
+  InfoCard,
   Table,
   DropDown,
   SidebarPlugin,
@@ -47,6 +49,7 @@ export {
   Card,
   ChartCard,
   StatsCard,
+  InfoCard,
   Table,
   DropDown,
   SidebarPlugin,

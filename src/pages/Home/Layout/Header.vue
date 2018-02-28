@@ -4,23 +4,23 @@
             <div class="bg-div">
                 <i class="fa fa-forumbee" style="font-size:16px;color:white;"></i>
                 <label>Buzz Currency</label>
-                <div class="auth">
-                    <button class="btn btn-circle sign-up">Sign Up</button>
-                    &nbsp;
-                    <button class="btn btn-circle" @click="$modal.show('modal-login')">Sign In</button>
+                <div class="button-inline">
+                     <button class="btn btn-round ">Sign Up</button>
+                     <button class="btn btn-outline btn-round ">Sign In</button>
                 </div>
             </div>
         </div>
         <div class="empty-row">&nbsp;</div>
         <div class="bg-div">
-            <h2>EASY EXCHANGE YOUR CURRENCY</h2>
+            <div>
+                <h2>EASY EXCHANGE YOUR CURRENCY</h2>
+            </div>
             <div style="padding-bottom: 10px;">
                 <small>New to Buzz Currency ? </small>
                 <i class="fa fa-book" style="font-size:16px;color:white;"></i>
                 <a class="white small" href="#">Learn More</a>
             </div>
         </div>
-        <app-login></app-login>
     </div>
 </template>
 
@@ -44,18 +44,14 @@
         font-weight: 900;
     }
 
-    .auth {
+    .button-inline {
         display: inline;
         float: right;
     }
 
-    .btn {
-        background-color: transparent;
-    }
-
     h2{
-        background: linear-gradient(to right, aliceblue, white);
-        background: -webkit-linear-gradient(to right,aliceblue, white);
+        background: linear-gradient(to right, #FBFCFC, #FDFEFE);
+        background: -webkit-linear-gradient(to right,#FBFCFC, #FDFEFE);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -114,11 +110,9 @@
 
 
 <script>
-    import Login from 'src/components/Login.vue';
-
     export default {
         components: {
-            appLogin: Login
+           
         }
     }
 </script>

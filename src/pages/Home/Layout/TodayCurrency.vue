@@ -1,6 +1,8 @@
 <template>
     <div class="container-fluid">
-        <div class="center"><h4>Today Currency</h4></div>
+        <div class="center">
+            <h4>Today Currency</h4>
+        </div>
         <div class="row container-currency">
             <div class="chevron">
                 <button class="btn">

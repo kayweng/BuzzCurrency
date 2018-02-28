@@ -2,12 +2,16 @@
     <div class="container-fluid bg">
         <div class="row">
             <div class="col-xs-12 col-md-10">
-                <p class="copyright">© Buzz Currency 2018</p>
+                <button class="btn btn-social btn-facebook btn-link white">
+                        <p class="copyright">© Buzz Currency 2018</p>
+                    </button>
+                
             </div>
             <div class="col-xs-12 col-md-2">
                 <div class="social">
-                   <i class="fa fa-facebook-square" />
-                   <i class="fa fa-instagram" />
+                    <button class="btn btn-social btn-round btn-facebook btn-outline white">
+                        <i class="fa fa-facebook"> </i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -18,25 +22,21 @@
     .bg{
         vertical-align: middle;
         background-color: #34495E;
+        max-height: 55px !important;
     }
 
     p.copyright{
         float: left;
-        margin: 12px 8px 16px 8px;
+        padding-top: 10px;
+        padding-left: 15px;
     }
 
     .social{
         float: right;
-        margin: 8px 16px;
+        padding-top: 10px;
+        padding-right: 15px;
     }
 
-    .social > i {
-        vertical-align: middle;
-        font-size: 20px;
-        color: white;
-        padding: 0 20px 0 20px;
-        cursor: pointer;
-    }
 </style>
 
 <script>

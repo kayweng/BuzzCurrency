@@ -13,6 +13,8 @@ const getters = {
 const mutations = {
     fetchCurrencies( state, limit) {
         
+        state.currencies = [];
+
         for(var i=0; i< limit; i++){
             state.currencies.push({
                 id: i,
