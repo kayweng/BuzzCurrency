@@ -3,32 +3,35 @@
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-lg-4 col-md-6 col-sm-8">
         <form method="#" action="#">
-          <!--You can specify transitions on initial render. The `card-hidden` class will be present initially and then it will be removed-->
           <fade-render-transition>
             <card>
+              <!-- Header -->
               <div slot="header">
-                <h3 class="card-title text-center">Login</h3>
+                <h3 class="card-title text-center">Sign In</h3>
               </div>
+              <!-- Login Inputs -->
               <div>
-                <fg-input label="Email address"
-                          placeholder="Enter email"
-                          type="email"
+                <fg-input type="email"
+                          name="email"
+                          label="Email address"
+                          v-validate="modelValidations.email"
+                          :error="getError('email')"
                           v-model="model.email">
-
                 </fg-input>
-                <fg-input label="passsword"
+                <fg-input label="Password"
                           type="password"
-                          placeholder="Password"
+                          name="password"
+                          v-validate="modelValidations.password"
+                          :error="getError('password')"
                           v-model="model.password">
                 </fg-input>
               </div>
+              <!-- Buttons -->
               <div class="text-center">
                 <button type="submit" class="btn btn-fill btn-primary btn-round btn-wd ">Login</button>
                 <br>
                 <div class="forgot">
-                  <router-link to="/register" class="card-category">
-                    Forgot your password?
-                  </router-link>
+                  <router-link to="/register" class="card-category">Forgot your password?</router-link>
                 </div>
               </div>
             </card>
@@ -53,26 +56,21 @@
         model: {
           email: '',
           password: '',
+        },
+        modelValidations: {
+          email: {
+            required: true
+          },
+          password: {
+            required: true
+          }
         }
       }
     },
     methods: {
-      toggleNavbar () {
-        document.body.classList.toggle('nav-open')
-      },
-      closeMenu () {
-        document.body.classList.remove('nav-open')
-        document.body.classList.remove('off-canvas-sidebar')
+      getError (fieldName) {
+        return this.errors.first(fieldName)
       }
-    },
-    beforeDestroy () {
-      this.closeMenu()
     }
   }
 </script>
-<style>
-  .navbar-nav .nav-item p{
-    line-height: inherit;
-    margin-left: 5px;
-  }
-</style>

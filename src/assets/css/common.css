@@ -2,6 +2,11 @@ body{
     overflow-x: hidden;
 }
 
+.empty-row{
+    height: 20px;
+    padding: 1px;
+}
+
 /* font style */
 .italic{
     font-style: italic;
@@ -48,6 +53,23 @@ body{
     float: left;
 }
 
+.outer {
+    width: 100%;
+    text-align: center;
+}
+  
+.inner {
+    display: inline-block;
+    left: 50%;
+}
+
+.center-item {
+    display: flex;
+    flex-wrap: wrap; /* optional. only if you want the items to wrap */
+    justify-content: center; /* for horizontal alignment */
+    align-items: center; /* for vertical alignment */
+}
+
 /*font style*/
 .bold{
     font-weight: bold;
@@ -79,4 +101,33 @@ body{
     color: #0976b4;
     background-color: transparent;
     border: 1px solid #0976b4;
+}
+
+.btn-signup{
+    background-color: transparent;
+    border: 2px solid #1F618D;
+    color: white !important;
+}
+
+.btn-login{
+    background-color: transparent;
+    border: 0px !important;
+    color: white !important;
+}
+
+.btn-reset{
+    color: black;
+    background-color: white;
+    border: 1px solid #7F8C8D;
+}
+
+.btn-submit{
+    color: white;
+    background-color: #2471A3;
+    border: 1px solid #7FB3D5;
+}
+
+/*Cursor*/
+.pointer{
+    cursor: pointer;
 }

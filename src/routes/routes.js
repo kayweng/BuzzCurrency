@@ -2,6 +2,7 @@
 import Home from 'src/pages/Home/Home.vue'
 // Login page
 import UserLogin from 'src/pages/Login/Login.vue'
+import UserSignUp from 'src/pages/Login/SignUp.vue'
 
 import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue'
 // GeneralViews
@@ -186,6 +187,12 @@ let loginPage = {
   component: UserLogin
 }
 
+let signUpPage = {
+  path: '/signup',
+  name: 'SignUp',
+  component: UserSignUp
+}
+
 let registerPage = {
   path: '/register',
   name: 'Register',
@@ -213,6 +220,7 @@ const routes = [
   mapsMenu,
   pagesMenu,
   loginPage,
+  signUpPage,
   registerPage,
   lockPage,
   {

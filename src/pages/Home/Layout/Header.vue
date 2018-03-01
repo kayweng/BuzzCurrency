@@ -1,10 +1,6 @@
 <template>
     <div class="container-fluid bg">
-        <div>
-            <div class="bg-div">
-                <sign-up></sign-up>
-            </div>
-        </div>
+        <landing-nav></landing-nav>
         <div class="empty-row">&nbsp;</div>
         <div class="bg-div">
             <div>
@@ -22,14 +18,14 @@
 <style scoped>
 
     .bg{
-        background-image: url("/static/img/bg_home.jpg");
+        background-image: url("/static/img/bg-home.jpg");
         background-size:     cover;                      
         background-repeat:   no-repeat;
         background-position: center center;
     }
 
     .bg-div{
-        padding: 15px 25px 0px 15px;
+        padding: 15px;
         color: white;
     }
 
@@ -93,11 +89,11 @@
 </style>
 
 <script>
-    import SignUp from 'src/components/SignUp.vue'
+    import LandingNav from 'src/components/LandingNav.vue'
 
     export default {
         components: {
-           signUp: SignUp
+           landingNav: LandingNav
         }
     }
 </script>

@@ -1,36 +1,25 @@
 <template>
-  <div>
-    <div class="wrapper wrapper-full-page">
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
-        <div class="container">
-          <div class="navbar-wrapper">
-            <div class="home">
-                <router-link to="/#" tag="button" class="btn btn-social btn-outline btn-round ">
-                  <i class="fa fa-home"> </i>
-                </router-link>
-            </div>
-          </div>
-        </div>
-      </nav>
+  <div class="wrapper wrapper-full-page">
+      <landing-nav></landing-nav>
       <div class="full-page" :data-color="backgroundColor" :class="pageClass">
-        <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple | black" -->
+        
         <div class="content">
           <div class="container">
             <slot></slot>
           </div>
         </div>
-        <div class="full-page-background"
-             style="background-image: url(static/img/full-screen-image-1.jpg) "></div>
-        </div>
-    </div>
+        <div class="full-page-background" style="background-image: url(static/img/full-screen-image-1.jpg) "></div>
+      </div>
   </div>
 </template>
 <script>
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
+  import LandingNav from 'src/components/LandingNav.vue'
 
   export default {
     components: {
-      [CollapseTransition.name]: CollapseTransition
+      [CollapseTransition.name]: CollapseTransition,
+      landingNav: LandingNav,
     },
     props: {
       pageClass: {
