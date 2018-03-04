@@ -87,6 +87,16 @@ body{
     text-align: center;
 }
 
+.terms{
+    text-transform: initial !important;
+}
+
+.note{
+    color: grey;
+    font-size: small;
+    padding-top: 10px;
+}
+
 /*border*/
 .border-orangered{
     border-color: orangered !important;

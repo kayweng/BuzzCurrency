@@ -3,9 +3,9 @@
     <div class="card-image" v-if="$slots.image">
       <slot name="image"></slot>
     </div>
-    <div class="card-header" v-if="$slots.header || title">
+    <div class="card-header text-center" v-if="$slots.header || title">
       <slot name="header">
-        <h4 class="card-title">{{title}}</h4>
+        <h3 class="card-title">{{title}}</h3>
         <p class="card-category">{{subTitle}}</p>
       </slot>
     </div>

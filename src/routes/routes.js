@@ -1,13 +1,16 @@
-// Landing page
-import Home from 'src/pages/Home/Home.vue'
-// Login page
-import UserLogin from 'src/pages/Login/Login.vue'
-import UserSignUp from 'src/pages/Login/SignUp.vue'
-
-import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue'
-// GeneralViews
+// *
 import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'
-// Dashboard pages
+
+// Landing page
+import Home from 'src/pages/Home/HomeLayout.vue'
+// Login page
+import UserLogin from 'src/pages/User/Layout/Login.vue'
+import UserSignUp from 'src/pages/User/Layout/SignUp.vue'
+import UserResetPassword from 'src/pages/User/Layout/ResetPassword.vue'
+import UserChangePassword from 'src/pages/User/Layout/ChangePassword.vue'
+
+/* To be remove */
+import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue'
 import Overview from 'src/pages/Dashboard/Dashboard/Overview.vue'
 import Stats from 'src/pages/Dashboard/Dashboard/Stats.vue'
 
@@ -193,10 +196,14 @@ let signUpPage = {
   component: UserSignUp
 }
 
-let registerPage = {
-  path: '/register',
-  name: 'Register',
-  component: Register
+let resetPasswordPage = {
+  path: '/reset-password',
+  component: UserResetPassword
+}
+
+let changePasswordPage = {
+  path: '/change-password',
+  component: UserChangePassword
 }
 
 let lockPage = {
@@ -221,7 +228,8 @@ const routes = [
   pagesMenu,
   loginPage,
   signUpPage,
-  registerPage,
+  resetPasswordPage,
+  changePasswordPage,
   lockPage,
   {
     path: '/admin',

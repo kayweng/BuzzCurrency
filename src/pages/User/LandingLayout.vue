@@ -2,17 +2,22 @@
   <div class="wrapper wrapper-full-page">
       <landing-nav></landing-nav>
       <div class="full-page" :data-color="backgroundColor" :class="pageClass">
-        
         <div class="content">
           <div class="container">
-            <slot></slot>
+            <div class="row d-flex justify-content-center align-items-center">
+              <div :class="contentClass">
+                <slot></slot>
+              </div>
+            </div>
           </div>
         </div>
         <div class="full-page-background" style="background-image: url(static/img/full-screen-image-1.jpg) "></div>
       </div>
   </div>
 </template>
+
 <script>
+  import { FadeRenderTransition } from 'src/components/index'
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
   import LandingNav from 'src/components/LandingNav.vue'
 
@@ -25,6 +30,10 @@
       pageClass: {
         type: String,
         default: 'login-page'
+      },
+      contentClass: {
+        type: String,
+        default: 'col-lg-8 col-md-8 col-sm-8',
       },
       backgroundColor: {
         type: String,

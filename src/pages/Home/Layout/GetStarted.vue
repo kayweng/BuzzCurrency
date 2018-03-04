@@ -6,7 +6,7 @@
                 authenticate yourself to be genuine user to enjoy more features.</p>
         </div>
         <div class="row">
-            <button class="btn btn-primary btn-wd">Getting Started</button>
+            <router-link class="btn btn-primary btn-wd" to="/signup" tag="button">Getting Started</router-link>
         </div>
     </div>
 </template>
