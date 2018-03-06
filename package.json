@@ -25,6 +25,7 @@
     "jvectormap-next": "^3.0.0",
     "perfect-scrollbar": "0.7.1",
     "sweetalert2": "^7.0.0",
+    "v-media-query": "^1.0.3",
     "v-tooltip": "^2.0.0-rc.25",
     "vee-validate": "^2.0.0-rc.21",
     "vue": "^2.5.13",

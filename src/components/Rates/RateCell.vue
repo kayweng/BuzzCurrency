@@ -41,8 +41,8 @@
 </style>
 
 <script>
-    export default {
-        props:['rate']
-    }
+  export default {
+    props: ['rate']
+  }
 </script>
 

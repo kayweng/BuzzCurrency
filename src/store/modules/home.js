@@ -1,41 +1,38 @@
-
-//state
+// state
 const state = {
-    currencies: [],
+  currencies: []
 }
 
-//getters
+// getters
 const getters = {
-    currencies: state => state.currencies,
+  currencies: state => state.currencies
 }
 
-//mutations
+// mutations
 const mutations = {
-    fetchCurrencies( state, limit) {
-        
-        state.currencies = [];
+  fetchCurrencies (state, limit) {
+    state.currencies = []
 
-        for(var i=0; i< limit; i++){
-            state.currencies.push({
-                id: i,
-                code: 'MYR',
-                rate: 2.9650
-            })
-        }
+    for (var i = 0; i < limit; i++) {
+      state.currencies.push({
+        id: i,
+        code: 'MYR',
+        rate: 2.9650
+      })
     }
+  }
 }
 
-//actions
+// actions
 const actions = {
-    getCurrencies ( {commit}, limit) {
-        //todo: chekc mobile/desktop limit
-        commit('fetchCurrencies', limit);
-    }
+  getCurrencies ({commit}, limit) {
+    commit('fetchCurrencies', limit)
+  }
 }
 
 export default {
-    state,
-    getters,
-    mutations,
-    actions
+  state,
+  getters,
+  mutations,
+  actions
 }

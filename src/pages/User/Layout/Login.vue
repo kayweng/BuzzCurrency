@@ -33,11 +33,11 @@
     </form>
   </landing-layout>
 </template>
-<script>
 
+<script>
   import { FadeRenderTransition } from 'src/components/index'
   import LandingLayout from 'src/pages/User/LandingLayout.vue'
- 
+
   export default {
     components: {
       FadeRenderTransition,
@@ -47,7 +47,7 @@
       return {
         model: {
           email: '',
-          password: '',
+          password: ''
         },
         modelValidations: {
           email: {

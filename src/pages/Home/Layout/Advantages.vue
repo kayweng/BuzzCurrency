@@ -10,36 +10,35 @@
 </template>
 
 <style scoped>
+  h3 {
+      padding-top: 15px;
+      padding-bottom: 60px;
+      text-align: center;
+  }
 
-    h3 {
-        padding-top: 15px;
-        padding-bottom: 60px;
-        text-align: center;
-    }
-
-    .container-fluid{
-        padding-left: 30px;
-        padding-right: 30px;
-    }
+  .container-fluid{
+      padding-left: 30px;
+      padding-right: 30px;
+  }
 </style>
 
 <script>
-    import {InfoCard} from 'src/components/index'
+  import {InfoCard} from 'src/components/index'
 
-    export default {
-        data() {
-            return {
-                items: [
-                    {img: 'genuine_user.png', message: 'Exchange currency with genuine users'},
-                    {img: 'currency_rate.png', message: 'Choose your comfortable currency rates'},
-                    {img: 'meetup.png', message: 'Meet up with each other for face to face exchange'},
-                    {img: 'aml.png', message: 'Prevent money laundering activity'},
-                ]
-            }
-         },
-         components: {
-             infoCard: InfoCard,
-         }
+  export default {
+    data () {
+      return {
+        items: [
+          {img: 'genuine_user.png', message: 'Exchange currency with genuine users'},
+          {img: 'currency_rate.png', message: 'Choose your comfortable currency rates'},
+          {img: 'meetup.png', message: 'Meet up with each other for face to face exchange'},
+          {img: 'aml.png', message: 'Prevent money laundering activity'}
+        ]
+      }
+    },
+    components: {
+      infoCard: InfoCard
     }
+  }
 </script>
 

@@ -17,8 +17,8 @@ import Stats from 'src/pages/Dashboard/Dashboard/Stats.vue'
 // Pages
 import User from 'src/pages/Dashboard/Pages/UserProfile.vue'
 import TimeLine from 'src/pages/Dashboard/Pages/TimeLinePage.vue'
-//import Login from 'src/pages/Dashboard/Pages/Login.vue'
-import Register from 'src/pages/Dashboard/Pages/Register.vue'
+// import Login from 'src/pages/Dashboard/Pages/Login.vue'
+// import Register from 'src/pages/Dashboard/Pages/Register.vue'
 import Lock from 'src/pages/Dashboard/Pages/Lock.vue'
 
 // Components pages
@@ -215,7 +215,7 @@ let lockPage = {
 const routes = [
   {
     path: '/',
-    component: Home,
+    component: Home
   },
   {
     path: '/overview',

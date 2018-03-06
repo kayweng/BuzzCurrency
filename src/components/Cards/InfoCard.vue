@@ -1,5 +1,5 @@
 <template>
-    <div class="card-item col-md-3 col-sm-6 col-xs-12">
+    <div class="card-item col-md-3 col-sm-6 col-xs-6">
         <slot name="image"></slot>
         <img :src="'/static/img/' + imgName " />
         <p class="text-muted">{{ message }}</p>
@@ -34,11 +34,11 @@
 </style>
 
 <script>
-    export default {
-        name: 'card-info',
-        props: {
-            imgName: String,
-            message: String
-        }
+  export default {
+    name: 'card-info',
+    props: {
+      imgName: String,
+      message: String
     }
+  }
 </script>

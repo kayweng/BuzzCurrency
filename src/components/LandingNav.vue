@@ -10,22 +10,21 @@
 </template>
 
 <style scoped>
+  .sign-up-div{
+      padding: 15px;
+      color: white !important;
+      z-index: 100;
+      position: relative;
+  }
 
-    .sign-up-div{
-        padding: 15px;
-        color: white !important;
-        z-index: 100;
-        position: relative;
-    }
+  .button-inline {
+      display: inline;
+      float: right;
+  }
 
-    .button-inline {
-        display: inline;
-        float: right;
-    }
-
-    label{
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        font-size: medium;
-        font-weight: 900;
-    }
+  label{
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: medium;
+      font-weight: 900;
+  }
 </style>

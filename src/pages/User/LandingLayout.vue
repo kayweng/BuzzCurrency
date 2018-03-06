@@ -1,30 +1,52 @@
 <template>
   <div class="wrapper wrapper-full-page">
-      <landing-nav></landing-nav>
-      <div class="full-page" :data-color="backgroundColor" :class="pageClass">
-        <div class="content">
-          <div class="container">
-            <div class="row d-flex justify-content-center align-items-center">
-              <div :class="contentClass">
-                <slot></slot>
-              </div>
+    <landing-nav></landing-nav>
+    <div class="full-page" :data-color="backgroundColor" :class="pageClass">
+      <div class="content">
+        <div class="container">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div :class="contentClass">
+              <slot></slot>
             </div>
           </div>
         </div>
-        <div class="full-page-background" style="background-image: url(static/img/full-screen-image-1.jpg) "></div>
       </div>
+      <div class="full-page-background" style="background-image: url(static/img/full-screen-image-1.jpg) "></div>
+    </div>
   </div>
 </template>
 
+<style>
+  .navbar-nav .nav-item p {
+    line-height: inherit;
+    margin-left: 5px;
+  }
+  .navbar-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .wrapper-full-page .navbar-toggler,
+  .wrapper-full-page .navbar-collapse .navbar-nav{
+    margin-right: 30px;
+  }
+  .navbar-collapse .navbar-nav .nav-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+</style>
+
 <script>
-  import { FadeRenderTransition } from 'src/components/index'
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
   import LandingNav from 'src/components/LandingNav.vue'
 
   export default {
     components: {
       [CollapseTransition.name]: CollapseTransition,
-      landingNav: LandingNav,
+      landingNav: LandingNav
     },
     props: {
       pageClass: {
@@ -33,7 +55,7 @@
       },
       contentClass: {
         type: String,
-        default: 'col-lg-8 col-md-8 col-sm-8',
+        default: 'col-lg-8 col-md-8 col-sm-8'
       },
       backgroundColor: {
         type: String,
@@ -59,25 +81,3 @@
     }
   }
 </script>
-<style>
-  .navbar-nav .nav-item p {
-    line-height: inherit;
-    margin-left: 5px;
-  }
-  .navbar-wrapper{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .wrapper-full-page .navbar-toggler,
-  .wrapper-full-page .navbar-collapse .navbar-nav{
-    margin-right: 30px;
-  }
-  .navbar-collapse .navbar-nav .nav-link {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-</style>
