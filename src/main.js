@@ -4,19 +4,19 @@ import vMediaQuery from 'v-media-query'
 import LightBootstrap from './light-bootstrap-main'
 import globalMixins from './globalMixins'
 import { store } from './store/store'
-
-// Plugins
+import routes from './routes/routes'
+import axios from 'axios'
 import App from './App.vue'
 
-// router setup
-import routes from './routes/routes'
-
-// plugin setup
+/* user plugins */
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
 Vue.use(vMediaQuery)
 
+/* user mixins */
 Vue.mixin(globalMixins)
+
+axios.defaults.baseURL = '' // tobe app server
 
 // configure router
 const router = new VueRouter({

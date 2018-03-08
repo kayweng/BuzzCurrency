@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="center">
-      <h4>Today Currency</h4>
+      <h4>Currencies</h4>
     </div>
     <div class="row container-currency">
       <div class="chevron">
@@ -11,8 +11,9 @@
       </div>
       <div class="currencies">
         <transition-group name="fade" tag="div">
-          <div style="display:inline-block;" v-for="curr in currencies" :key="curr.id">
-            <rate-box :rate="curr"></rate-box>
+          <div style="display:inline-block;" v-for="rate in currencies['rates']" :key="rate[0]">
+            {{ rate[0] }}
+            <!-- <rate-box :rate="rate"></rate-box> -->
           </div>
         </transition-group>
       </div>
@@ -20,12 +21,6 @@
         <button class="btn">
           <i class="fa fa-chevron-right" />
         </button>
-      </div>
-      <div class="fixer">
-        <span>
-          <i class="fa fa-globe" style="font-size:14px;" />
-          <small>&nbsp;currencies rate from <a href="http://fixer.io">fixer.io</a></small>
-        </span>
       </div>
     </div>
   </div>
@@ -94,7 +89,7 @@
 
   export default {
     components: {
-      rateBox: rateBox
+      rateBox: rateBox,
     },
     methods: {
       ...mapActions([
@@ -107,23 +102,7 @@
       ])
     },
     mounted () {
-      var currCount = 24
-
-      switch (this.deviceType) {
-        case 'mobile':
-          currCount = 6
-          break
-        case 'small-device':
-          currCount = 12
-          break
-        case 'medium-device':
-          currCount = 18
-          break
-        default:
-          currCount = 24
-      }
-
-      this.getCurrencies(currCount)
+      this.getCurrencies()
     }
   }
 </script>

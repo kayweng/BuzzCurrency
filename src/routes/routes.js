@@ -4,10 +4,10 @@ import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'
 // Landing page
 import Home from 'src/pages/Home/HomeLayout.vue'
 // Login page
-import UserLogin from 'src/pages/User/Layout/Login.vue'
-import UserSignUp from 'src/pages/User/Layout/SignUp.vue'
-import UserResetPassword from 'src/pages/User/Layout/ResetPassword.vue'
-import UserChangePassword from 'src/pages/User/Layout/ChangePassword.vue'
+import UserLogin from 'src/pages/Auth/Layout/Login.vue'
+import UserSignUp from 'src/pages/Auth/Layout/SignUp.vue'
+import UserResetPassword from 'src/pages/Auth/Layout/ResetPassword.vue'
+import UserChangePassword from 'src/pages/Auth/Layout/ChangePassword.vue'
 
 /* To be remove */
 import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue'

@@ -36,7 +36,7 @@
 
 <script>
   import { FadeRenderTransition } from 'src/components/index'
-  import LandingLayout from 'src/pages/User/LandingLayout.vue'
+  import LandingLayout from 'src/pages/Auth/LandingLayout.vue'
 
   export default {
     components: {
