@@ -10,8 +10,9 @@
 </template>
 
 <style scoped>
+  
   .sign-up-div{
-      padding: 15px;
+      padding: 10px 30px 10px 30px;
       color: white !important;
       z-index: 100;
       position: relative;

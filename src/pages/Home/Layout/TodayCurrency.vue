@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="center">
-      <h4>Currencies</h4>
+      <h4>Exchange Rates - {{ currency_data['base']}}</h4>
     </div>
     <div class="row container-currency">
       <div class="chevron">
@@ -10,12 +10,11 @@
         </button>
       </div>
       <div class="currencies">
-        <transition-group name="fade" tag="div">
-          <div style="display:inline-block;" v-for="rate in currencies['rates']" :key="rate[0]">
-            {{ rate[0] }}
-            <!-- <rate-box :rate="rate"></rate-box> -->
+        <!-- <transition-group name="fade" tag="div">
+          <div style="display:inline-block;" v-for="(rate, index) in currencyRates" :key="index">
+            <rate-box :rate="rate"></rate-box>
           </div>
-        </transition-group>
+        </transition-group> -->
       </div>
       <div class="chevron">
         <button class="btn">
@@ -51,6 +50,7 @@
 
   .chevron{
     width: 10%;
+    min-width:10px;
   }
 
   .chevron > button{
@@ -85,11 +85,11 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex'
-  import rateBox from 'src/components/Rates/RateCell.vue'
+  import rateBox from 'src/components/Cards/RateCard.vue'
 
   export default {
     components: {
-      rateBox: rateBox,
+      rateBox: rateBox
     },
     methods: {
       ...mapActions([
@@ -98,7 +98,8 @@
     },
     computed: {
       ...mapGetters([
-        'currencies'
+        'currency_data',
+        'currencyRates'
       ])
     },
     mounted () {

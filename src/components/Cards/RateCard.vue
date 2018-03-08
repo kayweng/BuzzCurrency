@@ -2,10 +2,10 @@
     <div>
         <div class="currency one-edge-shadow">
             <span class="code">
-                <small>{{ rate.code }}</small>
+                <small>{{ rate['code'] }}</small>
             </span>
             <span class="rate">
-                <small>{{ rate.rate }}</small>
+                <small>{{ rate['rate'] }}</small>
             </span>
         </div>
     </div>
@@ -30,13 +30,11 @@
     }
 
     span.code{
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 5px;
     }
 
     span.rate{
         color: #2980B9;
-        padding-left: 15px;
     }
 </style>
 

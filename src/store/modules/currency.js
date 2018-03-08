@@ -3,12 +3,14 @@ import { date } from 'src/lib/date'
 
 // state
 const state = {
-  currencies: {}
+  currency_data: {},
+  currencyRates: []
 }
 
 // getters
 const getters = {
-  currencies: state => state.currencies
+  currency_data: state => state.currency_data,
+  currencyRates: state => state.currencyRates
 }
 
 // mutations
@@ -29,7 +31,6 @@ const mutations = {
     if (refresh) {
       fixer.get('/latest?base=MYR')
         .then(response => {
-          console.log(response.data)
           localStorage.setItem('fxier_currencies', JSON.stringify(response.data))
           return
         })
@@ -37,7 +38,16 @@ const mutations = {
           console.log(error)
         })
     } else {
-      state.currencies = JSON.parse(localStorage.getItem('fxier_currencies'))
+      state.currency_data = JSON.parse(localStorage.getItem('fxier_currencies'))
+     
+      for (var i = 0; i < Object.keys(state.currency_data['rates']).length; i++) {
+        var key = Object.keys(state.currency_data['rates'])[i]
+        var value = Object.values(state.currency_data['rates'])[i]
+        state.currencyRates.push({
+          'code': key,
+          'rate': value
+        })
+      }
     }
   }
 }
