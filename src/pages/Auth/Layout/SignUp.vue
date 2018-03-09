@@ -114,7 +114,7 @@
 <script>
   import { DatePicker, Input, Button } from 'element-ui'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
-  import LandingLayout from 'src/pages/Auth/LandingLayout.vue'
+  import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
   
   export default {
     components: {

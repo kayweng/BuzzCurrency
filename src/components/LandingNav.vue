@@ -1,5 +1,5 @@
 <template>
-    <div class="sign-up-div">
+    <div class="landing-div">
         <i class="fa fa-forumbee" style="font-size:16px;color:white;"></i>
         <router-link to="/" tag="label" class="pointer">Buzz Currency</router-link>
         <div class="button-inline">
@@ -11,7 +11,7 @@
 
 <style scoped>
   
-  .sign-up-div{
+  .landing-div{
       padding: 10px 30px 10px 30px;
       color: white !important;
       z-index: 100;

@@ -16,6 +16,7 @@ Vue.use(vMediaQuery)
 /* user mixins */
 Vue.mixin(globalMixins)
 
+/* default axios */
 axios.defaults.baseURL = '' // tobe app server
 
 // configure router

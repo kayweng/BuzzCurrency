@@ -1,5 +1,5 @@
 import fixer from 'src/axios/axios_fixer'
-import { date } from 'src/lib/date'
+import { date } from 'src/plugins/date'
 
 // state
 const state = {
@@ -27,7 +27,7 @@ const mutations = {
       var baseDate = JSON.parse(localCurrencies).date
       refresh = (baseDate !== null && date.yesterdayDateString() !== baseDate)
     }
-    
+   
     if (refresh) {
       fixer.get('/latest?base=MYR')
         .then(response => {
@@ -39,7 +39,6 @@ const mutations = {
         })
     } else {
       state.currency_data = JSON.parse(localStorage.getItem('fxier_currencies'))
-     
       for (var i = 0; i < Object.keys(state.currency_data['rates']).length; i++) {
         var key = Object.keys(state.currency_data['rates'])[i]
         var value = Object.values(state.currency_data['rates'])[i]

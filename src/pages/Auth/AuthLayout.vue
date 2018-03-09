@@ -11,7 +11,7 @@
           </div>
         </div>
       </div>
-      <div class="full-page-background" style="background-image: url(static/img/full-screen-image-1.jpg) "></div>
+      <div class="full-page-background" style="background-image: url(static/img/bg_kuala_lumpur.jpeg) "></div>
     </div>
   </div>
 </template>

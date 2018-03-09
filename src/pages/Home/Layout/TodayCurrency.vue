@@ -1,25 +1,20 @@
 <template>
   <div class="container-fluid">
     <div class="center">
-      <h4>Exchange Rates - {{ currency_data['base']}}</h4>
+      <h4>Exchange Rates</h4>
+      <small>{{ currency_data['base'] }}</small>
     </div>
     <div class="row container-currency">
-      <div class="chevron">
-        <button class="btn">
-          <i class="fa fa-chevron-left" />
-        </button>
-      </div>
       <div class="currencies">
-        <!-- <transition-group name="fade" tag="div">
-          <div style="display:inline-block;" v-for="(rate, index) in currencyRates" :key="index">
-            <rate-box :rate="rate"></rate-box>
-          </div>
-        </transition-group> -->
-      </div>
-      <div class="chevron">
-        <button class="btn">
-          <i class="fa fa-chevron-right" />
-        </button>
+        <carousel>
+          <slide v-for="(arr, i) in carouselPages" :key="i">
+            <transition-group name="fade" tag="div">
+              <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
+                <rate-box :rate="rate"></rate-box>
+              </div>
+            </transition-group>
+          </slide>
+        </carousel>
       </div>
     </div>
   </div>
@@ -48,37 +43,15 @@
     font-size: 20px;
   }
 
-  .chevron{
-    width: 10%;
-    min-width:10px;
-  }
-
-  .chevron > button{
-    width: 100%;
-    height: 100%;
-    border: 0px;
-    background: transparent;
-  }
-
   .currencies{
-    min-width: 80%;
-    max-width: 80%;
-    padding: 10px;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 30px;
     text-align: center;
   }
 
-  .fixer{
-    text-align: center;
-    width: 100%;
-    margin-right: 15px;
-    min-height: 30px;
-    max-height: 30px !important;
-  }
-
-  .fixer > span > small{
-    vertical-align: middle;
-    display: inline-block;
-    line-height: normal;
+  .VueCarousel-slide{
+    min-height: 200px;
   }
 
 </style>
@@ -86,10 +59,13 @@
 <script>
   import { mapGetters, mapActions } from 'vuex'
   import rateBox from 'src/components/Cards/RateCard.vue'
+  import { Carousel, Slide } from 'vue-carousel'
 
   export default {
     components: {
-      rateBox: rateBox
+      rateBox,
+      Carousel,
+      Slide
     },
     methods: {
       ...mapActions([
@@ -100,7 +76,38 @@
       ...mapGetters([
         'currency_data',
         'currencyRates'
-      ])
+      ]),
+      carouselPages () {
+        var count = 0
+        var arr = []
+
+        switch (this.deviceType) {
+          case 'large-device':
+            count = 16
+            break
+          case 'medium-device':
+            count = 12
+            break
+          case 'small-device':
+            count = 6
+            break
+          case 'mobile':
+            count = 3
+            break
+        }
+       
+        var temp = JSON.parse(JSON.stringify(this.currencyRates))
+        for (var i = 0; i < temp.length; i++) {
+          var increament = i + 1
+          var sliceArray = temp.slice(count * i, (count * (increament)))
+          
+          arr.push(sliceArray)
+          if (count * (i === 0 ? 1 : increament) >= temp.length) {
+            break
+          }
+        }
+        return arr
+      }
     },
     mounted () {
       this.getCurrencies()

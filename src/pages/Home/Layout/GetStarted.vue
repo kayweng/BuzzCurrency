@@ -1,12 +1,12 @@
 <template>
     <div class="container-fluid bg">
       <div class="get-started-info row white">
-        <h3>Start exchange your currencies with buzz currency today</h3>
-        <p>Register an account to explores various currency exchange posts and <br/>
+        <h3>Get started to change your way to exchange foregin currency today</h3>
+        <p>Register an account to receives better currency rates opportunies and <br/>
             authenticate yourself to be genuine user to enjoy more features.</p>
       </div>
       <div class="row">
-        <router-link class="btn btn-primary btn-wd" to="/signup" tag="button">Getting Started</router-link>
+        <router-link class="btn btn-primary btn-wd" to="/signup" tag="button">Join now</router-link>
       </div>
     </div>
 </template>

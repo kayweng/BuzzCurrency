@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div>
-            <h3>What you should know before exchange currency</h3>
+            <h2>What You Should Know Here</h2>
         </div>
         <div class="row">
             <info-card v-for="(item, index) in items" :key="index" :imgName="item.img" :message="item.message" ></info-card>
@@ -10,10 +10,11 @@
 </template>
 
 <style scoped>
-  h3 {
+  h2 {
       padding-top: 15px;
       padding-bottom: 60px;
       text-align: center;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
   .container-fluid{

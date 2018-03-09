@@ -19,8 +19,8 @@
 
   .bg{
       background-image: url("/static/img/bg-home.jpg");
-      background-size:     cover;                      
-      background-repeat:   no-repeat;
+      background-size: cover;                      
+      background-repeat: no-repeat;
       background-position: center center;
   }
 
