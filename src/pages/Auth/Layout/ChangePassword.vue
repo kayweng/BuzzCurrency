@@ -1,34 +1,41 @@
 <template>
-    <landing-layout pageClass="login-page" :contentClass="'col-lg-4 col-md-6 col-sm-8'">>
+    <landing-layout pageClass="login-page" :contentClass="'col-lg-5 col-md-6 col-sm-8'">>
       <form method="#" action="#">
         <fade-render-transition>
           <card :title="'Create New Password'">
               
             <fg-input label="Old Password"
-                v-show="isReset"
+                v-show="!isReset"
                 type="password"
                 name="old password"
-                v-validate="modelValidations.password"
-                :error="getError('old password')"
-                v-model="model.password">
+                @blur="$v.model.oldPassword.$touch()"
+                :class="{'input-error': $v.model.oldPassword.$error }"
+                v-model="model.oldPassword">
             </fg-input>
-              
+            <span v-if="!$v.model.oldPassword.requiredIf" class="error-message">The old password field is required</span>
+            <span v-if="!$v.model.oldPassword.minLength" class="error-message">The old password field length must have at least {{$v.model.oldPassword.$params.minLength.min}}</span>
+
             <fg-input label="New Password"
                 type="password"
                 name="new password"
-                v-validate="modelValidations.password"
-                :error="getError('new password')"
-                v-model="model.password">
+                @blur="$v.model.newPassword.$touch()"
+                :class="{'input-error': $v.model.newPassword.$error }"
+                v-model="model.newPassword">
             </fg-input>
+            <span v-if="!$v.model.newPassword.required" class="error-message">The new password field is required</span>
+            <span v-if="!$v.model.newPassword.minLength" class="error-message">The new password field length must have at least {{$v.model.newPassword.$params.minLength.min}}</span>
 
             <fg-input label="Confirm Password"
                 type="password"
                 name="confirm password"
-                v-validate="modelValidations.confirmPassword"
-                :error="getError('confirm password')"
+                @blur="$v.model.confirmPassword.$touch()"
+                :class="{'input-error': $v.model.confirmPassword.$error }"
                 v-model="model.confirmPassword">
             </fg-input>
-
+            <span v-if="!$v.model.confirmPassword.required" class="error-message">The confirm password field is required</span>
+            <span v-if="$v.model.confirmPassword.required && !$v.model.confirmPassword.sameAs" class="error-message">The confirm password must be same as new password</span>
+            
+            <div class="empty-row"></div>
             <div class="text-center">
                 <button type="submit" @click.prevent="validate" 
                     class="btn btn-round btn-submit btn-wd">Submit</button>
@@ -40,6 +47,7 @@
 </template>
 
 <script>
+  import { required, minLength, sameAs, requiredIf } from 'vuelidate/lib/validators'
   import { FadeRenderTransition } from 'src/components/index'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
 
@@ -57,30 +65,39 @@
     data () {
       return {
         model: {
-          oldPassword: '',
-          newPassword: '',
-          confirmPassword: ''
+          oldPassword: null,
+          newPassword: null,
+          confirmPassword: null
+        }
+      }
+    },
+    validations: {
+      model: {
+        oldPassword: {
+          minLength: minLength(6),
+          requiredIf: requiredIf(function() {
+            return !this.isReset
+          })
         },
-        modelValidations: {
-          password: {
-            required: true,
-            min: 6
-          },
-          confirmPassword: {
-            required: true,
-            confirmed: 'password'
-          }
+        newPassword: {
+          required,
+          minLength: minLength(6)
+        },
+        confirmPassword: {
+          required,
+          sameAs: sameAs('newPassword')
         }
       }
     },
     methods: {
-      getError (fieldName) {
-        return this.errors.first(fieldName)
-      },
-      validate () {
-        this.$validator.validateAll().then(isValid => {
-          this.$emit('on-submit', this.signUp, isValid)
-        })
+      validate (event) {
+        
+        if (this.$v.model.$invalid || this.$v.model.$error) {
+         this.$v.model.$touch()
+          return
+        }
+        
+        console.log(event)
       }
     }
   }

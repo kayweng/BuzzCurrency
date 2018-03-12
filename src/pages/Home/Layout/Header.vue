@@ -18,6 +18,7 @@
 <style scoped>
 
   .bg{
+      padding-left: 15px;
       background-image: url("/static/img/bg-home.jpg");
       background-size: cover;                      
       background-repeat: no-repeat;

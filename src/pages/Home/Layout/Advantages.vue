@@ -1,10 +1,13 @@
 <template>
     <div class="container-fluid">
         <div>
-            <h2>What You Should Know Here</h2>
+            <h2>What You Should Know</h2>
         </div>
         <div class="row">
-            <info-card v-for="(item, index) in items" :key="index" :imgName="item.img" :message="item.message" ></info-card>
+            <info-card  v-for="(item, index) in items" :key="index" 
+                        :imgName="item.img" 
+                        :title="item.title"
+                        :message="item.message" ></info-card>
         </div>
     </div>
 </template>
@@ -30,10 +33,18 @@
     data () {
       return {
         items: [
-          {img: 'genuine_user.png', message: 'Exchange currency with genuine users'},
-          {img: 'currency_rate.png', message: 'Choose your comfortable currency rates'},
-          {img: 'meetup.png', message: 'Meet up with each other for face to face exchange'},
-          {img: 'aml.png', message: 'Prevent money laundering activity'}
+          {img: 'genuine_user.png',
+            title: 'Genuine User',
+            message: 'Genuine user who has been verified and identified by our team to ensure user is responsibilities to the currency exchange.'},
+          {img: 'currency_rate.png',
+            title: 'Exchange Rate',
+            message: 'You can offers yours competitive exchange rates to everyoneor accept interesting exchange rates from each other.'},
+          {img: 'meetup.png',
+            title: 'Meet up',
+            message: 'Meet up with buddy for exchange currency at safety location such as cafe, restaurant or shopping mall,etc.'},
+          {img: 'aml.png',
+            title: 'Money Laundaring',
+            message: 'To make a better currency exchange way, money laundering is strictly not allow.You have responsbility to prevent money laundering activity.'}
         ]
       }
     },

@@ -12,20 +12,24 @@
 <style scoped>
   
   .landing-div{
-      padding: 10px 30px 10px 30px;
-      color: white !important;
-      z-index: 100;
-      position: relative;
+    min-height: 60px;
+    width: 100%;
+    padding: 10px 15px 10px 15px;
+    color: white !important;
+    z-index: 100;
+    position: relative;
   }
 
   .button-inline {
-      display: inline;
-      float: right;
+    display: inline;
+    float: right;
   }
 
+
   label{
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-      font-size: medium;
-      font-weight: 900;
+    padding-top: 8px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: medium;
+    font-weight: 900;
   }
 </style>

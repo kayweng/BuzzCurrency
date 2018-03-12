@@ -16,6 +16,7 @@ const getters = {
 // mutations
 const mutations = {
   fetchCurrencies (state) {
+    
     var refresh = false
     var localCurrencies = localStorage.getItem('fxier_currencies')
 
@@ -29,6 +30,7 @@ const mutations = {
     }
    
     if (refresh) {
+
       fixer.get('/latest?base=MYR')
         .then(response => {
           localStorage.setItem('fxier_currencies', JSON.stringify(response.data))
@@ -38,7 +40,9 @@ const mutations = {
           console.log(error)
         })
     } else {
+      
       state.currency_data = JSON.parse(localStorage.getItem('fxier_currencies'))
+
       for (var i = 0; i < Object.keys(state.currency_data['rates']).length; i++) {
         var key = Object.keys(state.currency_data['rates'])[i]
         var value = Object.values(state.currency_data['rates'])[i]
@@ -53,8 +57,14 @@ const mutations = {
 
 // actions
 const actions = {
-  getCurrencies ({commit}) {
-    commit('fetchCurrencies')
+  async getCurrencies ({commit}) {
+
+    try{
+      await commit('fetchCurrencies')
+    }catch(ex){
+      console.log(ex)
+    }
+
   }
 }
 

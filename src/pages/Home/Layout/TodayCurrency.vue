@@ -1,13 +1,12 @@
 <template>
   <div class="container-fluid">
     <div class="center">
-      <h4>Exchange Rates</h4>
-      <small>{{ currency_data['base'] }}</small>
+      <h4>Exchange Rates <span style="font-size: 10px;">{{ currency_data['base'] }}</span></h4>
     </div>
     <div class="row container-currency">
       <div class="currencies">
         <carousel>
-          <slide v-for="(arr, i) in carouselPages" :key="i">
+          <slide  v-for="(arr, i) in carouselPages" :key="i">
             <transition-group name="fade" tag="div">
               <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
                 <rate-box :rate="rate"></rate-box>
@@ -97,11 +96,13 @@
         }
        
         var temp = JSON.parse(JSON.stringify(this.currencyRates))
+
         for (var i = 0; i < temp.length; i++) {
           var increament = i + 1
           var sliceArray = temp.slice(count * i, (count * (increament)))
-          
+
           arr.push(sliceArray)
+          
           if (count * (i === 0 ? 1 : increament) >= temp.length) {
             break
           }

@@ -13,6 +13,8 @@
     <slot>
       <input
         :value="value"
+        @blur="$emit('blur',$event.target.value)"
+        @change="$emit('blur',$event.target.value)"
         @input="$emit('input',$event.target.value)"
         v-bind="$attrs"
         class="form-control"
@@ -41,7 +43,7 @@
       error: String,
       labelClasses: String,
       inputClasses: String,
-      value: [String, Number],
+      value: [String, Number, Date],
       addonRightIcon: String,
       addonLeftIcon: String
     },
@@ -53,6 +55,9 @@
     }
   }
 </script>
-<style>
 
+<style scoped>
+  .form-group {
+    margin-bottom: 0em!important;
+  }
 </style>

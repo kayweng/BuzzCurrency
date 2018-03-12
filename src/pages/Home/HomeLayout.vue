@@ -1,10 +1,12 @@
 <template>
   <div class="wrapper">
-    <app-header></app-header>
-    <app-advantages></app-advantages>
-    <app-today-currency></app-today-currency>
-    <app-get-started></app-get-started>
-    <app-footer></app-footer>
+    <transition-group name="fade" mode="out-in">
+      <app-header :key="1"></app-header>
+      <app-advantages :key="2"></app-advantages>
+      <app-today-currency :key="3"></app-today-currency>
+      <app-get-started :key="4"></app-get-started>
+      <app-footer :key="5"></app-footer>
+    </transition-group>
   </div>
 </template>
 

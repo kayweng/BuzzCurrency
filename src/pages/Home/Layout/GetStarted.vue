@@ -1,9 +1,8 @@
 <template>
     <div class="container-fluid bg">
       <div class="get-started-info row white">
-        <h3>Get started to change your way to exchange foregin currency today</h3>
-        <p>Register an account to receives better currency rates opportunies and <br/>
-            authenticate yourself to be genuine user to enjoy more features.</p>
+        <h3>Get started to change your way of exchange foregin currency today</h3>
+        <p>Register an account to explores more currency rates in platform and authenticate yourself to be genuine user to enjoy more features.</p>
       </div>
       <div class="row">
         <router-link class="btn btn-primary btn-wd" to="/signup" tag="button">Join now</router-link>

@@ -93,7 +93,7 @@ body{
 
 .note{
     color: grey;
-    font-size: small;
+    font-size: 0.75em;
     padding-top: 10px;
 }
 
@@ -137,7 +137,25 @@ body{
     border: 1px solid #7FB3D5;
 }
 
-/*Cursor*/
+/* Cursor */
 .pointer{
     cursor: pointer;
+}
+
+/* Error */
+.input-error > input{
+  border: 1px solid #f79483;
+  animation: shaking 0.4s linear;
+  -webkit-animation: shaking 0.4s linear;
+}
+
+.input-error > .control-label{
+  color: #f79483;
+}
+
+.error-message{
+  color: #f79483 !important;
+  font-size: .75rem;
+  line-height: 1;
+  margin-left: 4px;
 }

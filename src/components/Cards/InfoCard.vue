@@ -1,17 +1,24 @@
 <template>
-    <div class="card-item col-md-3 col-sm-6 col-xs-6">
+    <div class="center card-item col-md-3 col-sm-6 col-6">
         <slot name="image"></slot>
         <img :src="'/static/img/' + imgName " />
+        <h6>{{ title }} </h6>
         <p class="text-muted">{{ message }}</p>
     </div>
 </template>
 
 <style scoped>
+    h6{
+      padding-top: 15px;
+      text-align: center;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+
     .card-item {
         display: inline-block;
         vertical-align: top;
         width: 100%;
-        height: 180px;
+        min-height: 180px;
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -24,11 +31,11 @@
     }
 
     .card-item > p{
-        font-size: medium;
+        font-size: small;
         color: #515A5A;
-        padding-top: 30px;
+        padding-top: 10px;
         display: block;
-        text-align: center;
+        text-align: left;
     }
 
 </style>
@@ -38,6 +45,7 @@
     name: 'card-info',
     props: {
       imgName: String,
+      title: String,
       message: String
     }
   }

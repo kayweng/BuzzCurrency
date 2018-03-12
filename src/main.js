@@ -6,12 +6,14 @@ import globalMixins from './globalMixins'
 import { store } from './store/store'
 import routes from './routes/routes'
 import axios from 'axios'
+import Vuelidate from 'vuelidate'
 import App from './App.vue'
 
 /* user plugins */
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
 Vue.use(vMediaQuery)
+Vue.use(Vuelidate)
 
 /* user mixins */
 Vue.mixin(globalMixins)

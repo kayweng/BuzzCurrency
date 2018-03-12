@@ -5,100 +5,118 @@
         <card :title="'Create Account'">
           <!-- User Info -->
           <div class="row">
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-md-6 col-12">
               <fg-input type="text"
                         name="first name"
                         label="First Name"
-                        v-validate="modelValidations.firstName"
-                        :error="getError('first name')"
+                        @blur="$v.model.firstName.$touch()"
+                        :class="{'input-error': $v.model.firstName.$error }"
                         v-model="model.firstName">
               </fg-input>
+              <span v-if="!$v.model.firstName.required" class="error-message">The first name field is required</span>
+              <span v-if="!$v.model.firstName.alpha" class="error-message">The first name field must be only alphabet characters</span>
             </div>
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-md-6 col-12">
               <fg-input type="text"
                         name="last name"
                         label="Last Name"
-                        v-validate="modelValidations.lastName"
-                        :error="getError('last name')"
+                        @blur="$v.model.lastName.$touch()"
+                        :class="{'input-error': $v.model.lastName.$error }"
                         v-model="model.lastName">
               </fg-input>
+              <span v-if="!$v.model.lastName.required" class="error-message">The last name field is required</span>
+              <span v-if="!$v.model.lastName.alpha" class="error-message">The last name field must be only alphabet characters</span>
             </div>
           </div> 
           <div class="row">
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-md-6 col-12">
               <fg-input type="email"
                         name="email"
                         label="Email address"
-                        v-validate="modelValidations.email"
-                        :error="getError('email')"
+                        @blur="$v.model.email.$touch()"
+                        :class="{'input-error': $v.model.email.$error }"
                         v-model="model.email">
               </fg-input>
+              <span v-if="!$v.model.email.required" class="error-message">The email field is required</span>
+              <span v-if="!$v.model.email.email" class="error-message">Invalid email format</span>
             </div>
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-md-6 col-12">
               <fg-input type="mobile"
                         name="mobile"
                         label="Mobile Number"
-                        v-validate="modelValidations.mobile"
-                        :error="getError('mobile')"
+                        @blur="$v.model.mobile.$touch()"
+                        :class="{'input-error': $v.model.mobile.$error }"
                         v-model="model.mobile">
-              </fg-input> 
+              </fg-input>    
+              <span v-if="!$v.model.mobile.required" class="error-message">The mobile number field is required</span>
+              <span v-if="!$v.model.mobile.numeric" class="error-message">The mobile number field must be only numeric</span>
+              <span v-if="$v.model.mobile.numeric && !$v.model.mobile.minLength" class="error-message">The mobile number field must have at least {{ $v.model.mobile.$params.minLength.min}} numbers</span>
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-md-6 col-12">
               <fg-input label="Date of Birth" 
-                        name="dob" 
-                        v-model="model.dob" 
-                        v-validate="modelValidations.dob" 
-                        :error="getError('dob')">
+                        name="dob"
+                        @blur="$v.model.dob.$touch()"
+                        :class="{'input-error': $v.model.dob.$error }"
+                        v-model="model.dob">
                 <el-date-picker v-model="birthdayDate"
                                 format="dd-MMM-yyyy"
                                 type="date"
+                                :class="{'input-error': $v.model.dob.$error }"
                                 placeholder="Date of Birth"></el-date-picker>
               </fg-input>
+              <span v-if="!$v.model.dob.required" class="error-message">The date of birth field is required</span>
+              <span v-if="!$v.model.dob.between" class="error-message">The date of birth must between {{$v.model.dob.$params.between.min.getFullYear() }} and {{$v.model.dob.$params.between.max.getFullYear() - 1}}</span>
             </div>
-            <div class="col-lg-6 col-xs-12"></div>
+            <div class="empty-row"></div>
           </div> 
           <hr/>
           <!-- Password -->
           <div class="row">
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-md-6 col-12">
               <fg-input label="Password"
                         type="password"
                         name="password"
-                        v-validate="modelValidations.password"
-                        :error="getError('password')"
+                        @blur="$v.model.password.$touch()"
+                        :class="{'input-error': $v.model.password.$error }"
                         v-model="model.password">
               </fg-input>
+              <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
+              <span v-if="!$v.model.password.minLength" class="error-message">The password field length must have at least {{$v.model.password.$params.minLength.min}}</span>
             </div>
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-md-6 col-12">
               <fg-input label="Confirm Password"
                         type="password"
                         name="confirm password"
-                        v-validate="modelValidations.confirmPassword"
-                        :error="getError('confirm password')"
+                        @blur="$v.model.confirmPassword.$touch()"
+                        :class="{'input-error': $v.model.confirmPassword.$error }"
                         v-model="model.confirmPassword">
               </fg-input>
+              <span v-if="!$v.model.confirmPassword.required" class="error-message">The confirm password field is required</span>
+              <span v-if="$v.model.confirmPassword.required && !$v.model.confirmPassword.sameAs" class="error-message">The confirm password must be same as password</span>
             </div>
           </div>
           <br/>
 
-          <!-- Terms -->
+          <!-- Agreement -->
           <div class="row">
-            <check-box v-model="model.agreement">
-                <span class="terms" v-html="terms"></span>
-              </check-box>
+            <check-box v-model="model.agreement" :class="{'input-error': $v.model.agreement.$error }">
+              <span class="terms" v-html="terms"></span>
+              <span v-if="!$v.model.agreement.required" class="error-message terms">(Please tick the check box to accept and agree our terms and agreements)</span>
+            </check-box>
           </div>
           <br/>
           <!-- Recaptcha -->
           <div class="row center-item">
               <div class="g-recaptcha" data-sitekey="6LfwwUkUAAAAAGcTAv-UXTyeRdH2UKoydww1wsab"></div>
+              <input type="hidden" v-model="model.reCaptcha" />
           </div>
           <br/>
 
           <!-- Buttons -->
           <div class="row">
-            <div class="text-center col-lg-12">
+            <div class="text-center col-12">
               <div class="button-inline">
                 <button type="reset" @click="resetForm" class="btn btn-round btn-reset btn-wd">Reset</button>
                 <button type="submit" @click.prevent="validate" class="btn btn-round btn-submit btn-wd">Submit</button>
@@ -112,8 +130,10 @@
 </template>
 
 <script>
+  import { required, email, minLength, between, sameAs, alpha, numeric } from 'vuelidate/lib/validators'
   import { DatePicker, Input, Button } from 'element-ui'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
+  import { date } from 'src/plugins/date'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
   
   export default {
@@ -134,55 +154,68 @@
           lastName: '',
           email: '',
           mobile: '',
-          dob: '',
+          dob: null,
           password: '',
           confirmedPassword: '',
-          agreement: false
+          agreement: false,
+          reCaptcha: false
+        }
+      }
+    },
+    validations: {
+      model: {
+        firstName: {
+          required,
+          alpha
         },
-        modelValidations: {
-          firstName: {
-            required: true
-          },
-          lastName: {
-            required: true
-          },
-          email: {
-            required: true,
-            email: true
-          },
-          mobile: {
-            required: true
-          },
-          password: {
-            required: true,
-            min: 6
-          },
-          confirmPassword: {
-            required: true,
-            confirmed: 'password'
-          },
-          dob: {
-            required: true
-          }
+        lastName: {
+          required,
+          alpha
+        },
+        email: {
+          required,
+          email
+        },
+        mobile: {
+          required,
+          numeric,
+          minLength: minLength(6)
+        },
+        dob: {
+          required,
+          between: between(date.getDateByYearAdded(-80), date.getDateByYearAdded(-18))
+        },
+        password: {
+          required,
+          minLength: minLength(6)
+        },
+        confirmPassword: {
+          required,
+          sameAs: sameAs('password')
+        },
+        agreement: {
+          required
         }
       }
     },
     methods: {
-      getError (fieldName) {
-        return this.errors.first(fieldName)
-      },
       resetForm () {
         this.model = {}
+        this.$v.model.$reset()
       },
-      validate () {
-        this.$validator.validateAll().then(isValid => {
-          this.$emit('on-submit', this.signUp, isValid)
-        })
+      validate (event) {
+
+        if (this.$v.model.$invalid || this.$v.model.$error) {
+         this.$v.model.$touch()
+          return
+        }
+        
+        console.log(event)
       }
     },
     watch: {
       birthdayDate: function (val) {
-        this.model.dob = val.toLocaleDateString()
+        this.model.dob = val
       }
     }
   }
