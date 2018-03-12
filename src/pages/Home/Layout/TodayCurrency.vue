@@ -5,15 +5,20 @@
     </div>
     <div class="row container-currency">
       <div class="currencies">
-        <carousel>
-          <slide  v-for="(arr, i) in carouselPages" :key="i">
-            <transition-group name="fade" tag="div">
-              <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
-                <rate-box :rate="rate"></rate-box>
-              </div>
-            </transition-group>
-          </slide>
-        </carousel>
+        <transition name="fade" tag="div" mode="out-in">
+          <carousel v-if="currencyRates.length > 0">
+            <slide v-for="(arr, i) in carouselPages" :key="i">
+              <transition-group name="fade" tag="div">
+                <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
+                  <rate-box :rate="rate"></rate-box>
+                </div>
+              </transition-group>
+              </slide>
+          </carousel>
+          <div v-if="currencyRates.length === 0">
+            <small>Loading ...</small>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -96,7 +101,7 @@
         }
        
         var temp = JSON.parse(JSON.stringify(this.currencyRates))
-
+     
         for (var i = 0; i < temp.length; i++) {
           var increament = i + 1
           var sliceArray = temp.slice(count * i, (count * (increament)))
@@ -111,7 +116,13 @@
       }
     },
     mounted () {
-      this.getCurrencies()
+      setTimeout(vm => {
+        this.getCurrencies().then(response => {
+          console.log(response)
+        }, error => {
+          console.log(error)
+        })
+      }, 1000)
     }
   }
 </script>

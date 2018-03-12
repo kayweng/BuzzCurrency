@@ -3,11 +3,12 @@ import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'
 
 // Landing page
 import Home from 'src/pages/Home/HomeLayout.vue'
-// Login page
+// Auth page
 import UserLogin from 'src/pages/Auth/Layout/Login.vue'
 import UserSignUp from 'src/pages/Auth/Layout/SignUp.vue'
 import UserResetPassword from 'src/pages/Auth/Layout/ResetPassword.vue'
 import UserChangePassword from 'src/pages/Auth/Layout/ChangePassword.vue'
+import UserEmailVerification from 'src/pages/Auth/Layout/EmailVerification.vue'
 
 /* To be remove */
 import DashboardLayout from 'src/pages/Dashboard/Layout/DashboardLayout.vue'
@@ -206,6 +207,11 @@ let changePasswordPage = {
   component: UserChangePassword
 }
 
+let verifyEmailPage = {
+  path: '/verify-email',
+  component: UserEmailVerification
+}
+
 let lockPage = {
   path: '/lock',
   name: 'Lock',
@@ -230,6 +236,7 @@ const routes = [
   signUpPage,
   resetPasswordPage,
   changePasswordPage,
+  verifyEmailPage,
   lockPage,
   {
     path: '/admin',

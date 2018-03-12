@@ -66,15 +66,14 @@
         },
         password: {
           required,
-          minLength: minLength(6)
+          minLength: minLength(8)
         }
       }
     },
     methods: {
       validate (event) {
-        
         if (this.$v.model.$invalid || this.$v.model.$error) {
-         this.$v.model.$touch()
+          this.$v.model.$touch()
           return
         }
         

@@ -77,9 +77,8 @@
     },
     methods: {
       validate (event) {
-        
         if (this.$v.model.$invalid || this.$v.model.$error) {
-         this.$v.model.$touch()
+          this.$v.model.$touch()
           return
         }
         

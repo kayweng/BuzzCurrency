@@ -12,7 +12,7 @@ export const date = {
   },
   
   // yesterday
-  yesterday: function() {
+  yesterday: function () {
     var dt = new Date()
 
     return dt.setDate(dt.getDate() - 1)
@@ -27,10 +27,10 @@ export const date = {
     return y + '-' + m + '-' + d
   },
 
-  getDateByDayAdded: function(val) {
+  getDateByDayAdded: function (val) {
     var dt = new Date()
 
-    if (val == undefined || isNaN(val)) {
+    if (val === undefined || isNaN(val)) {
       return null
     }
 
@@ -39,7 +39,7 @@ export const date = {
     return dt
   },
 
-  getDateByYearAdded: function(val) {
+  getDateByYearAdded: function (val) {
     var dt = new Date()
 
     if (isNaN(val)) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="center card-item col-md-3 col-sm-6 col-6">
+    <div class="center card-item">
         <slot name="image"></slot>
         <img :src="'/static/img/' + imgName " />
         <h6>{{ title }} </h6>

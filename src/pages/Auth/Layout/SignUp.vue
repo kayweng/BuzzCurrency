@@ -179,7 +179,7 @@
         mobile: {
           required,
           numeric,
-          minLength: minLength(6)
+          minLength: minLength(8)
         },
         dob: {
           required,
@@ -187,7 +187,7 @@
         },
         password: {
           required,
-          minLength: minLength(6)
+          minLength: minLength(8)
         },
         confirmPassword: {
           required,
@@ -204,9 +204,15 @@
         this.$v.model.$reset()
       },
       validate (event) {
-
         if (this.$v.model.$invalid || this.$v.model.$error) {
-         this.$v.model.$touch()
+          this.$v.model.$touch()
+          return
+        }
+
+        var captcha = grecaptcha.getResponse();
+
+        if (captcha.length === 0) {
+          alert('Please complete recaptcha upon submit form data')
           return
         }
         

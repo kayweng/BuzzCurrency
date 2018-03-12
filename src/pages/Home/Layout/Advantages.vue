@@ -4,7 +4,7 @@
             <h2>What You Should Know</h2>
         </div>
         <div class="row">
-            <info-card  v-for="(item, index) in items" :key="index" 
+            <info-card  v-for="(item, index) in items" :key="index" class="col-md-3 col-sm-6 col-6"
                         :imgName="item.img" 
                         :title="item.title"
                         :message="item.message" ></info-card>

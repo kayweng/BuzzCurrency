@@ -108,33 +108,39 @@ body{
 
 /*button*/
 .btn-home{
-    color: #0976b4;
-    background-color: transparent;
-    border: 1px solid #0976b4;
+  color: #0976b4;
+  background-color: transparent;
+  border: 1px solid #0976b4;
 }
 
 .btn-signup{
-    background-color: transparent;
-    border: 2px solid #1F618D;
-    color: white !important;
+  background-color: transparent;
+  border: 2px solid #1F618D;
+  color: white !important;
 }
 
 .btn-login{
-    background-color: transparent;
-    border: 0px !important;
-    color: white !important;
+  background-color: transparent;
+  border: 0px !important;
+  color: white !important;
 }
 
 .btn-reset{
-    color: black;
-    background-color: white;
-    border: 1px solid #7F8C8D;
+  color: black;
+  background-color: white;
+  border: 1px solid #7F8C8D;
 }
 
 .btn-submit{
-    color: white;
-    background-color: #2471A3;
-    border: 1px solid #7FB3D5;
+  color: white;
+  background-color: #2471A3;
+  border: 1px solid #7FB3D5;
+}
+
+.btn-verify{
+  color: white;
+  background-color: rgb(68, 22, 175);
+  border: 1px solid white;
 }
 
 /* Cursor */
