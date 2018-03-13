@@ -55,7 +55,7 @@
       },
       contentClass: {
         type: String,
-        default: 'col-lg-8 col-md-8 col-sm-8'
+        default: 'col-lg-8 col-sm-10'
       },
       backgroundColor: {
         type: String,

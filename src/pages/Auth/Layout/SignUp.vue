@@ -5,52 +5,67 @@
         <card :title="'Create Account'">
           <!-- User Info -->
           <div class="row">
+            <!-- first name -->
             <div class="col-md-6 col-12">
               <fg-input type="text"
                         name="first name"
                         label="First Name"
+                        placeholder= "Alan"
                         @blur="$v.model.firstName.$touch()"
                         :class="{'input-error': $v.model.firstName.$error }"
                         v-model="model.firstName">
               </fg-input>
-              <span v-if="!$v.model.firstName.required" class="error-message">The first name field is required</span>
-              <span v-if="!$v.model.firstName.alpha" class="error-message">The first name field must be only alphabet characters</span>
+              <div class="error-message">
+                <span v-if="!$v.model.firstName.required" class="error-message">The first name field is required</span>
+                <span v-if="$v.model.firstName.required && !$v.model.firstName.alpha" class="error-message">The first name field must be only alphabet characters</span>
+              </div>
             </div>
+            <!-- last name -->
             <div class="col-md-6 col-12">
               <fg-input type="text"
                         name="last name"
                         label="Last Name"
+                        placeholder= "Bob"
                         @blur="$v.model.lastName.$touch()"
                         :class="{'input-error': $v.model.lastName.$error }"
                         v-model="model.lastName">
               </fg-input>
-              <span v-if="!$v.model.lastName.required" class="error-message">The last name field is required</span>
-              <span v-if="!$v.model.lastName.alpha" class="error-message">The last name field must be only alphabet characters</span>
+              <div class="error-message">
+                <span v-if="!$v.model.lastName.required">The last name field is required</span>
+                <span v-if="$v.model.lastName.required && !$v.model.lastName.alpha">The last name field must be only alphabet characters</span>
+              </div>
             </div>
           </div> 
           <div class="row">
+            <!-- email -->
             <div class="col-md-6 col-12">
               <fg-input type="email"
                         name="email"
                         label="Email address"
+                        placeholder= "abc@email.com"
                         @blur="$v.model.email.$touch()"
                         :class="{'input-error': $v.model.email.$error }"
                         v-model="model.email">
               </fg-input>
-              <span v-if="!$v.model.email.required" class="error-message">The email field is required</span>
-              <span v-if="!$v.model.email.email" class="error-message">Invalid email format</span>
+              <div class="error-message">
+                <span v-if="!$v.model.email.required">The email field is required</span>
+                <span v-if="$v.model.email.required && !$v.model.email.email">Invalid email format</span>
+              </div>
             </div>
+            <!-- mobile -->
             <div class="col-md-6 col-12">
               <fg-input type="mobile"
                         name="mobile"
-                        label="Mobile Number"
+                        label="Mobile Number (+)"
+                        placeholder= "6012345678"
                         @blur="$v.model.mobile.$touch()"
                         :class="{'input-error': $v.model.mobile.$error }"
                         v-model="model.mobile">
-              </fg-input>    
-              <span v-if="!$v.model.mobile.required" class="error-message">The mobile number field is required</span>
-              <span v-if="!$v.model.mobile.numeric" class="error-message">The mobile number field must be only numeric</span>
-              <span v-if="$v.model.mobile.numeric && !$v.model.mobile.minLength" class="error-message">The mobile number field must have at least {{ $v.model.mobile.$params.minLength.min}} numbers</span>
+              </fg-input>  
+              <div class="error-message">
+                <span v-if="!$v.model.mobile.numeric" class="error-message">The mobile number field must be only numeric</span>
+                <span v-if="$v.model.mobile.numeric && !$v.model.mobile.minLength" class="error-message">Insufficient length ({{ $v.model.mobile.$params.minLength.min }}) of mobile</span>
+              </div>  
             </div>
           </div>
           <div class="row">
@@ -66,8 +81,10 @@
                                 :class="{'input-error': $v.model.dob.$error }"
                                 placeholder="Date of Birth"></el-date-picker>
               </fg-input>
-              <span v-if="!$v.model.dob.required" class="error-message">The date of birth field is required</span>
-              <span v-if="!$v.model.dob.between" class="error-message">The date of birth must between {{$v.model.dob.$params.between.min.getFullYear() }} and {{$v.model.dob.$params.between.max.getFullYear() - 1}}</span>
+              <div class="error-message">
+                <span v-if="!$v.model.dob.required">The date of birth field is required</span>
+                <span v-if="$v.model.dob.required && !$v.model.dob.between">The date of birth must between {{$v.model.dob.$params.between.min.getFullYear() }} and {{$v.model.dob.$params.between.max.getFullYear() - 1}}</span>
+              </div>
             </div>
             <div class="empty-row"></div>
           </div> 
@@ -82,8 +99,10 @@
                         :class="{'input-error': $v.model.password.$error }"
                         v-model="model.password">
               </fg-input>
-              <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
-              <span v-if="!$v.model.password.minLength" class="error-message">The password field length must have at least {{$v.model.password.$params.minLength.min}}</span>
+              <div class="error-message">
+                <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
+                <span v-if="$v.model.password.required && !$v.model.password.minLength" class="error-message">Insufficient length ({{$v.model.password.$params.minLength.min}}) of password</span>
+              </div>
             </div>
             <div class="col-md-6 col-12">
               <fg-input label="Confirm Password"
@@ -93,8 +112,10 @@
                         :class="{'input-error': $v.model.confirmPassword.$error }"
                         v-model="model.confirmPassword">
               </fg-input>
-              <span v-if="!$v.model.confirmPassword.required" class="error-message">The confirm password field is required</span>
-              <span v-if="$v.model.confirmPassword.required && !$v.model.confirmPassword.sameAs" class="error-message">The confirm password must be same as password</span>
+              <div class="error-message">
+                <span v-if="!$v.model.confirmPassword.required" class="error-message">The confirm password field is required</span>
+                <span v-if="$v.model.confirmPassword.required && !$v.model.confirmPassword.sameAs" class="error-message">The confirm password must be same as password</span>
+              </div>
             </div>
           </div>
           <br/>
@@ -103,7 +124,7 @@
           <div class="row">
             <check-box v-model="model.agreement" :class="{'input-error': $v.model.agreement.$error }">
               <span class="terms" v-html="terms"></span>
-              <span v-if="!$v.model.agreement.required" class="error-message terms">(Please tick the check box to accept and agree our terms and agreements)</span>
+              <p class="terms" :class="{'note-message': $v.model.agreement.required, 'error-message': !$v.model.agreement.required }" >Note: Please tick the check box to accept and agree our terms and agreements</p>
             </check-box>
           </div>
           <br/>
@@ -131,9 +152,10 @@
 
 <script>
   import { required, email, minLength, between, sameAs, alpha, numeric } from 'vuelidate/lib/validators'
-  import { DatePicker, Input, Button } from 'element-ui'
+  import { DatePicker } from 'element-ui'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
   import { date } from 'src/plugins/date'
+  import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
   
   export default {
@@ -141,22 +163,20 @@
       FadeRenderTransition,
       LandingLayout,
       checkBox: Checkbox,
-      [DatePicker.name]: DatePicker,
-      [Input.name]: Input,
-      [Button.name]: Button
+      [DatePicker.name]: DatePicker
     },
     data () {
       return {
         terms: 'By proceeding, I agree that you can collect, use and disclose the information provided by me in accordance with your <a href="#">Privacy Policy</a> which I have read and understand.',
         birthdayDate: null,
         model: {
-          firstName: '',
-          lastName: '',
-          email: '',
-          mobile: '',
+          firstName: null,
+          lastName: null,
+          email: null,
+          mobile: null,
           dob: null,
-          password: '',
-          confirmedPassword: '',
+          password: null,
+          confirmedPassword: null,
           agreement: false,
           reCaptcha: false
         }
@@ -177,7 +197,6 @@
           email
         },
         mobile: {
-          required,
           numeric,
           minLength: minLength(8)
         },
@@ -214,26 +233,37 @@
           return
         }
 
-        var captcha = grecaptcha.getResponse();
+        // var captcha = grecaptcha.getResponse();
 
-        if (captcha.length === 0) {
-          alert('Please complete recaptcha upon submit form data')
-          return
-        }
-        console.log(event)
+        // if (captcha.length === 0) {
+        //   alert('Please complete recaptcha upon submit form data')
+        //   return
+        // }
+        
         this.$store.dispatch('signUp', {
           username: this.model.email,
           password: this.model.password,
           attributes: {
             email: this.model.email,
             name: this.name,
-            phone_number: this.model.mobile,
-            birthdate: this.model.dob
-          },
+            phone_number: this.model.mobile === null ? '' : '+' + this.model.mobile,
+            birthdate: this.model.dob.toISOString().slice(0,10)
+          }
         }).then(() => {
-
-        }).catch(() => {
-
+          swal({
+            title: 'Sign up',
+            text: 'You have been succesfully create account. Before you can login, please verify your account with the verification link sent to your email address.',
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-submit btn-round',
+            type: 'success'
+          })
+        }).catch((error) => {
+          swal({
+            title: 'Error',
+            text: error.description,
+            buttonsStyling: false,
+            confirmButtonClass: 'btn btn-error btn-round'
+          })
         })
       }
     },

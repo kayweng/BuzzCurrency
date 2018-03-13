@@ -1,7 +1,7 @@
 // Notifications plugin. Used on Notifications page
 import Notifications from 'vue-notifyjs'
 // Validation plugin used to validate forms
-import VeeValidate from 'vee-validate'
+// import VeeValidate from 'vee-validate'
 // A plugin file where you could register global components used across the app
 import GlobalComponents from './globalComponents'
 // A plugin file where you could register global directives
@@ -33,6 +33,6 @@ export default {
     Vue.use(SideBar)
     Vue.use(Notifications)
     Vue.use(VueTabs)
-    Vue.use(VeeValidate)
+    // Vue.use(VeeValidate)
   }
 }

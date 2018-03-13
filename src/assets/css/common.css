@@ -89,6 +89,7 @@ body{
 
 .terms{
     text-transform: initial !important;
+    color: black;
 }
 
 .note{
@@ -162,6 +163,13 @@ body{
 .error-message{
   color: #f79483 !important;
   font-size: .75rem;
-  line-height: 1;
-  margin-left: 4px;
+  min-height: 18px;
+  margin-left: 2px;
+}
+
+.note-message {
+  color: grey !important;
+  font-size: .75rem;
+  min-height: 18px;
+  margin-left: 2px;
 }
