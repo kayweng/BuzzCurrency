@@ -119,7 +119,7 @@
             <div class="text-center col-12">
               <div class="button-inline">
                 <button type="reset" @click="resetForm" class="btn btn-round btn-reset btn-wd">Reset</button>
-                <button type="submit" @click.prevent="validate" class="btn btn-round btn-submit btn-wd">Submit</button>
+                <button type="submit" @click.prevent="submitForm" class="btn btn-round btn-submit btn-wd">Submit</button>
               </div>
             </div>
           </div>
@@ -198,12 +198,17 @@
         }
       }
     },
+    computed: {
+      name () {
+        return this.model.firstName + ' ' + this.model.lastName
+      }
+    },
     methods: {
       resetForm () {
         this.model = {}
         this.$v.model.$reset()
       },
-      validate (event) {
+      submitForm (event) {
         if (this.$v.model.$invalid || this.$v.model.$error) {
           this.$v.model.$touch()
           return
@@ -215,8 +220,21 @@
           alert('Please complete recaptcha upon submit form data')
           return
         }
-        
         console.log(event)
+        this.$store.dispatch('signUp', {
+          username: this.model.email,
+          password: this.model.password,
+          attributes: {
+            email: this.model.email,
+            name: this.name,
+            phone_number: this.model.mobile,
+            birthdate: this.model.dob
+          },
+        }).then(() => {
+
+        }).catch(() => {
+
+        })
       }
     },
     watch: {

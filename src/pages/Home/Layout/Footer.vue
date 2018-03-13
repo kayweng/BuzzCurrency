@@ -20,7 +20,7 @@
 <style scoped>
   .bg{
       vertical-align: middle;
-      background-color: #34495E;
+      background: linear-gradient(to right, #34495E, #5499C7);
       max-height: 55px !important;
   }
 

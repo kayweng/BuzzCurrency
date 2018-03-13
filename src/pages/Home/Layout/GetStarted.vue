@@ -12,13 +12,14 @@
 
 <style scoped>
   .bg{
-      background-color: #2874A6;
+      background: linear-gradient(to right, #154360, #5499C7);
       min-height: 250px;
   }
 
   .btn{
       margin-left: 100px;
       background-color: #CB4335;
+      border-color: white;
       height: 40px;
       box-shadow: 1px 2px grey;
   }

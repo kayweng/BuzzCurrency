@@ -6,10 +6,10 @@
       <div>
         <h2>EASY EXCHANGE YOUR CURRENCY</h2>
       </div>
-      <div style="padding-bottom: 10px;">
+      <div style="padding-bottom: 10px; color: white">
         <small>New to Buzz Currency ? </small>
-        <i class="fa fa-book" style="font-size:16px;color:white;"></i>
-        <a class="white small" href="#">Learn More</a>
+        <i class="fa fa-book" style="font-size:16px; color: white;"></i>
+        <a class="small white" href="#">Learn More</a>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
 
   .bg{
       padding-left: 15px;
-      background-image: url("/static/img/bg-home.jpg");
+      background-image: url("/static/img/bg_home.jpeg");
       background-size: cover;                      
       background-repeat: no-repeat;
       background-position: center center;
@@ -31,8 +31,8 @@
   }
 
   h2{
-      background: linear-gradient(to right, #FBFCFC, #FDFEFE);
-      background: -webkit-linear-gradient(to right,#FBFCFC, #FDFEFE);
+      background: linear-gradient(to right, white, black);
+      background: -webkit-linear-gradient(to right, white, black);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
   }
