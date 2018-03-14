@@ -76,7 +76,7 @@ export default function actionsFactory (config) {
         Name: key,
         Value: userInfo.attributes[key]
       }))
-      console.log(userAttributes)
+      
       return new Promise((resolve, reject) => {
         cognitoUserPool.signUp(
           userInfo.username, userInfo.password, userAttributes, null,

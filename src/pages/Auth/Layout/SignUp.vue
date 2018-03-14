@@ -17,7 +17,7 @@
               </fg-input>
               <div class="error-message">
                 <span v-if="!$v.model.firstName.required" class="error-message">The first name field is required</span>
-                <span v-if="$v.model.firstName.required && !$v.model.firstName.alpha" class="error-message">The first name field must be only alphabet characters</span>
+                <span v-if="$v.model.firstName.required && !$v.model.firstName.alphaSpace" class="error-message">The first name field must be only alphabet characters</span>
               </div>
             </div>
             <!-- last name -->
@@ -32,7 +32,7 @@
               </fg-input>
               <div class="error-message">
                 <span v-if="!$v.model.lastName.required">The last name field is required</span>
-                <span v-if="$v.model.lastName.required && !$v.model.lastName.alpha">The last name field must be only alphabet characters</span>
+                <span v-if="$v.model.lastName.required && !$v.model.lastName.alphaSpace">The last name field must be only alphabet characters</span>
               </div>
             </div>
           </div> 
@@ -56,15 +56,14 @@
             <div class="col-md-6 col-12">
               <fg-input type="mobile"
                         name="mobile"
-                        label="Mobile Number (+)"
-                        placeholder= "6012345678"
+                        label="Mobile Number"
+                        placeholder= "+6012345678"
                         @blur="$v.model.mobile.$touch()"
                         :class="{'input-error': $v.model.mobile.$error }"
                         v-model="model.mobile">
               </fg-input>  
               <div class="error-message">
-                <span v-if="!$v.model.mobile.numeric" class="error-message">The mobile number field must be only numeric</span>
-                <span v-if="$v.model.mobile.numeric && !$v.model.mobile.minLength" class="error-message">Insufficient length ({{ $v.model.mobile.$params.minLength.min }}) of mobile</span>
+                <span v-if="!$v.model.mobile.numericPlus" class="error-message">Invalid format.Start with + and numeric only</span>
               </div>  
             </div>
           </div>
@@ -186,19 +185,31 @@
       model: {
         firstName: {
           required,
-          alpha
+          alphaSpace: val => {
+            var regex = new RegExp(/^[a-zA-Z ]*$/)
+            return regex.test(val)
+          }
         },
         lastName: {
           required,
-          alpha
+          alphaSpace: val => {
+            var regex = new RegExp(/^[a-zA-Z ]*$/)
+            return regex.test(val)
+          }
         },
         email: {
           required,
           email
         },
         mobile: {
-          numeric,
-          minLength: minLength(8)
+          numericPlus: val => {
+            if (val === null || val === '' || val === undefined) {
+              return true
+            }
+            
+            var regex = new RegExp(/^\+\d{6,14}$/)
+            return regex.test(val)
+          }
         },
         dob: {
           required,
@@ -233,12 +244,12 @@
           return
         }
 
-        // var captcha = grecaptcha.getResponse();
+        var captcha = grecaptcha.getResponse();
 
-        // if (captcha.length === 0) {
-        //   alert('Please complete recaptcha upon submit form data')
-        //   return
-        // }
+        if (captcha.length === 0) {
+          alert('Please complete recaptcha upon submit form data')
+          return
+        }
         
         this.$store.dispatch('signUp', {
           username: this.model.email,
@@ -246,23 +257,27 @@
           attributes: {
             email: this.model.email,
             name: this.name,
-            phone_number: this.model.mobile === null ? '' : '+' + this.model.mobile,
+            phone_number: this.model.mobile === null ? null : '+' + this.model.mobile,
             birthdate: this.model.dob.toISOString().slice(0,10)
           }
         }).then(() => {
           swal({
-            title: 'Sign up',
+            title: 'Created New Account',
             text: 'You have been succesfully create account. Before you can login, please verify your account with the verification link sent to your email address.',
-            buttonsStyling: false,
-            confirmButtonClass: 'btn btn-submit btn-round',
-            type: 'success'
+            type: 'success',
+            showCancelButton: false,
+            confirmButtonClass: 'btn btn-home btn-round btn-wd',
+            confirmButtonText: 'Home Page',
+            buttonsStyling: false
+          }).then(function () {
+            this.$route.router.go('/')  // Back to Home page
           })
         }).catch((error) => {
           swal({
             title: 'Error',
-            text: error.description,
+            text: error.message,
             buttonsStyling: false,
-            confirmButtonClass: 'btn btn-error btn-round'
+            confirmButtonClass: 'btn btn-info btn-round btn-wd'
           })
         })
       }
