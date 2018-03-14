@@ -221,7 +221,8 @@ let lockPage = {
 const routes = [
   {
     path: '/',
-    component: Home
+    component: Home,
+    naem: 'home'
   },
   {
     path: '/overview',

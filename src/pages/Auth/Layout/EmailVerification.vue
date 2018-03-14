@@ -31,10 +31,9 @@
 </style>
 
 <script>
-  import { FadeRenderTransition } from 'src/components/index'
+  import { FadeRenderTransition, InfoCard } from 'src/components/index'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
-  import {InfoCard} from 'src/components/index'
-
+  
   export default {
     components: {
       FadeRenderTransition,

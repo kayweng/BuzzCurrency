@@ -24,7 +24,9 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // allow blank lines
-    "no-trailing-spaces": [2, { "skipBlankLines": true }]
+    "no-trailing-spaces": [2, { "skipBlankLines": true }],
+    // allow undefine variable/object such as grecaptcha
+    "no-undef": "off"
   },
   "comma-dangle": ["error", {
     "arrays": "never",

@@ -19,6 +19,7 @@
         v-bind="$attrs"
         class="form-control"
         :class="inputClasses"
+        :maxlength="maxLength"
         aria-describedby="addon-right addon-left">
     </slot>
     <slot name="helpBlock">
@@ -45,7 +46,8 @@
       inputClasses: String,
       value: [String, Number, Date],
       addonRightIcon: String,
-      addonLeftIcon: String
+      addonLeftIcon: String,
+      maxLength: Number
     },
     computed: {
       hasIcon () {

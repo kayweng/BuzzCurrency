@@ -13,6 +13,7 @@
                         placeholder= "Alan"
                         @blur="$v.model.firstName.$touch()"
                         :class="{'input-error': $v.model.firstName.$error }"
+                        :maxLength="20"
                         v-model="model.firstName">
               </fg-input>
               <div class="error-message">
@@ -28,6 +29,7 @@
                         placeholder= "Bob"
                         @blur="$v.model.lastName.$touch()"
                         :class="{'input-error': $v.model.lastName.$error }"
+                        :maxLength="30"
                         v-model="model.lastName">
               </fg-input>
               <div class="error-message">
@@ -45,6 +47,7 @@
                         placeholder= "abc@email.com"
                         @blur="$v.model.email.$touch()"
                         :class="{'input-error': $v.model.email.$error }"
+                        :maxLength="40"
                         v-model="model.email">
               </fg-input>
               <div class="error-message">
@@ -60,36 +63,38 @@
                         placeholder= "+6012345678"
                         @blur="$v.model.mobile.$touch()"
                         :class="{'input-error': $v.model.mobile.$error }"
+                        :maxLength="14"
                         v-model="model.mobile">
               </fg-input>  
               <div class="error-message">
-                <span v-if="!$v.model.mobile.numericPlus" class="error-message">Invalid format.Start with + and numeric only</span>
+                <span v-if="!$v.model.mobile.numericPlus" class="error-message">Invalid mobile format.Please start with + and country code</span>
               </div>  
             </div>
           </div>
           <div class="row">
+            <!-- birthdate -->
             <div class="col-md-6 col-12">
-              <fg-input label="Date of Birth" 
-                        name="dob"
-                        @blur="$v.model.dob.$touch()"
-                        :class="{'input-error': $v.model.dob.$error }"
-                        v-model="model.dob">
-                <el-date-picker v-model="birthdayDate"
+              <fg-input label="Birth Date" 
+                        name="birthdate"
+                        @blur="$v.model.birthdate.$touch()"
+                        :class="{'input-error': $v.model.birthdate.$error }"
+                        v-model="model.birthdate">
+                <el-date-picker v-model="calendarDate"
                                 format="dd-MMM-yyyy"
                                 type="date"
-                                :class="{'input-error': $v.model.dob.$error }"
+                                :class="{'input-error': $v.model.birthdate.$error }"
                                 placeholder="Date of Birth"></el-date-picker>
               </fg-input>
               <div class="error-message">
-                <span v-if="!$v.model.dob.required">The date of birth field is required</span>
-                <span v-if="$v.model.dob.required && !$v.model.dob.between">The date of birth must between {{$v.model.dob.$params.between.min.getFullYear() }} and {{$v.model.dob.$params.between.max.getFullYear() - 1}}</span>
+                <span v-if="!$v.model.birthdate.required">The birth date field is required</span>
+                <span v-if="$v.model.birthdate.required && !$v.model.birthdate.between">You must be age of 18 or order to sign up</span>
               </div>
             </div>
             <div class="empty-row"></div>
           </div> 
           <hr/>
-          <!-- Password -->
           <div class="row">
+             <!-- Password -->
             <div class="col-md-6 col-12">
               <fg-input label="Password"
                         type="password"
@@ -98,11 +103,12 @@
                         :class="{'input-error': $v.model.password.$error }"
                         v-model="model.password">
               </fg-input>
-              <div class="error-message">
+              <div class="error-message-36">
                 <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
-                <span v-if="$v.model.password.required && !$v.model.password.minLength" class="error-message">Insufficient length ({{$v.model.password.$params.minLength.min}}) of password</span>
+                <span v-if="$v.model.password.required && !$v.model.password.passwordPolicy" class="error-message">Passwords must be at least 8 characters and numbers in length</span>
               </div>
             </div>
+            <!-- confirm Password -->
             <div class="col-md-6 col-12">
               <fg-input label="Confirm Password"
                         type="password"
@@ -111,12 +117,13 @@
                         :class="{'input-error': $v.model.confirmPassword.$error }"
                         v-model="model.confirmPassword">
               </fg-input>
-              <div class="error-message">
+              <div class="error-message-36">
                 <span v-if="!$v.model.confirmPassword.required" class="error-message">The confirm password field is required</span>
                 <span v-if="$v.model.confirmPassword.required && !$v.model.confirmPassword.sameAs" class="error-message">The confirm password must be same as password</span>
               </div>
             </div>
           </div>
+
           <br/>
 
           <!-- Agreement -->
@@ -126,7 +133,9 @@
               <p class="terms" :class="{'note-message': $v.model.agreement.required, 'error-message': !$v.model.agreement.required }" >Note: Please tick the check box to accept and agree our terms and agreements</p>
             </check-box>
           </div>
+
           <br/>
+
           <!-- Recaptcha -->
           <div class="row center-item">
               <div class="g-recaptcha" data-sitekey="6LfwwUkUAAAAAGcTAv-UXTyeRdH2UKoydww1wsab"></div>
@@ -150,10 +159,9 @@
 </template>
 
 <script>
-  import { required, email, minLength, between, sameAs, alpha, numeric } from 'vuelidate/lib/validators'
   import { DatePicker } from 'element-ui'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
-  import { date } from 'src/plugins/date'
+  import user from 'src/models/user'
   import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
   
@@ -166,67 +174,13 @@
     },
     data () {
       return {
-        terms: 'By proceeding, I agree that you can collect, use and disclose the information provided by me in accordance with your <a href="#">Privacy Policy</a> which I have read and understand.',
-        birthdayDate: null,
-        model: {
-          firstName: null,
-          lastName: null,
-          email: null,
-          mobile: null,
-          dob: null,
-          password: null,
-          confirmedPassword: null,
-          agreement: false,
-          reCaptcha: false
-        }
+        terms: 'By proceeding, I agree that you can collect, use and disclose the information provided by me in accordance with your <a href="#/policy">Privacy Policy</a> which I have read and understand.',
+        calendarDate: null,
+        model: user
       }
     },
     validations: {
-      model: {
-        firstName: {
-          required,
-          alphaSpace: val => {
-            var regex = new RegExp(/^[a-zA-Z ]*$/)
-            return regex.test(val)
-          }
-        },
-        lastName: {
-          required,
-          alphaSpace: val => {
-            var regex = new RegExp(/^[a-zA-Z ]*$/)
-            return regex.test(val)
-          }
-        },
-        email: {
-          required,
-          email
-        },
-        mobile: {
-          numericPlus: val => {
-            if (val === null || val === '' || val === undefined) {
-              return true
-            }
-            
-            var regex = new RegExp(/^\+\d{6,14}$/)
-            return regex.test(val)
-          }
-        },
-        dob: {
-          required,
-          between: between(date.getDateByYearAdded(-80), date.getDateByYearAdded(-18))
-        },
-        password: {
-          required,
-          minLength: minLength(8)
-        },
-        confirmPassword: {
-          required,
-          sameAs: sameAs('password')
-        },
-        agreement: {
-          required
-        }
-      }
+      model: user.validations
     },
     computed: {
       name () {
@@ -243,49 +197,65 @@
           this.$v.model.$touch()
           return
         }
-
-        var captcha = grecaptcha.getResponse();
-
-        if (captcha.length === 0) {
-          alert('Please complete recaptcha upon submit form data')
-          return
-        }
         
+        if (location.hostname !== 'localhost') {
+          try {
+            var captcha = grecaptcha.getResponse()
+            if (captcha.length === 0) {
+              throw new Error('Please complete recaptcha upon submit form data')
+            }
+          } catch (error) {
+            swal({
+              type: 'error',
+              title: 'Oops...',
+              text: error.message,
+              buttonsStyling: false,
+              confirmButtonClass: 'btn btn-warning btn-round btn-wd'
+            })
+            event.preventDefault()
+            return
+          }
+        }
+
         this.$store.dispatch('signUp', {
           username: this.model.email,
           password: this.model.password,
           attributes: {
             email: this.model.email,
             name: this.name,
-            phone_number: this.model.mobile === null ? null : '+' + this.model.mobile,
-            birthdate: this.model.dob.toISOString().slice(0,10)
+            phone_number: this.model.mobile === null ? null : this.model.mobile,
+            birthdate: this.model.birthdate.toISOString().slice(0, 10)
           }
         }).then(() => {
           swal({
-            title: 'Created New Account',
-            text: 'You have been succesfully create account. Before you can login, please verify your account with the verification link sent to your email address.',
             type: 'success',
+            title: 'Created New Account',
+            text: 'You have been succesfully created an account. Before you can login, please verify your account with the verification link sent to your email address.',
             showCancelButton: false,
-            confirmButtonClass: 'btn btn-home btn-round btn-wd',
-            confirmButtonText: 'Home Page',
+            confirmButtonClass: 'btn btn-primary btn-round btn-wd',
+            confirmButtonText: 'Home',
             buttonsStyling: false
           }).then(function () {
-            this.$route.router.go('/')  // Back to Home page
+            this.$router.push('/')  // Back to Home page
           })
         }).catch((error) => {
           swal({
-            title: 'Error',
+            type: 'error',
+            title: 'Oops...',
             text: error.message,
             buttonsStyling: false,
-            confirmButtonClass: 'btn btn-info btn-round btn-wd'
+            confirmButtonClass: 'btn btn-warning btn-round btn-wd'
           })
         })
       }
     },
     watch: {
-      birthdayDate: function (val) {
-        this.model.dob = val
+      calendarDate: function (val) {
+        this.model.birthdate = val
       }
+    },
+    beforeMount () {
+      user.resetUserState()
     }
   }
 </script>

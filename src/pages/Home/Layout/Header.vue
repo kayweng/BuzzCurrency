@@ -19,7 +19,7 @@
 
   .bg{
       padding-left: 15px;
-      background-image: url("/static/img/bg_home.jpeg");
+      background-image: url("/static/img/bg_home.png");
       background-size: cover;                      
       background-repeat: no-repeat;
       background-position: center center;
@@ -31,9 +31,10 @@
   }
 
   h2{
-      background: linear-gradient(to right, white, black);
-      background: -webkit-linear-gradient(to right, white, black);
+      background: -webkit-linear-gradient(to right, white, #808B96);
+      background: linear-gradient(to right, white, #808B96);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
   }
 

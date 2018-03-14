@@ -10,7 +10,7 @@ function formatDateToString (val, delimiter) {
   return y + delimiter + m + delimiter + d
 }
 
-export const date = {
+const date = {
   // today
   today: new Date(),
 
@@ -76,3 +76,5 @@ export const date = {
     return dt
   }
 }
+
+export { date }

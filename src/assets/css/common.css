@@ -167,6 +167,13 @@ body{
   margin-left: 2px;
 }
 
+.error-message-36{
+  color: #f79483 !important;
+  font-size: .75rem;
+  min-height: 36px;
+  margin-left: 2px;
+}
+
 .note-message {
   color: grey !important;
   font-size: .75rem;
