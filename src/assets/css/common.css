@@ -93,9 +93,13 @@ body{
 }
 
 .note{
-    color: grey;
-    font-size: 0.75em;
-    padding-top: 10px;
+    color: grey !important;
+    font-size: 0.75em !important;
+    padding-top: 10px !important;
+}
+
+.medium{
+  font-size: 0.75em !important;
 }
 
 /*border*/
@@ -150,6 +154,11 @@ body{
 }
 
 /* Error */
+.error {
+  animation: shaking 0.4s linear;
+  -webkit-animation: shaking 0.4s linear;
+}
+
 .input-error > input{
   border: 1px solid #f79483;
   animation: shaking 0.4s linear;

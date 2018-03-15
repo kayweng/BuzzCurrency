@@ -101,6 +101,7 @@
                         name="password"
                         @blur="$v.model.password.$touch()"
                         :class="{'input-error': $v.model.password.$error }"
+                        :maxLength="20"
                         v-model="model.password">
               </fg-input>
               <div class="error-message-36">
@@ -115,6 +116,7 @@
                         name="confirm password"
                         @blur="$v.model.confirmPassword.$touch()"
                         :class="{'input-error': $v.model.confirmPassword.$error }"
+                        :maxLength="20"
                         v-model="model.confirmPassword">
               </fg-input>
               <div class="error-message-36">
@@ -130,7 +132,9 @@
           <div class="row">
             <check-box v-model="model.agreement" :class="{'input-error': $v.model.agreement.$error }">
               <span class="terms" v-html="terms"></span>
-              <p class="terms" :class="{'note-message': $v.model.agreement.required, 'error-message': !$v.model.agreement.required }" >Note: Please tick the check box to accept and agree our terms and agreements</p>
+              <div :class="{'error': !$v.model.agreement.required}">
+                <p class="terms" :class="{'note-message': $v.model.agreement.required, 'error-message': !$v.model.agreement.required }" >Note: Please tick the check box to accept and agree our terms and agreements</p>
+              </div>
             </check-box>
           </div>
 
@@ -141,6 +145,7 @@
               <div class="g-recaptcha" data-sitekey="6LfwwUkUAAAAAGcTAv-UXTyeRdH2UKoydww1wsab"></div>
               <input type="hidden" v-model="model.reCaptcha" />
           </div>
+
           <br/>
 
           <!-- Buttons -->
@@ -161,7 +166,7 @@
 <script>
   import { DatePicker } from 'element-ui'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
-  import user from 'src/models/user'
+  import user from 'src/models/signup'
   import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
   
@@ -205,14 +210,7 @@
               throw new Error('Please complete recaptcha upon submit form data')
             }
           } catch (error) {
-            swal({
-              type: 'error',
-              title: 'Oops...',
-              text: error.message,
-              buttonsStyling: false,
-              confirmButtonClass: 'btn btn-warning btn-round btn-wd'
-            })
-            event.preventDefault()
+            this.swalError(error.message)
             return
           }
         }
@@ -239,13 +237,7 @@
             this.$router.push('/')  // Back to Home page
           })
         }).catch((error) => {
-          swal({
-            type: 'error',
-            title: 'Oops...',
-            text: error.message,
-            buttonsStyling: false,
-            confirmButtonClass: 'btn btn-warning btn-round btn-wd'
-          })
+          this.swalError(error.message)
         })
       }
     },
@@ -255,7 +247,7 @@
       }
     },
     beforeMount () {
-      user.resetUserState()
+      user.resetState()
     }
   }
 </script>

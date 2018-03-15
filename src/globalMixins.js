@@ -1,3 +1,5 @@
+import swal from 'sweetalert2'
+
 export default {
   computed: {
     deviceType () {
@@ -17,6 +19,24 @@ export default {
   methods: {
     toInteger: function (number) {
       return Math.round(Number(number))
+    },
+    swalError (message) {
+      swal({
+        type: 'error',
+        title: 'Oops...',
+        html: message,
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-warning btn-round btn-wd'
+      })
+    },
+    swalSuccess (title, message) {
+      swal({
+        type: 'success',
+        title: title,
+        html: message,
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-info btn-round btn-wd'
+      })
     }
   }
 }

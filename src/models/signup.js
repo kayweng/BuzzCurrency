@@ -22,7 +22,7 @@ const user = {
     agreement: validator.mandatory
   },
 
-  resetUserState () {
+  resetState () {
     this.firstName = null
     this.lastName = null
     this.email = null

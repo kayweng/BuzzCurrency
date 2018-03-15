@@ -5,33 +5,44 @@
         <card :title="'Sign In'">
           <!-- Login Inputs -->
           <div>
+            <!-- email -->
             <fg-input type="email"
                       name="email"
                       label="Email address"
                       @blur="$v.model.email.$touch()"
                       :class="{'input-error': $v.model.email.$error }"
+                      :maxLength="40"
                       v-model="model.email">
             </fg-input>
-            <span v-if="!$v.model.email.required" class="error-message">The email field is required</span>
-            <span v-if="!$v.model.email.email" class="error-message">Invalid email format</span>
-
-            <fg-input label="Password"
+            <div class="error-message">
+              <span v-if="!$v.model.email.required" class="error-message">The email field is required</span>
+              <span v-if="!$v.model.email.email" class="error-message">Invalid email format</span>
+            </div>
+            <!-- password -->
+             <fg-input label="Password"
                       type="password"
                       name="password"
                       @blur="$v.model.password.$touch()"
                       :class="{'input-error': $v.model.password.$error }"
+                      :maxLength="20"
                       v-model="model.password">
             </fg-input>
-            <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
-            <span v-if="!$v.model.password.minLength" class="error-message">The password length must have at least {{$v.model.password.$params.minLength.min}} characters</span>
+            <div class="error-message">
+              <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
+            </div>
           </div>
           <div class="empty-row"></div>
           <!-- Buttons -->
           <div class="text-center">
-            <button @click.enter.prevent="validate" type="submit" class="btn btn-fill btn-primary btn-round btn-wd ">Login</button>
-            <br>
-            <div class="forgot">
-              <router-link to="/reset-password" class="card-category">Forgot your password?</router-link>
+            <button @click.enter.prevent="submitForm" type="submit" class="btn btn-fill btn-primary btn-round btn-wd ">Login</button>
+            <div class="empty-row"></div>
+            <div class="row">
+              <div class="col-lg-6 col-12">
+                <router-link to="/reset-password" class="card-category note">Forgot password</router-link>
+              </div>
+              <div class="col-lg-6 col-12">
+                <router-link to="/verify-email" class="card-category medium">Resend verification email</router-link>
+              </div>
             </div>
           </div>
         </card>
@@ -41,8 +52,9 @@
 </template>
 
 <script>
-  import { required, email, minLength } from 'vuelidate/lib/validators'
   import { FadeRenderTransition } from 'src/components/index'
+  import { login } from 'src/models/auth'
+  import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
 
   export default {
@@ -52,33 +64,35 @@
     },
     data () {
       return {
-        model: {
-          email: null,
-          password: null
-        }
+        model: login
       }
     },
     validations: {
-      model: {
-        email: {
-          required,
-          email
-        },
-        password: {
-          required,
-          minLength: minLength(8)
-        }
-      }
+      model: login.validations
     },
     methods: {
-      validate (event) {
+      submitForm (event) {
         if (this.$v.model.$invalid || this.$v.model.$error) {
           this.$v.model.$touch()
           return
         }
         
-        console.log(event)
+        this.$store.dispatch('authenticateUser', {
+          username: this.model.email,
+          password: this.model.password,
+        }).then(() => {
+          this.swalSuccess('Signed In', '<br/>Comming soon ...')
+        }).catch((error) => {
+          if (error.code === 'UserNotConfirmedException') {
+            this.swalError(error.message + 'You need to click on a link in email to verify your email address.')
+          }else {
+            this.swalError(error.message)
+          }
+        })
       }
+    },
+    beforeMount () {
+      login.resetState()
     }
   }
 </script>
