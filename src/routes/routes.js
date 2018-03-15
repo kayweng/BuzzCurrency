@@ -7,6 +7,7 @@ import Home from 'src/pages/Home/HomeLayout.vue'
 import UserLogin from 'src/pages/Auth/Layout/Login.vue'
 import UserSignUp from 'src/pages/Auth/Layout/SignUp.vue'
 import UserForgotPassword from 'src/pages/Auth/Layout/ForgotPassword.vue'
+import UserConfirmForgotPassword from 'src/pages/Auth/Layout/ConfirmForgotPassword.vue'
 import UserChangePassword from 'src/pages/Auth/Layout/ChangePassword.vue'
 
 /* To be remove */
@@ -201,6 +202,11 @@ let forgotPasswordPage = {
   component: UserForgotPassword
 }
 
+let confirmForgotPasswordPage = {
+  path: '/confirm-password',
+  component: UserConfirmForgotPassword
+}
+
 let changePasswordPage = {
   path: '/change-password',
   component: UserChangePassword
@@ -230,6 +236,7 @@ const routes = [
   loginPage,
   signUpPage,
   forgotPasswordPage,
+  confirmForgotPasswordPage,
   changePasswordPage,
   lockPage,
   {

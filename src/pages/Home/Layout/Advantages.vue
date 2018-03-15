@@ -27,7 +27,7 @@
 </style>
 
 <script>
-  import {InfoCard} from 'src/components/index'
+  import { InfoCard } from 'src/components/index'
 
   export default {
     data () {

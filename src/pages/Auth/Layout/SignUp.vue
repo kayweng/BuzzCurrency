@@ -166,7 +166,7 @@
 <script>
   import { DatePicker } from 'element-ui'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
-  import user from 'src/models/signup'
+  import SignUpModel from 'src/models/signUpModel'
   import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
   
@@ -181,22 +181,18 @@
       return {
         terms: 'By proceeding, I agree that you can collect, use and disclose the information provided by me in accordance with your <a href="#/policy">Privacy Policy</a> which I have read and understand.',
         calendarDate: null,
-        model: user
+        model: new SignUpModel()
       }
     },
     validations: {
-      model: user.validations
-    },
-    computed: {
-      name () {
-        return this.model.firstName + ' ' + this.model.lastName
-      }
+      model: SignUpModel.validationScheme()
     },
     methods: {
       resetForm () {
-        this.model = {}
+        this.model.resetState()
         this.$v.model.$reset()
       },
+
       submitForm (event) {
         if (this.$v.model.$invalid || this.$v.model.$error) {
           this.$v.model.$touch()
@@ -220,21 +216,21 @@
           password: this.model.password,
           attributes: {
             email: this.model.email,
-            name: this.name,
+            name: this.model.name(),
             phone_number: this.model.mobile === null ? null : this.model.mobile,
             birthdate: this.model.birthdate.toISOString().slice(0, 10)
           }
         }).then(() => {
           swal({
             type: 'success',
-            title: 'Created New Account',
-            text: 'You have been succesfully created an account. Before you can login, please verify your account with the verification link sent to your email address.',
+            title: 'Successfully Signed Up',
+            html: '<small>You have been succesfully created an account.<br/>Before you can login, please verify your account with the verification link sent to your email address.</small>',
             showCancelButton: false,
             confirmButtonClass: 'btn btn-primary btn-round btn-wd',
-            confirmButtonText: 'Home',
+            confirmButtonText: '<i class="fa fa-home"></i> Home',
             buttonsStyling: false
           }).then(function () {
-            this.$router.push('/')  // Back to Home page
+            location.href = '/#/'
           })
         }).catch((error) => {
           this.swalError(error.message)
@@ -247,7 +243,7 @@
       }
     },
     beforeMount () {
-      user.resetState()
+      this.model.resetState()
     }
   }
 </script>

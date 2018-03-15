@@ -18,8 +18,6 @@
             <div class="empty-row"></div>
             <div class="text-center">
               <button type="submit" @click.prevent="submitForm" class="btn btn-round btn-submit btn-wd">Submit</button>
-            </div>
-            <div name="footer" class="text-center">
               <p class="note">Note: A verification email will send to your email inbox</p>
             </div>
           </card>
@@ -30,7 +28,7 @@
 
 <script>
   import { FadeRenderTransition } from 'src/components/index'
-  import { email } from 'src/models/auth'
+  import { PasswordModel } from 'src/models/passwordModel'
   import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
 
@@ -41,11 +39,11 @@
     },
     data () {
       return {
-        model: email
+        model: new PasswordModel()
       }
     },
     validations: {
-      model: email.validations
+      model: PasswordModel.validationScheme()
     },
     methods: {
       submitForm (event) {
@@ -57,32 +55,7 @@
         this.$store.dispatch('forgotPassword', {
           username: this.model.email
         }).then(() => {
-          swal({
-            title: 'Verification',
-            html: '<small>Please enter a verification code that sent to your email</small>',
-            input: 'number',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            confirmButtonText: 'Submit',
-            cancelButtonClass: 'btn btn-default btn-round btn-wd',
-            confirmButtonClass: 'btn btn-submit btn-round btn-wd',
-            preConfirm: (number) => {
-              return new Promise((resolve) => {
-                this.$store.dispatch('confirmForgotPassword', {
-                  username: this.model.email
-                }).then(() => {
-                  resolve()
-                }).catch((error) => {
-                  this.swalError(error.message)
-                })
-              })
-            },
-            allowOutsideClick: () => !swal.isLoading()
-          }).then((result) => {
-            if (result.value) {
-              this.$router.push('/change-password', {'forceReset': true } )
-            }
-          })
+          this.$router.push('/confirm-password')
         }).catch((error) => {
           if (error.code === 'UserNotFoundException') {
             this.swalError('Incorrect Username')
@@ -93,7 +66,7 @@
       }
     },
     beforeMount () {
-      email.resetState()
+      this.model.resetState()
     }
   }
 </script>

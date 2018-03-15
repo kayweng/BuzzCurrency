@@ -20,20 +20,22 @@ export default {
     toInteger: function (number) {
       return Math.round(Number(number))
     },
+
     swalError (message) {
       swal({
         type: 'error',
         title: 'Oops...',
-        html: message,
+        html: '<small>' + message + '</small>',
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-warning btn-round btn-wd'
       })
     },
+
     swalSuccess (title, message) {
       swal({
         type: 'success',
         title: title,
-        html: message,
+        html: '<small>' + message + '</small>',
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-info btn-round btn-wd'
       })

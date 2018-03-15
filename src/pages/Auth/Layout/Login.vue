@@ -53,7 +53,7 @@
 
 <script>
   import { FadeRenderTransition } from 'src/components/index'
-  import { login } from 'src/models/auth'
+  import { LoginModel } from 'src/models/loginModel'
   import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
 
@@ -64,11 +64,11 @@
     },
     data () {
       return {
-        model: login
+        model: new LoginModel()
       }
     },
     validations: {
-      model: login.validations
+      model: LoginModel.validationScheme()
     },
     methods: {
       submitForm (event) {
@@ -84,7 +84,7 @@
           this.swalSuccess('Signed In', '<br/>Comming soon ...')
         }).catch((error) => {
           if (error.code === 'UserNotConfirmedException') {
-            this.swalError(error.message + 'You need to click on a link in email to verify your email address.')
+            this.swalError(error.message + '<br/>You need to click on a link in email to verify your email address.')
           }else {
             this.swalError(error.message)
           }
@@ -92,7 +92,7 @@
       }
     },
     beforeMount () {
-      login.resetState()
+      this.model.resetState()
     }
   }
 </script>
