@@ -52,8 +52,13 @@ const confirmPassword = {
   sameAs: sameAs('password')
 }
 
+const confirmNewPassword = {
+  required,
+  sameAs: sameAs('newPassword')
+}
+
 const mandatory = {
   required
 }
 
-export { firstName, lastName, birthdate, emailAddress, mobile, password, confirmPassword, mandatory }
+export { firstName, lastName, birthdate, emailAddress, mobile, password, confirmPassword, confirmNewPassword, mandatory }

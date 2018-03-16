@@ -24,7 +24,10 @@ class PasswordModel extends basedModel {
         return forceReset
       }),
       newPassword: validator.password,
-      confirmPassword: validator.confirmPassword
+      confirmPassword: validator.confirmNewPassword,
+      forceReset: {
+        required
+      }
     }
   }
 

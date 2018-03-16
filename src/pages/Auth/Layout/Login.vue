@@ -41,7 +41,7 @@
                 <router-link to="/reset-password" class="card-category note">Forgot password</router-link>
               </div>
               <div class="col-lg-6 col-12">
-                <router-link to="/verify-email" class="card-category medium">Resend verification email</router-link>
+                <router-link to="/resend-verification" class="card-category medium">Resend verification code</router-link>
               </div>
             </div>
           </div>

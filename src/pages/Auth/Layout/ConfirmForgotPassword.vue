@@ -7,26 +7,51 @@
             <form-wizard step-size="sm" 
                         error-color="#f79483"
                         color="#2874A6"
-                        @on-complete="onComplete">
+                        :ref="wizardForm">
               <h3 slot="title" class="text-center">Create New Password</h3>   
-
+              <!-- verify email -->
+              <tab-content title="Email"
+                          class="col-12"
+                          :tabId="1"
+                          :before-change="() => validateStep('verifyEmail')"
+                          icon="nc-icon nc-circle-09">
+                <verify-email ref="verifyEmail" @on-validated="returnEmail"></verify-email>
+              </tab-content>
+              <!-- verify code -->
               <tab-content title="Verification"
                           class="col-12"
+                          :tabId="2"
                           :before-change="() => validateStep('verifyCode')"
-                          icon="nc-icon nc-badge">
-                <verify-code ref="verifyCode" @on-validated="onStepValidated"></verify-code>
+                          icon="nc-icon nc-lock-circle-open">
+                <verify-code ref="verifyCode" @on-validated="returnVerificationCode"></verify-code>
+              </tab-content>
+              <!-- enter new password -->
+              <tab-content title="Password"
+                          class="col-12"
+                          :tabId="3"
+                          :before-change="() => validateStep('newPassword')"
+                          icon="nc-icon nc-key-25">
+                <new-password ref="newPassword" @on-validated="returnNewPassword"></new-password>
+              </tab-content>
+               <!-- confirm to create -->
+              <tab-content title="Completion"
+                          class="col-12"
+                          :tabId="4"
+                          :before-change="() => validateStep('createNewPassword')"
+                          icon="nc-icon nc-check-2">
+                <create-password ref="createNewPassword" @on-reset="reset" :confirmPasswordResult="confirmPasswordResult"></create-password>
               </tab-content>
 
-              <tab-content title="New Password"
-                          class="col-12"
-                          :before-change="() => validateStep('newPassword')"
-                          icon="nc-icon nc-lock">
-                <verify-code ref="newPassword" @on-validated="onStepValidated"></verify-code>
-              </tab-content>
               <div class="empty-row"></div>
-              <!-- <div slot="footer" class="text-center">
-                <button slot="next" @click="nextTab()" class="btn btn-primary btn-round btn-wd btn-next">Next</button>
-              </div> -->
+
+              <template slot="footer" slot-scope="props">
+                <div class=wizard-footer-left>
+                  <wizard-button  v-if="props.activeTabIndex > 0 && !props.isLastStep" @click.native="props.prevTab()" :style="props.fillButtonStyle">Previous</wizard-button>
+                </div>
+                <div class="wizard-footer-right">
+                  <wizard-button v-if="!props.isLastStep" @click.native="props.nextTab()" class="wizard-footer-right" :style="props.fillButtonStyle">Next</wizard-button>
+                </div>
+              </template>
             </form-wizard>
           </div>
          </div>
@@ -56,10 +81,13 @@
 </style>
 
 <script>
-  import { FormWizard, TabContent } from 'vue-form-wizard'
+  import { FormWizard, TabContent, WizardButton } from 'vue-form-wizard'
   import { FadeRenderTransition } from 'src/components/index'
   import { PasswordModel } from 'src/models/passwordModel'
-  import VerifyCode from './VerifyCode.vue'
+  import VerifyEmail from '../ConfirmForgotPasswordWizard/VerifyEmail.vue'
+  import VerifyCode from '../ConfirmForgotPasswordWizard/VerifyCode.vue'
+  import NewPassword from '../ConfirmForgotPasswordWizard/NewPassword.vue'
+  import CompleteForgotPassword from '../ConfirmForgotPasswordWizard/CompleteForgotPassword.vue'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
   import 'vue-form-wizard/dist/vue-form-wizard.min.css'
   
@@ -68,27 +96,76 @@
       FadeRenderTransition,
       LandingLayout,
       FormWizard,
+      WizardButton,
       TabContent,
-      VerifyCode
+      VerifyEmail,
+      VerifyCode,
+      NewPassword,
+      'createPassword': CompleteForgotPassword
     },
     data () {
       return {
-        model: new PasswordModel() 
+        model: new PasswordModel(),
+        confirmPasswordResult: {
+          success: false,
+          message: '',
+          resultTitle: ''
+        }
       }
+    },
+    validations: {
+      model: PasswordModel.validationScheme()
     },
     methods: {
       validateStep (ref) {
         if (this.$refs[ref].validate()) {
-          return true
+          
+          if (ref !== 'newPassword') {
+            return true
+          }
+
+          if (!this.$v.model.$error) {
+            this.$store.dispatch('confirmPassword', {
+              username: this.model.email,
+              code: this.model.code,
+              newPassword: this.model.newPassword
+            }).then(() => {
+              this.confirmPasswordResult = {
+                success: true,
+                message: 'Your password has been created.'
+              }
+            }).catch((error) => {
+              this.confirmPasswordResult = {
+                success: false,
+                message: error.message
+              }
+            })
+            console.log(this.confirmPasswordResult)
+            return true
+          } else {
+            this.swalError('Your provided info may not valid.<br/>Please correct it and try again.')
+          }
         }
 
         return false
       },
-      onStepValidated (val) {
+      returnEmail (val) {
+        this.model.email = val
+      },
+      returnVerificationCode (val) {
         this.model.code = val
       },
-      onComplete () {
-        console.log('complete')
+      returnNewPassword (val) {
+        this.model.newPassword = val.newPassword
+        this.model.confirmPassword = val.confirmPassword
+      },
+      reset () {
+        console.log('reset')
+        //this.$refs['wizardForm'].reset()
+      },
+      beforeMount () {
+        this.model.resetState()
+        this.mode.forceReset = true
       }
     }
   }

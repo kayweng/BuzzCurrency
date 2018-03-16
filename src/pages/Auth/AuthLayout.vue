@@ -16,29 +16,6 @@
   </div>
 </template>
 
-<style>
-  .navbar-nav .nav-item p {
-    line-height: inherit;
-    margin-left: 5px;
-  }
-  .navbar-wrapper{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .wrapper-full-page .navbar-toggler,
-  .wrapper-full-page .navbar-collapse .navbar-nav{
-    margin-right: 30px;
-  }
-  .navbar-collapse .navbar-nav .nav-link {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-</style>
-
 <script>
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
   import LandingNav from 'src/components/LandingNav.vue'
