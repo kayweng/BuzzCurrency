@@ -6,25 +6,27 @@
           <div class="card card-wizard">
             <form-wizard step-size="sm" 
                         error-color="#f79483"
-                        color="#2874A6">
-
+                        color="#2874A6"
+                        @on-complete="onComplete">
               <h3 slot="title" class="text-center">Create New Password</h3>   
 
               <tab-content title="Verification"
                           class="col-12"
+                          :before-change="() => validateStep('verifyCode')"
                           icon="nc-icon nc-badge">
-                <verify-code :code="this.model.code"></verify-code>
+                <verify-code ref="verifyCode" @on-validated="onStepValidated"></verify-code>
               </tab-content>
 
               <tab-content title="New Password"
                           class="col-12"
+                          :before-change="() => validateStep('newPassword')"
                           icon="nc-icon nc-lock">
-                <verify-code :code="this.model.code"></verify-code>
+                <verify-code ref="newPassword" @on-validated="onStepValidated"></verify-code>
               </tab-content>
               <div class="empty-row"></div>
-              <div slot="footer" class="text-center">
-                <button slot="next" class="btn btn-primary btn-round btn-wd btn-next">Next</button>
-              </div>
+              <!-- <div slot="footer" class="text-center">
+                <button slot="next" @click="nextTab()" class="btn btn-primary btn-round btn-wd btn-next">Next</button>
+              </div> -->
             </form-wizard>
           </div>
          </div>
@@ -45,6 +47,12 @@
       animation: fadeIn 0.5s;
     }
   }
+
+  .wizard-btn {
+    border-radius: 30px !important;
+    padding: 8px 16px;
+  }
+
 </style>
 
 <script>
@@ -66,6 +74,21 @@
     data () {
       return {
         model: new PasswordModel() 
+      }
+    },
+    methods: {
+      validateStep (ref) {
+        if (this.$refs[ref].validate()) {
+          return true
+        }
+
+        return false
+      },
+      onStepValidated (val) {
+        this.model.code = val
+      },
+      onComplete () {
+        console.log('complete')
       }
     }
   }
