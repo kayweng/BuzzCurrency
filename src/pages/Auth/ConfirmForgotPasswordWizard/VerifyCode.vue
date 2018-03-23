@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import { required, numeric, minLength, maxLength } from 'vuelidate/lib/validators'
+  import { required, numeric } from 'vuelidate/lib/validators'
 
   export default {
     data () {

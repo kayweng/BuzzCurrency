@@ -2,10 +2,11 @@
   <div class="wrapper">
     <transition-group name="fade" mode="out-in">
       <app-header :key="1"></app-header>
-      <app-advantages :key="2"></app-advantages>
+      <app-benefits :key="2"></app-benefits>
       <app-today-currency :key="3"></app-today-currency>
-      <app-get-started :key="4"></app-get-started>
-      <app-footer :key="5"></app-footer>
+      <app-team :key="4"></app-team>
+      <app-get-started :key="5"></app-get-started>
+      <app-footer :key="6"></app-footer>
     </transition-group>
   </div>
 </template>
@@ -19,16 +20,18 @@
 <script>
     import Header from '../../pages/Home/Layout/Header.vue'
     import Footer from '../../pages/Home/Layout/Footer.vue'
-    import Advantages from '../../pages/Home/Layout/Advantages.vue'
+    import Benefits from '../../pages/Home/Layout/Benefits.vue'
     import TodayCurrency from '../../pages/Home/Layout/TodayCurrency.vue'
+    import Team from '../../pages/Home/Layout/Team.vue'
     import GetStarted from '../../pages/Home/Layout/GetStarted.vue'
     
     export default {
       components: {
         'appHeader': Header,
         'appFooter': Footer,
-        'appAdvantages': Advantages,
+        'appBenefits': Benefits,
         'appTodayCurrency': TodayCurrency,
+        'appTeam': Team,
         'appGetStarted': GetStarted
       }
     }

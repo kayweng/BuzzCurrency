@@ -10,7 +10,7 @@
             <slide v-for="(arr, i) in carouselPages" :key="i">
               <transition-group name="fade" tag="div">
                 <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
-                  <rate-box :rate="rate"></rate-box>
+                  <small-note-card :rate="rate"></small-note-card>
                 </div>
               </transition-group>
               </slide>
@@ -62,12 +62,12 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex'
-  import rateBox from 'src/components/Cards/RateCard.vue'
+  import { SmallNoteCard } from 'src/components/index'
   import { Carousel, Slide } from 'vue-carousel'
 
   export default {
     components: {
-      rateBox,
+      SmallNoteCard,
       Carousel,
       Slide
     },

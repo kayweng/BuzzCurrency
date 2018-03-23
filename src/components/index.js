@@ -13,6 +13,8 @@ import Card from './Cards/Card.vue'
 import ChartCard from './Cards/ChartCard.vue'
 import StatsCard from './Cards/StatsCard.vue'
 import InfoCard from './Cards/InfoCard.vue'
+import SmallNoteCard from './Cards/SmallNoteCard.vue'
+import CircleInfoCard from './Cards/CircleInfoCard.vue'
 
 import Breadcrumb from './Breadcrumb/Breadcrumb.vue'
 import BreadcrumbItem from './Breadcrumb/BreadcrumbItem.vue'
@@ -32,6 +34,8 @@ let components = {
   ChartCard,
   StatsCard,
   InfoCard,
+  SmallNoteCard,
+  CircleInfoCard,
   Table,
   DropDown,
   SidebarPlugin,
@@ -50,6 +54,8 @@ export {
   ChartCard,
   StatsCard,
   InfoCard,
+  SmallNoteCard,
+  CircleInfoCard,
   Table,
   DropDown,
   SidebarPlugin,

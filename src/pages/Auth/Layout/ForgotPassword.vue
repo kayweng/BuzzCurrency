@@ -142,7 +142,7 @@
         }).catch((error) => {
           if (error.code === 'UserNotFoundException') {
             this.swalError('Incorrect Username')
-          }else{
+          } else {
             this.swalError(error.message)
           }
         })

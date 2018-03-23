@@ -119,7 +119,6 @@
     methods: {
       validateStep (ref) {
         if (this.$refs[ref].validate()) {
-          
           if (ref !== 'newPassword') {
             return true
           }
@@ -160,8 +159,7 @@
         this.model.confirmPassword = val.confirmPassword
       },
       reset () {
-        console.log('reset')
-        //this.$refs['wizardForm'].reset()
+        // this.$refs['wizardForm'].reset()
       },
       beforeMount () {
         this.model.resetState()

@@ -18,12 +18,11 @@
 </template>
 
 <script>
-
   export default {
     props: ['confirmPasswordResult'],
     methods: {
       resetWizardForm () {
-        this.$emit("reset")
+        this.$emit('reset')
       },
       resetVerficationCode () {
         this.$router.push('/resend-verification')
