@@ -85,7 +85,7 @@
     color: #333;
   }
   .card-footer{
-    padding: 15px 15px 10px 15px;
+    padding: 0px 15px 10px 15px;
     background-color: $transparent-bg;
     line-height: 30px;
     border-top: none !important;
@@ -272,7 +272,7 @@
     box-shadow: 0 25px 30px -13px rgba(40, 40, 40, 0.4);
     border-radius: 10px;
     padding-top: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     @include transform-translate-y(0px);
     @include transition(300ms, linear);
 

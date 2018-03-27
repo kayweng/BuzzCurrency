@@ -7765,7 +7765,7 @@ star {
   margin: 10px 0;
 }
 .card .card-footer {
-  padding: 0 15px 15px;
+  padding: 0 0px 15px;
 }
 .card .card-footer .social-line .btn:first-child {
   border-radius: 0 0 0 6px;

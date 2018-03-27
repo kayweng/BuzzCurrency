@@ -33,16 +33,16 @@
     data () {
       return {
         items: [
-          {img: 'genuine_user.png',
+          {img: 'benefits/genuine_user.png',
             title: 'Genuine User',
-            message: 'Genuine user who has been verified and identified by our team to ensure user is responsibilities to the currency exchange.'},
-          {img: 'currency_rate.png',
+            message: 'Genuine user who has been verified and identified by our team to ensure user is responsibilities in currency exchange activity.'},
+          {img: 'benefits/currency_rate.png',
             title: 'Exchange Rate',
-            message: 'You can offers yours competitive exchange rates to everyoneor accept interesting exchange rates from each other.'},
-          {img: 'meetup.png',
+            message: 'You can offers a competitive exchange rate to everyone or accept interesting exchange rates from someone.'},
+          {img: 'benefits/meetup.png',
             title: 'Meet up',
-            message: 'Meet up with buddy for exchange currency at safety location such as cafe, restaurant or shopping mall,etc.'},
-          {img: 'aml.png',
+            message: 'Meet up with your buddy to exchange currency at preferable locations such as cafe, restaurant or shopping mall,etc.'},
+          {img: 'benefits/aml.png',
             title: 'Money Laundaring',
             message: 'To make a better currency exchange way, money laundering is strictly not allow.You have responsbility to prevent money laundering activity.'}
         ]

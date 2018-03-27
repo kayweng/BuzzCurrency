@@ -6,6 +6,7 @@ import Home from 'src/pages/Home/HomeLayout.vue'
 // Auth page
 import UserLogin from 'src/pages/Auth/Layout/Login.vue'
 import UserSignUp from 'src/pages/Auth/Layout/SignUp.vue'
+import UserResendConfirmation from 'src/pages/Auth/Layout/ResendConfirmation.vue'
 import UserForgotPassword from 'src/pages/Auth/Layout/ForgotPassword.vue'
 import UserConfirmForgotPassword from 'src/pages/Auth/Layout/ConfirmForgotPassword.vue'
 import UserChangePassword from 'src/pages/Auth/Layout/ChangePassword.vue'
@@ -197,6 +198,11 @@ let signUpPage = {
   component: UserSignUp
 }
 
+let resendConfirmationPage = {
+  path: '/resend-confirmation',
+  component: UserResendConfirmation
+}
+
 let forgotPasswordPage = {
   path: '/reset-password',
   component: UserForgotPassword
@@ -235,6 +241,7 @@ const routes = [
   pagesMenu,
   loginPage,
   signUpPage,
+  resendConfirmationPage,
   forgotPasswordPage,
   confirmForgotPasswordPage,
   changePasswordPage,

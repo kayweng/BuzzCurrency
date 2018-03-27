@@ -19,7 +19,7 @@
 
   .bg{
       padding-left: 15px;
-      background-image: url("/static/img/bg_home.png");
+      background-image: url("/static/img/background/bg_home.jpg");
       background-size: cover;                      
       background-repeat: no-repeat;
       background-position: center center;

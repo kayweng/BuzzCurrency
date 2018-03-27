@@ -37,8 +37,7 @@
           
           <div class="empty-row"></div>
           <div class="text-center">
-              <button type="submit" @click.prevent="validate" 
-                  class="btn btn-round btn-submit btn-wd">Submit</button>
+              <button type="submit" @click.prevent="validate" class="btn btn-round btn-submit btn-wd">Submit</button>
           </div>
         </card>
       </fade-render-transition>

@@ -1,11 +1,11 @@
 <template>
   <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-5 col-12" v-if="$slots.member-image || image">
+    <div class="col-md-3 col-sm-5 col-12 text-center" v-if="$slots.member-image || image">
       <slot name="image">
         <img class="img-circle" :style="imageSize" :src="'/static/img/' + image" alt="image">
       </slot>
     </div>
-    <div class="col-lg-9 col-md-8 col-sm-7 col-12" v-if="$slots.member-info || name || title || info">
+    <div class="col-md-9 col-sm-7 col-12" v-if="$slots.member-info || name || title || info">
       <slot name="info">
           <div class="inner-info white">
             <h5>{{ name }}</h5>
@@ -18,11 +18,24 @@
 </template>
 
 <style scoped>
+
+  /* Large desktops and laptops */
+  @media (min-width: 1200px) {
+    .img-circle{
+      margin-left: 15px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .inner-info{
+      text-align: center;
+    }
+  }
+
   .img-circle{
     border-radius: 50%;
     position: relative;
     top: 50%;
-    margin-left:50px;
     transform: translateY(-50%);
   }
 

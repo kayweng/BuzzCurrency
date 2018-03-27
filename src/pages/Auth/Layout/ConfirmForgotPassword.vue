@@ -6,8 +6,7 @@
           <div class="card card-wizard">
             <form-wizard step-size="sm" 
                         error-color="#f79483"
-                        color="#2874A6"
-                        :ref="wizardForm">
+                        color="#2874A6">
               <h3 slot="title" class="text-center">Create New Password</h3>   
               <!-- verify email -->
               <tab-content title="Email"

@@ -2,7 +2,7 @@
     <landing-layout pageClass="login-page" :contentClass="'col-lg-5 col-md-6 col-sm-8'">>
       <form method="#" action="#">
         <fade-render-transition>
-          <card :title="'Forgot Password'">
+          <card :title="'Resend Confirmation'">
             <!-- email -->
             <fg-input type="email"
                         name="email"
@@ -18,12 +18,7 @@
             <div class="empty-row"></div>
             <div class="text-center">
               <button type="submit" @click.prevent="submitForm" class="btn btn-round btn-submit btn-wd">Submit</button>
-              <p class="note">Note: A verification code will send to your email inbox</p>
-            </div>
-            <div slot="footer" class="text-center">
-              <div class="col-12">
-                <router-link to="/confirm-password" class="btn btn-simple btn-link btn-sm">Already with verifiction code ?<br/> create new password now</router-link>
-              </div>
+              <p class="note">Note: A confirmation email will send to your email inbox</p>
             </div>
           </card>
         </fade-render-transition>
@@ -59,11 +54,20 @@
           return
         }
 
-        this.$store.dispatch('forgotPassword', {
+        this.$store.dispatch('resendConfirmationCode', {
           username: this.email
         }).then(() => {
+          this.$notify({
+            component: {
+              template: '<span>A confirmation link is sent to your email.Please check.</span>'
+            },
+            horizontalAlign: 'top',
+            verticalAlign: 'right',
+            type: 'info'
+          })
+
           setTimeout(vm => {
-            vm.$router.push('/confirm-password')
+            vm.$router.push('/')
           }, 500)
         }).catch((error) => {
           if (error.code === 'UserNotFoundException') {

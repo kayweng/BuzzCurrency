@@ -11,7 +11,7 @@
           </div>
         </div>
       </div>
-      <div class="full-page-background" style="background-image: url(static/img/bg_auth.jpg) "></div>
+      <div class="full-page-background" style="background-image: url(static/img/background/bg_auth.jpg) "></div>
     </div>
   </div>
 </template>

@@ -25,7 +25,7 @@
         this.$emit('reset')
       },
       resetVerficationCode () {
-        this.$router.push('/resend-verification')
+        this.$router.push('/reset-password')
       }
     }
   }

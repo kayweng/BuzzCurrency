@@ -97,9 +97,16 @@ body{
 }
 
 .note{
-    color: grey !important;
+    color: darkgrey !important;
     font-size: 0.75em !important;
     padding-top: 10px !important;
+}
+
+.note-message {
+  color: grey !important;
+  font-size: .75rem;
+  min-height: 18px;
+  margin-left: 2px;
 }
 
 .medium{
@@ -184,12 +191,5 @@ body{
   color: #f79483 !important;
   font-size: .75rem;
   min-height: 36px;
-  margin-left: 2px;
-}
-
-.note-message {
-  color: grey !important;
-  font-size: .75rem;
-  min-height: 18px;
   margin-left: 2px;
 }

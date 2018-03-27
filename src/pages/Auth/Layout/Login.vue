@@ -35,16 +35,15 @@
           <!-- Buttons -->
           <div class="text-center">
             <button @click.enter.prevent="submitForm" type="submit" class="btn btn-fill btn-primary btn-round btn-wd ">Login</button>
-            <div class="empty-row"></div>
-            <div class="row">
-              <div class="col-lg-6 col-12">
-                <router-link to="/reset-password" class="card-category note">Forgot password</router-link>
+          </div>
+          <div slot="footer" class="row text-center">
+              <div class="col-sm-6 col-12">
+                <router-link to="/reset-password" class="btn btn-simple btn-link btn-sm">Forgot password</router-link>
               </div>
-              <div class="col-lg-6 col-12">
-                <router-link to="/resend-verification" class="card-category medium">Resend verification code</router-link>
+              <div class="col-sm-6 col-12">
+                <router-link to="/resend-confirmation" class="btn btn-simple btn-link btn-sm">Resend Confirmation</router-link>
               </div>
             </div>
-          </div>
         </card>
       </fade-render-transition>
     </form>
@@ -54,7 +53,6 @@
 <script>
   import { FadeRenderTransition } from 'src/components/index'
   import { LoginModel } from 'src/models/loginModel'
-  import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
 
   export default {
@@ -79,13 +77,13 @@
         
         this.$store.dispatch('authenticateUser', {
           username: this.model.email,
-          password: this.model.password,
+          password: this.model.password
         }).then(() => {
           this.swalSuccess('Signed In', '<br/>Comming soon ...')
         }).catch((error) => {
           if (error.code === 'UserNotConfirmedException') {
             this.swalError(error.message + '<br/>You need to click on a link in email to verify your email address.')
-          }else {
+          } else {
             this.swalError(error.message)
           }
         })
