@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper wrapper-full-page">
+    <notifications></notifications>
     <landing-nav></landing-nav>
     <div class="full-page" :data-color="backgroundColor" :class="pageClass">
       <div class="content">

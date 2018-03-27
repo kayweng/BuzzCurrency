@@ -25,7 +25,7 @@
 
 <style scoped>
   div.container-fluid{
-    background-color: #3498DB;
+    background-color: #2471A3;
     padding: 4px;
     height: 300px;
     max-height: 300px;

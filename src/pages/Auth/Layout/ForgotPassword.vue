@@ -18,7 +18,6 @@
             <div class="empty-row"></div>
             <div class="text-center">
               <button type="submit" @click.prevent="submitForm" class="btn btn-round btn-submit btn-wd">Submit</button>
-              <p class="note">Note: A verification code will send to your email inbox</p>
             </div>
             <div slot="footer" class="text-center">
               <div class="col-12">
@@ -43,10 +42,7 @@
     },
     data () {
       return {
-        email: null,
-        notifications: {
-          topCenter: false
-        }
+        email: null
       }
     },
     validations: {
@@ -62,9 +58,20 @@
         this.$store.dispatch('forgotPassword', {
           username: this.email
         }).then(() => {
+          this.$notify({
+            component: {
+              template: `<span>You will receive a verification email with code</span>`
+            },
+            timeout: 3000,
+            icon: 'nc-icon nc-send',
+            horizontalAlign: 'right',
+            verticalAlign: 'bottom',
+            type: 'primary'
+          })
+
           setTimeout(vm => {
             vm.$router.push('/confirm-password')
-          }, 500)
+          }, 3200)
         }).catch((error) => {
           if (error.code === 'UserNotFoundException') {
             this.swalError('Incorrect Username')

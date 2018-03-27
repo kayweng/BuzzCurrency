@@ -44,7 +44,7 @@
     props: {
       title: {
         type: String,
-        default: 'Vue LBD PRO'
+        default: 'Buzz Currency'
       },
       backgroundColor: {
         type: String,

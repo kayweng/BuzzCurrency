@@ -18,7 +18,6 @@
             <div class="empty-row"></div>
             <div class="text-center">
               <button type="submit" @click.prevent="submitForm" class="btn btn-round btn-submit btn-wd">Submit</button>
-              <p class="note">Note: A confirmation email will send to your email inbox</p>
             </div>
           </card>
         </fade-render-transition>
@@ -59,16 +58,18 @@
         }).then(() => {
           this.$notify({
             component: {
-              template: '<span>A confirmation link is sent to your email.Please check.</span>'
+              template: `<span>You will receive a confirmation email with link</span>`
             },
-            horizontalAlign: 'top',
-            verticalAlign: 'right',
-            type: 'info'
+            timeout: 3000,
+            icon: 'nc-icon nc-send',
+            horizontalAlign: 'right',
+            verticalAlign: 'bottom',
+            type: 'primary'
           })
 
           setTimeout(vm => {
             vm.$router.push('/')
-          }, 500)
+          }, 3200)
         }).catch((error) => {
           if (error.code === 'UserNotFoundException') {
             this.swalError('Incorrect Username')

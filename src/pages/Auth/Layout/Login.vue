@@ -79,7 +79,7 @@
           username: this.model.email,
           password: this.model.password
         }).then(() => {
-          this.swalSuccess('Signed In', '<br/>Comming soon ...')
+          this.$router.push('/dashboard')
         }).catch((error) => {
           if (error.code === 'UserNotConfirmedException') {
             this.swalError(error.message + '<br/>You need to click on a link in email to verify your email address.')
