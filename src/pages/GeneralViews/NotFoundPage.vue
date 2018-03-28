@@ -1,18 +1,18 @@
 <template>
-  <auth-layout class="not-found-page">
+  <landing-nav class="not-found-page">
     <div class="centered">
       <h1><i class="not-found-icon nc-icon nc-puzzle-10"></i>404</h1>
       <p>The page you requested could not be found.</p>
     </div>
-  </auth-layout>
+  </landing-nav>
 </template>
 
 <script>
-  import AuthLayout from 'src/pages/Dashboard/Pages/AuthLayout.vue'
+  import LandingNav from 'src/components/LandingNav.vue'
 
   export default {
     components: {
-      AuthLayout
+      LandingNav
     }
   }
 </script>

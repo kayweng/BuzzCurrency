@@ -4,23 +4,20 @@
        :data-color="backgroundColor"
        :data-image="backgroundImage"
        :data-active-color="activeColor">
-
     <div class="sidebar-wrapper" ref="sidebarScrollArea">
-      <div class="logo">
-        <a class="logo-mini"
-           href="https://www.creative-tim.com/product/vue-light-bootstrap-dashboard-pro">
-          <div class="logo-img">
+      <slot name="logo" v-if="$slots.logo || title">
+        <div class="logo">
+          <a class="logo-mini" href="#">
+            <div class="logo-img">
               <img :src="logo" alt="">
-          </div>
-          
-        </a>
-        <a href="" class="simple-text logo-normal">
-          {{ title }}
-        </a>
-      </div>
-      <slot>
-
+            </div>
+          </a>
+          <a href="" class="simple-text logo-normal">
+            {{ title }}
+          </a>
+        </div>
       </slot>
+      <slot></slot>
       <ul class="nav">
         <slot name="links">
           <sidebar-item v-for="(link, index) in sidebarLinks"
@@ -33,7 +30,6 @@
             </sidebar-item>
           </sidebar-item>
         </slot>
-
       </ul>
     </div>
   </div>
@@ -43,8 +39,7 @@
     name: 'sidebar',
     props: {
       title: {
-        type: String,
-        default: 'Buzz Currency'
+        type: String
       },
       backgroundColor: {
         type: String,
@@ -56,7 +51,7 @@
       },
       backgroundImage: {
         type: String,
-        default: 'static/img/sidebar-5.jpg'
+        default: 'static/img/sidebar.jpg'
       },
       activeColor: {
         type: String,
@@ -68,7 +63,7 @@
       },
       logo: {
         type: String,
-        default: 'static/img/vue-logo.png'
+        default: 'static/img/logo.png'
       },
       sidebarLinks: {
         type: Array,

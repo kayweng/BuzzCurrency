@@ -3,13 +3,13 @@ import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'
 
 // Landing page
 import Home from 'src/pages/Home/HomeLayout.vue'
-// Auth page
-import Login from 'src/pages/Auth/Layout/Login.vue'
-import SignUp from 'src/pages/Auth/Layout/SignUp.vue'
-import ResendConfirmation from 'src/pages/Auth/Layout/ResendConfirmation.vue'
-import ForgotPassword from 'src/pages/Auth/Layout/ForgotPassword.vue'
-import ConfirmForgotPassword from 'src/pages/Auth/Layout/ConfirmForgotPassword.vue'
-import ChangePassword from 'src/pages/Auth/Layout/ChangePassword.vue'
+// Auth pages
+import Login from 'src/pages/Auth/Pages/Login.vue'
+import SignUp from 'src/pages/Auth/Pages/SignUp.vue'
+import ResendConfirmation from 'src/pages/Auth/Pages/ResendConfirmation.vue'
+import ForgotPassword from 'src/pages/Auth/Pages/ForgotPassword.vue'
+import ConfirmForgotPassword from 'src/pages/Auth/Pages/ConfirmForgotPassword.vue'
+import ChangePassword from 'src/pages/Auth/Pages/ChangePassword.vue'
 // Dashboard page
 import DashboardLayout from 'src/pages/Dashboard/DashboardLayout.vue'
 
@@ -103,6 +103,7 @@ const routes = [
   forgotPasswordPage,
   confirmForgotPasswordPage,
   changePasswordPage,
+  dashboardLayoutPage,
   { path: '*', component: NotFound }
 ]
 
