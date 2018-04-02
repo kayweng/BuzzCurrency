@@ -33,9 +33,33 @@ const mobile = {
   }
 }
 
+const mobile2 = {
+  required,
+  numericPlus: val => {
+    if (val === null || val === '' || val === undefined) {
+      return true
+    }
+    
+    var regex = new RegExp(/^\+\d{6,14}$/)
+    return regex.test(val)
+  }
+}
+
+const gender = {
+  required,
+}
+
 const birthdate = {
   required,
   between: between(date.getDateByYearAdded(-80), date.getDateByYearAdded(-18))
+}
+
+const address = {
+  required
+}
+
+const country = {
+  required
 }
 
 const password = {
@@ -61,4 +85,6 @@ const mandatory = {
   required
 }
 
-export { firstName, lastName, birthdate, emailAddress, mobile, password, confirmPassword, confirmNewPassword, mandatory }
+export { firstName, lastName, birthdate, emailAddress, mobile, 
+  mobile2, gender, address, country, password, confirmPassword, 
+  confirmNewPassword, mandatory }

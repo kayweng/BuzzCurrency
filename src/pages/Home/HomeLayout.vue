@@ -18,12 +18,12 @@
 </style>
 
 <script>
-    import Header from '../../pages/Home/Layout/Header.vue'
-    import Footer from '../../pages/Home/Layout/Footer.vue'
-    import Benefits from '../../pages/Home/Layout/Benefits.vue'
-    import TodayCurrency from '../../pages/Home/Layout/TodayCurrency.vue'
-    import Team from '../../pages/Home/Layout/Team.vue'
-    import GetStarted from '../../pages/Home/Layout/GetStarted.vue'
+    import Header from '../../pages/Home/Components/Header.vue'
+    import Footer from '../../pages/Home/Components/Footer.vue'
+    import Benefits from '../../pages/Home/Components/Benefits.vue'
+    import TodayCurrency from '../../pages/Home/Components/TodayCurrency.vue'
+    import Team from '../../pages/Home/Components/Team.vue'
+    import GetStarted from '../../pages/Home/Components/GetStarted.vue'
     
     export default {
       components: {

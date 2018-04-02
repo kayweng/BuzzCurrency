@@ -1,19 +1,19 @@
 body{
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .empty-row{
-    height: 20px;
-    padding: 1px;
+  height: 20px;
+  padding: 1px;
 }
 
 /* font style */
 .italic{
-    font-style: italic;
+  font-style: italic;
 }
 
 .bold{
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .gill-Sans{
@@ -22,84 +22,92 @@ body{
 
 /* color */
 .white{
-    color: white !important;
+  color: white !important;
 }
 
 .grey{
-    color: grey !important;
+  color: grey !important;
 }
 
 .bg-orangered{
-    background-color: orangered !important;
+  background-color: orangered !important;
 }
 
-/* shadow */
+/* shape */
+.img-circle{
+  border-radius: 50%;
+}
+
 .shadow{
-    -moz-box-shadow:    outset 0 0 10px #000000;
-    -webkit-box-shadow: outset 0 0 10px #000000;
-    box-shadow:         outset 0 0 10px #000000;
+  -moz-box-shadow:    outset 0 0 10px #000000;
+  -webkit-box-shadow: outset 0 0 10px #000000;
+  box-shadow:         outset 0 0 10px #000000;
 }
 
 .one-edge-shadow {
-    box-shadow: 0 10px 6px -6px grey;
+  box-shadow: 0 10px 6px -6px grey;
+}
+
+.border-white{
+  border: 2px solid white;
 }
 
 /*Position*/
 .center{
-    text-align: center;
+  text-align: center;
 }
 
 .right{
-    float: right;
+  float: right;
 }
 
 .left{
-    float: left;
+  float: left;
 }
 
 .outer {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
   
 .inner {
-    display: inline-block;
-    left: 50%;
+  display: inline-block;
+  left: 50%;
 }
 
 .center-item {
-    display: flex;
-    flex-wrap: wrap; /* optional. only if you want the items to wrap */
-    justify-content: center; /* for horizontal alignment */
-    align-items: center; /* for vertical alignment */
+  display: flex;
+  flex-wrap: wrap; /* optional. only if you want the items to wrap */
+  justify-content: center; /* for horizontal alignment */
+  align-items: center; /* for vertical alignment */
 }
 
 /*font style*/
 .bold{
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .copyright {
-    font-family: 'Sanomat Grab Web Regular', sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    font-size: 12px;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.5;
-    outline: none;
-    text-align: center;
+  font-family: 'Sanomat Grab Web Regular', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  outline: none;
+  text-align: center;
 }
 
-.terms{
-    text-transform: initial !important;
-    color: black;
+.terms {
+  text-transform: initial !important;
+  color: black;
 }
 
-.note{
-    color: darkgrey !important;
-    font-size: 0.75em !important;
-    padding-top: 10px !important;
+.note {
+  color: darkgrey !important;
+  font-size: 0.75em !important;
+  padding-top: 10px !important;
 }
 
 .note-message {
@@ -109,21 +117,21 @@ body{
   margin-left: 2px;
 }
 
-.medium{
+.medium {
   font-size: 0.75em !important;
 }
 
 /*border*/
-.border-orangered{
-    border-color: orangered !important;
+.border-orangered {
+  border-color: orangered !important;
 }
 
-.border-white{
-    border-color: white !important;
+.border-white {
+  border-color: white !important;
 }
 
 /*button*/
-.btn-home{
+.btn-home {
   color: #0976b4;
   background-color: transparent;
   border: 1px solid #0976b4;
@@ -161,7 +169,7 @@ body{
 
 /* Cursor */
 .pointer{
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Error */

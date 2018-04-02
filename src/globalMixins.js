@@ -14,6 +14,14 @@ export default {
       }
 
       return device
+    },
+    countries () {
+      var countries = [
+        { value: 'MY', label: 'Malaysia' },
+        { value: 'SG', label: 'Singapore'}
+      ]
+
+      return countries
     }
   },
   methods: {

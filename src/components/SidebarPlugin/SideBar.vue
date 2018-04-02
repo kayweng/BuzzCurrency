@@ -1,7 +1,6 @@
 <template>
   <div class="sidebar"
        :style="sidebarStyle"
-       :data-color="backgroundColor"
        :data-image="backgroundImage"
        :data-active-color="activeColor">
     <div class="sidebar-wrapper" ref="sidebarScrollArea">
@@ -34,6 +33,20 @@
     </div>
   </div>
 </template>
+
+<style>
+  @media (min-width: 992px) {
+    .navbar-search-form-mobile,
+    .nav-mobile-menu{
+      display: none;
+    }
+  }
+
+  .sidebar {
+    background: linear-gradient(to bottom, #2471A3, white) !important;
+  }
+</style>
+
 <script>
   export default {
     name: 'sidebar',
@@ -41,14 +54,14 @@
       title: {
         type: String
       },
-      backgroundColor: {
-        type: String,
-        default: 'black',
-        validator: (value) => {
-          let acceptedValues = ['', 'blue', 'azure', 'green', 'orange', 'red', 'purple', 'black']
-          return acceptedValues.indexOf(value) !== -1
-        }
-      },
+      // backgroundColor: {
+      //   type: String,
+      //   default: 'black',
+      //   validator: (value) => {
+      //     let acceptedValues = ['', 'blue', 'azure', 'green', 'orange', 'red', 'purple', 'black']
+      //     return acceptedValues.indexOf(value) !== -1
+      //   }
+      // },
       backgroundImage: {
         type: String,
         default: 'static/img/sidebar.jpg'
@@ -104,11 +117,3 @@
   }
 
 </script>
-<style>
-  @media (min-width: 992px) {
-    .navbar-search-form-mobile,
-    .nav-mobile-menu{
-      display: none;
-    }
-  }
-</style>

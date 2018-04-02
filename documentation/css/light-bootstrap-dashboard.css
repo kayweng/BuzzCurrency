@@ -640,10 +640,10 @@ input:focus {
     overflow: hidden;
     border-radius: 50%;
     float: left;
-    margin-right: 11px;
-    margin-left: 23px;
+    margin-right: 11px !important;
+    margin-left: 11px !important;
     z-index: 5;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 .sidebar .user .photo img {

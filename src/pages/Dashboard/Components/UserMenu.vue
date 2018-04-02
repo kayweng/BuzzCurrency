@@ -1,38 +1,23 @@
 <template>
   <div class="user">
     <div class="photo">
-      <img src="static/img/default-avatar.png" alt="avatar"/>
+      <img :src="'/static/img/team/' + image" alt="profile"/>
     </div>
     <div class="info">
       <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">
-           <span>
-             {{title}}
-             <b class="caret"></b>
-          </span>
+        <span class="title" v-if="title">
+          {{title}}
+          <b class="caret"></b>
+        </span>
+        <span class="subtitle" v-if="subtitle">
+          <small>{{ subtitle }}</small>
+        </span>
       </a>
       <div class="clearfix"></div>
       <div>
         <el-collapse-transition>
           <ul class="nav" v-show="!isClosed">
             <slot>
-              <li>
-                <a class="profile-dropdown" href="#pablo">
-                  <span class="sidebar-mini">MP</span>
-                  <span class="sidebar-normal">My Profile</span>
-                </a>
-              </li>
-              <li>
-                <a class="profile-dropdown" href="#pablo">
-                  <span class="sidebar-mini">EP</span>
-                  <span class="sidebar-normal">Edit Profile</span>
-                </a>
-              </li>
-              <li>
-                <a class="profile-dropdown" href="#pablo">
-                  <span class="sidebar-mini">S</span>
-                  <span class="sidebar-normal">Settings</span>
-                </a>
-              </li>
             </slot>
           </ul>
         </el-collapse-transition>
@@ -40,6 +25,38 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  .collapsed {
+    transition: opacity 1s;
+  }
+
+  .user .photo {
+    height: 60px;
+    width: 60px;
+    margin-left: 11px !important;
+  }
+
+  .subtitle {
+    padding-top: 4px;
+    font-size: medium;
+    color: grey;
+  }
+  
+  .nav {
+    padding-top: 10px;
+  }
+
+  .nc-icon{
+    font-size: 28px!important;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    float: left;
+  }
+
+</style>
+
 <script>
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
 
@@ -49,8 +66,13 @@
     },
     props: {
       title: {
-        type: String,
-        default: 'Tania Andrew'
+        type: String
+      },
+      subtitle: {
+        type: String
+      },
+      image: {
+        type: String
       }
     },
     data () {
@@ -65,8 +87,3 @@
     }
   }
 </script>
-<style>
-  .collapsed {
-    transition: opacity 1s;
-  }
-</style>

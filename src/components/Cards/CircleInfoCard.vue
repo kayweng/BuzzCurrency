@@ -33,12 +33,11 @@
   }
 
   .img-circle{
-    border-radius: 50%;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
   }
-
+  
   .inner-info{
     padding: 20px;
     height:200px;
