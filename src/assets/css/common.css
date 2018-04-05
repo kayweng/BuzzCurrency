@@ -184,6 +184,12 @@ body{
   -webkit-animation: shaking 0.4s linear;
 }
 
+.input-error > div.el-select > div.el-input > input{
+  border: 1px solid #f79483 !important;
+  animation: shaking 0.4s linear !important;
+  -webkit-animation: shaking 0.4s linear !important;
+}
+
 .input-error > .control-label{
   color: #f79483;
 }

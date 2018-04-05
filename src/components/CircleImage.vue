@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <img :src="imagePath" :style="sizeStyle" alt="image"/>
+    <img :src="imagePath" :style="sizeStyle" alt=""/>
     <slot name="title" v-if="$slots.title || title">
       <h5>{{ title }}</h5>
     </slot>
@@ -24,6 +24,8 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    min-width: 100px;
+    min-height: 100px;
   }
 
   .imgUrl {

@@ -13,8 +13,8 @@ class userModel extends basedModel {
     this.gender = null
     this.address = null
     this.country = null
-
-    this.mdoe = 'view'  //default to view
+    this.profileImage = null
+    this.mode = 'view'  //default to view
   }
 
   static validationScheme () {
@@ -26,7 +26,8 @@ class userModel extends basedModel {
       birthdate: validator.birthdate,
       gender: validator.gender,
       address: validator.address,
-      country: validator.country
+      country: validator.country,
+      profileImage: validator.image
     }
   }
 
@@ -39,7 +40,8 @@ class userModel extends basedModel {
     this.gender = null
     this.address = null
     this.country = null
-    this.mdoe = 'view' 
+    this.profileImage = null
+    this.mode = 'view' 
   }
 }
 

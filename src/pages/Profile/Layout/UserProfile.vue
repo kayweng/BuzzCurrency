@@ -1,10 +1,11 @@
 <template>
   <form method="#" action="#">
-      <fade-render-transition :duration="200">
+    <fade-render-transition :duration="200">
         <card :title="'kaylek207@gmail.com'">
           <div class="row text-center">
-            <circleImg :imagePath="'static/img/team/kayweng.png'"
-                          :sizeStyle="'width: 120px; height:120px'">   
+            <circleImg  :imagePath="model.profileImage == null ? 'static/img/faces/user.jpg' : model.profileImage"
+                        :sizeStyle="'width: 120px; height:120px'"
+                        :isUpload="model.profileImage == null">   
             </circleImg>
           </div>
           <hr/>
@@ -45,10 +46,8 @@
           </div> 
           <div class="row">
             <!-- gender -->
-            <div class="col-md-6 col-12 form-group">
-              <div>
-                <label class="control-label">GENDER</label>
-              </div>
+            <div class="col-md-6 col-12 form-group" :class="{'input-error': $v.model.gender.$error }">
+              <label class="control-label">GENDER</label>
               <el-select class="select-default"
                           size="large"
                           placeholder="Select Gender"
@@ -57,7 +56,7 @@
                              class="select-default"
                              :value="option.value"
                              :label="option.label"
-                             :key="option.label">
+                             :key="option.value">
                   </el-option>
                 </el-select>
               <div class="error-message">
@@ -121,7 +120,7 @@
           </div>
           <div class="row">
             <!-- country -->
-            <div class="col-md-6 col-12 form-group">
+            <div class="col-md-6 col-12 form-group" :class="{'input-error': $v.model.country.$error }">
               <label class="control-label">COUNTRY</label>
               <el-select class="select-default"
                           size="large"
@@ -144,7 +143,7 @@
             <div class="text-center col-12">
               <div class="button-inline">
                 <button type="reset" @click="resetForm" class="btn btn-round btn-reset btn-wd">Reset</button>
-                <button type="submit" @click.prevent="submitForm" class="btn btn-round btn-submit btn-wd">Save</button>
+                <button type="submit" @click.prevent="saveProfile" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
           </div>
@@ -171,8 +170,8 @@
       return {
         calendarDate: null,
         genders: [
-          { value: 'M', text: 'Male'},
-          { value: 'F', text: 'Female'},
+          { value: 'M', label: 'Male'},
+          { value: 'F', label: 'Female'},
         ],
         model: new UserModel()
       }
@@ -184,6 +183,19 @@
       resetForm () {
         this.model.resetState()
         this.$v.model.$reset()
+      },
+      saveProfile () {
+        if (this.$v.model.$invalid || this.$v.model.$error) {
+          this.$v.model.$touch()
+          return
+        }
+
+        alert('saved')
+      }
+    },
+    watch: {
+      calendarDate: function (val) {
+        this.model.birthdate = val
       }
     },
     beforeMount () {
