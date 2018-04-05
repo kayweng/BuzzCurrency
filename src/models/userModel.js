@@ -14,7 +14,7 @@ class userModel extends basedModel {
     this.address = null
     this.country = null
     this.profileImage = null
-    this.mode = 'view'  //default to view
+    this.edit = false
   }
 
   static validationScheme () {
@@ -41,7 +41,7 @@ class userModel extends basedModel {
     this.address = null
     this.country = null
     this.profileImage = null
-    this.mode = 'view' 
+    this.edit = false
   }
 }
 

@@ -1,11 +1,20 @@
 <template>
   <form method="#" action="#">
     <fade-render-transition :duration="200">
-        <card :title="'kaylek207@gmail.com'">
+        <card>
+          <div slot="header">
+            <div class="row switch">
+              <l-switch v-model="model.edit">
+                <i class="fa fa-pencil" slot="on"></i>
+                <i class="fa fa-times" slot="off"></i>
+              </l-switch>
+            </div>
+            <h3 class="card-title">kaylek207@gmail.com</h3>
+          </div>
           <div class="row text-center">
             <circleImg  :imagePath="model.profileImage == null ? 'static/img/faces/user.jpg' : model.profileImage"
                         :sizeStyle="'width: 120px; height:120px'"
-                        :isUpload="model.profileImage == null">   
+                        :isUpload="model.profileImage == null">
             </circleImg>
           </div>
           <hr/>
@@ -20,6 +29,7 @@
                         @blur="$v.model.firstName.$touch()"
                         :class="{'input-error': $v.model.firstName.$error }"
                         :maxLength="20"
+                        :readonly="!model.edit"
                         v-model="model.firstName">
               </fg-input>
               <div class="error-message">
@@ -36,6 +46,7 @@
                         @blur="$v.model.lastName.$touch()"
                         :class="{'input-error': $v.model.lastName.$error }"
                         :maxLength="30"
+                        :readonly="!model.edit"
                         v-model="model.lastName">
               </fg-input>
               <div class="error-message">
@@ -51,11 +62,13 @@
               <el-select class="select-default"
                           size="large"
                           placeholder="Select Gender"
+                          :readonly="!model.edit"
                           v-model="model.gender">
                   <el-option v-for="option in genders"
                              class="select-default"
                              :value="option.value"
                              :label="option.label"
+                             :readonly="!model.edit"
                              :key="option.value">
                   </el-option>
                 </el-select>
@@ -72,6 +85,7 @@
                         @blur="$v.model.mobile.$touch()"
                         :class="{'input-error': $v.model.mobile.$error }"
                         :maxLength="14"
+                        :readonly="!model.edit"
                         v-model="model.mobile">
               </fg-input>  
               <div class="error-message">
@@ -87,11 +101,13 @@
                         name="birthdate"
                         @blur="$v.model.birthdate.$touch()"
                         :class="{'input-error': $v.model.birthdate.$error }"
+                        :readonly="!model.edit"
                         v-model="model.birthdate">
                 <el-date-picker v-model="calendarDate"
                                 format="dd-MMM-yyyy"
                                 type="date"
                                 :class="{'input-error': $v.model.birthdate.$error }"
+                                :readonly="!model.edit"
                                 placeholder="Date of Birth"></el-date-picker>
               </fg-input>
               <div class="error-message">
@@ -111,6 +127,7 @@
                         @blur="$v.model.address.$touch()"
                         :class="{'input-error': $v.model.address.$error }"
                         :maxLength="200"
+                        :readonly="!model.edit"
                         v-model="model.address">
               </fg-input>
               <div class="error-message">
@@ -125,11 +142,13 @@
               <el-select class="select-default"
                           size="large"
                           placeholder="Select Country"
+                          :readonly="!model.edit"
                           v-model="model.country">
                   <el-option v-for="option in countries"
                              class="select-default"
                              :value="option.value"
                              :label="option.label"
+                             :readonly="!model.edit"
                              :key="option.label">
                   </el-option>
                 </el-select>
@@ -152,9 +171,17 @@
     </form>
 </template>
 
+<style scoped>
+  .switch {
+    padding-right: 15px;
+    float: right;
+  }
+</style>
+
+
 <script>
   import { DatePicker, Select, Option } from 'element-ui'
-  import { FadeRenderTransition } from 'src/components/index'
+  import { FadeRenderTransition, Switch as LSwitch } from 'src/components/index'
   import CircleImage from 'src/components/CircleImage.vue'
   import UserModel from 'src/models/userModel'
   
@@ -164,7 +191,8 @@
       [Select.name]: Select,
       FadeRenderTransition,
       [DatePicker.name]: DatePicker,
-      [CircleImage.name]: CircleImage
+      [CircleImage.name]: CircleImage,
+      LSwitch
     },
     data () {
       return {
@@ -196,6 +224,11 @@
     watch: {
       calendarDate: function (val) {
         this.model.birthdate = val
+      },
+      model: {
+        edit (val) {
+          console.log(val);
+        } 
       }
     },
     beforeMount () {
