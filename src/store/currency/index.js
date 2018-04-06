@@ -44,7 +44,6 @@ const actions = {
       var baseDate = new Date(json.date)
       
       if (baseDate === date.today) {
-        console.log('set currency with local storage')
         commit('setCurrencyData', localCurrencies)
         return
       }
@@ -52,7 +51,6 @@ const actions = {
 
     return new Promise((resolve, reject) => {
       fixer.get('/latest?base=MYR').then(response => {
-        console.log('set currency with server data')
         commit('setCurrencyData', response.data)
         resolve(response)
       }, error => {

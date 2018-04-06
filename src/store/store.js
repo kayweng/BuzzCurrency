@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import currency from './modules/currency'
+import currency from './currency/index'
+import user from './user/index'
 import cognitoConfig from '../../config/cognito'
-import CognitoAuth from 'src/cognito/index'
+import CognitoAuth from 'src/store/cognito/index'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   modules: {
-    currency: currency,
+    currency,
+    user,
     cognito: new CognitoAuth(cognitoConfig)
   }
 })

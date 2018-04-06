@@ -1,4 +1,4 @@
-import * as types from 'src/cognito/mutations-types'
+import * as types from './mutations-types'
 
 export default {
   [types.AUTHENTICATE] (state, payload) {

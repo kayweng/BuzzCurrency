@@ -1,5 +1,5 @@
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
-import * as types from 'src/cognito/mutations-types'
+import * as types from './mutations-types'
 
 function constructUser (cognitoUser, session) {
   return {

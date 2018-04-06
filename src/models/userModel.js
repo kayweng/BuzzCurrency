@@ -41,7 +41,6 @@ class userModel extends basedModel {
     this.address = null
     this.country = null
     this.profileImage = null
-    this.edit = false
   }
 }
 
