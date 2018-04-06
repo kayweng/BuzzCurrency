@@ -6,7 +6,7 @@
             <div class="row switch">
               <l-switch v-model="model.edit">
                 <i class="fa fa-pencil" slot="on"></i>
-                <i class="fa fa-times" slot="off"></i>
+                <i class="fa fa-pencil" slot="off"></i>
               </l-switch>
             </div>
             <h3 class="card-title">kaylek207@gmail.com</h3>
@@ -14,7 +14,7 @@
           <div class="row text-center">
             <circleImg  :imagePath="model.profileImage == null ? 'static/img/faces/user.jpg' : model.profileImage"
                         :sizeStyle="'width: 120px; height:120px'"
-                        :isUpload="model.profileImage == null">
+                        :isUpload="model.edit">
             </circleImg>
           </div>
           <hr/>
@@ -33,8 +33,8 @@
                         v-model="model.firstName">
               </fg-input>
               <div class="error-message">
-                <span v-if="!$v.model.firstName.required" class="error-message">The first name field is required</span>
-                <span v-if="$v.model.firstName.required && !$v.model.firstName.alphaSpace" class="error-message">The first name field must be only alphabet characters</span>
+                <span v-if="model.edit && !$v.model.firstName.required" class="error-message">The first name field is required</span>
+                <span v-if="model.edit && $v.model.firstName.required && !$v.model.firstName.alphaSpace" class="error-message">The first name field must be only alphabet characters</span>
               </div>
             </div>
             <!-- last name -->
@@ -50,8 +50,8 @@
                         v-model="model.lastName">
               </fg-input>
               <div class="error-message">
-                <span v-if="!$v.model.lastName.required">The last name field is required</span>
-                <span v-if="$v.model.lastName.required && !$v.model.lastName.alphaSpace">The last name field must be only alphabet characters</span>
+                <span v-if="model.edit && !$v.model.lastName.required">The last name field is required</span>
+                <span v-if="model.edit && $v.model.lastName.required && !$v.model.lastName.alphaSpace">The last name field must be only alphabet characters</span>
               </div>
             </div>
           </div> 
@@ -73,7 +73,7 @@
                   </el-option>
                 </el-select>
               <div class="error-message">
-                <span v-if="!$v.model.gender.required">The gender field is required</span>
+                <span v-if="model.edit && !$v.model.gender.required">The gender field is required</span>
               </div> 
             </div>
             <!-- mobile -->
@@ -89,8 +89,8 @@
                         v-model="model.mobile">
               </fg-input>  
               <div class="error-message">
-                <span v-if="!$v.model.mobile.required">The mobile field is required</span>
-                <span v-if="!$v.model.mobile.numericPlus" class="error-message">Invalid mobile format.Please start with + and country code</span>
+                <span v-if="model.edit && !$v.model.mobile.required">The mobile field is required</span>
+                <span v-if="model.edit && !$v.model.mobile.numericPlus" class="error-message">Invalid mobile format.Please start with + and country code</span>
               </div>  
             </div>
           </div>
@@ -111,8 +111,8 @@
                                 placeholder="Date of Birth"></el-date-picker>
               </fg-input>
               <div class="error-message">
-                <span v-if="!$v.model.birthdate.required">The birth date field is required</span>
-                <span v-if="$v.model.birthdate.required && !$v.model.birthdate.between">You must be age of 18 or order to sign up</span>
+                <span v-if="model.edit && !$v.model.birthdate.required">The birth date field is required</span>
+                <span v-if="model.edit && $v.model.birthdate.required && !$v.model.birthdate.between">You must be age of 18 or order to sign up</span>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@
                         v-model="model.address">
               </fg-input>
               <div class="error-message">
-                <span v-if="!$v.model.address.required">The premise address field is required</span>
+                <span v-if="model.edit && !$v.model.address.required">The premise address field is required</span>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@
                   </el-option>
                 </el-select>
                 <div class="error-message">
-                  <span v-if="!$v.model.country.required">The country field is required</span>
+                  <span v-if="model.edit && !$v.model.country.required">The country field is required</span>
                 </div> 
             </div> 
           </div>
@@ -161,8 +161,8 @@
           <div class="row">
             <div class="text-center col-12">
               <div class="button-inline">
-                <button type="reset" @click="resetForm" class="btn btn-round btn-reset btn-wd">Reset</button>
-                <button type="submit" @click.prevent="saveProfile" class="btn btn-round btn-submit btn-wd">Save</button>
+                <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
+                <button type="submit" @click.prevent="saveProfile" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
           </div>
@@ -198,8 +198,8 @@
       return {
         calendarDate: null,
         genders: [
-          { value: 'M', label: 'Male'},
-          { value: 'F', label: 'Female'},
+          {value: 'M', label: 'Male'},
+          {value: 'F', label: 'Female'}
         ],
         model: new UserModel()
       }
@@ -226,9 +226,9 @@
         this.model.birthdate = val
       },
       model: {
-        edit (val) {
-          console.log(val);
-        } 
+        edit () {
+          
+        }
       }
     },
     beforeMount () {

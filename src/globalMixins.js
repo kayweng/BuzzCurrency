@@ -17,8 +17,8 @@ export default {
     },
     countries () {
       var countries = [
-        { value: 'MY', label: 'Malaysia' },
-        { value: 'SG', label: 'Singapore'}
+        {value: 'MY', label: 'Malaysia'},
+        {value: 'SG', label: 'Singapore'}
       ]
 
       return countries

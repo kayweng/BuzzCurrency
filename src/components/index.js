@@ -8,6 +8,7 @@ import DropDown from './Dropdown.vue'
 import Table from './Table.vue'
 
 import FadeRenderTransition from './Transitions/FadeRenderTransition.vue'
+import SlideRenderTransition from './Transitions/SlideRenderTransition.vue'
 
 import Card from './Cards/Card.vue'
 import ChartCard from './Cards/ChartCard.vue'
@@ -40,6 +41,7 @@ let components = {
   DropDown,
   SidebarPlugin,
   FadeRenderTransition,
+  SlideRenderTransition,
   Breadcrumb,
   BreadcrumbItem
 }
@@ -60,6 +62,7 @@ export {
   DropDown,
   SidebarPlugin,
   FadeRenderTransition,
+  SlideRenderTransition,
   Breadcrumb,
   BreadcrumbItem
 }
