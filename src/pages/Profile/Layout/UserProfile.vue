@@ -6,10 +6,10 @@
             <div class="row switch">
               <l-switch v-model="model.edit">
                 <i class="fa fa-pencil" slot="on"></i>
-                <i class="fa fa-pencil" slot="off"></i>
+                <i class="fa fa-times" slot="off"></i>
               </l-switch>
             </div>
-            <h3 class="card-title">kaylek207@gmail.com</h3>
+            <h4 class="card-title">{{username}}</h4>
           </div>
           <div class="row text-center">
             <circleImg  :imagePath="model.profileImage == null ? 'static/img/faces/user.jpg' : model.profileImage"
@@ -62,13 +62,13 @@
               <el-select class="select-default"
                           size="large"
                           placeholder="Select Gender"
-                          :readonly="!model.edit"
+                          :disabled="!model.edit"
                           v-model="model.gender">
                   <el-option v-for="option in genders"
                              class="select-default"
                              :value="option.value"
                              :label="option.label"
-                             :readonly="!model.edit"
+                             :disabled="!model.edit"
                              :key="option.value">
                   </el-option>
                 </el-select>
@@ -123,7 +123,7 @@
               <fg-input type="text"
                         name="Address"
                         label="Premise Address"
-                        placeholder= "Premiss Address"
+                        placeholder= "Premise Address"
                         @blur="$v.model.address.$touch()"
                         :class="{'input-error': $v.model.address.$error }"
                         :maxLength="200"
@@ -142,13 +142,13 @@
               <el-select class="select-default"
                           size="large"
                           placeholder="Select Country"
-                          :readonly="!model.edit"
+                          :disabled="!model.edit"
                           v-model="model.country">
                   <el-option v-for="option in countries"
                              class="select-default"
                              :value="option.value"
                              :label="option.label"
-                             :readonly="!model.edit"
+                             :disabled="!model.edit"
                              :key="option.label">
                   </el-option>
                 </el-select>
@@ -158,7 +158,7 @@
             </div> 
           </div>
           <div class="empty-row"></div>
-          <div class="row">
+          <div class="row" v-if="model.edit">
             <div class="text-center col-12">
               <div class="button-inline">
                 <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
@@ -201,6 +201,7 @@
           {value: 'M', label: 'Male'},
           {value: 'F', label: 'Female'}
         ],
+        username: '',
         model: new UserModel()
       }
     },
@@ -225,14 +226,23 @@
       calendarDate: function (val) {
         this.model.birthdate = val
       },
-      model: {
-        edit () {
-          
+      'model.edit' (val) {
+        if (!val){
+          //todo: undo user profile changes
         }
       }
     },
     beforeMount () {
       this.model.resetState()
+    },
+    mounted () {
+      this.$store.dispatch('getUserProfileInfo',{
+          username: this.$store.state.cognito.user.username
+        }).then((data) =>{
+          console.log(data)
+        }).catch((error) => {
+          console.log(error)
+        })
     }
   }
 

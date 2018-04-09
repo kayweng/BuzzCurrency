@@ -8,8 +8,7 @@ function constructUser (cognitoUser, session) {
       IdToken: session.getIdToken().getJwtToken(),
       AccessToken: session.getAccessToken().getJwtToken(),
       RefreshToken: session.getRefreshToken().getToken()
-    },
-    attributes: {}
+    }
   }
 }
 
@@ -26,7 +25,6 @@ export default function actionsFactory (config) {
     getCurrentUser ({ commit }) {
       return new Promise((resolve, reject) => {
         const cognitoUser = cognitoUserPool.getCurrentUser()
-
         if (!cognitoUser) {
           reject({
             message: "Can't retrieve the current user"
@@ -39,7 +37,7 @@ export default function actionsFactory (config) {
             reject(err)
             return
           }
-
+          
           const constructedUser = constructUser(cognitoUser, session)
           // Call AUTHENTICATE because it's utterly the same
           commit(types.AUTHENTICATE, constructedUser)

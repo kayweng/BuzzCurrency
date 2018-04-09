@@ -28,7 +28,7 @@ export default {
     toInteger: function (number) {
       return Math.round(Number(number))
     },
-
+    
     swalError (message) {
       swal({
         type: 'error',

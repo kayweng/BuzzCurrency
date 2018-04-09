@@ -118,7 +118,7 @@
     mounted () {
       setTimeout(vm => {
         this.getCurrencies().then(response => {
-          console.log(response)
+          
         }, error => {
           console.log(error)
         })

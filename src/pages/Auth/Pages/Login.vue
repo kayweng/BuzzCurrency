@@ -79,7 +79,7 @@
           username: this.model.email,
           password: this.model.password
         }).then(() => {
-          this.$router.push('/dashboard')
+          this.$router.push('Dashboard')
         }).catch((error) => {
           if (error.code === 'UserNotConfirmedException') {
             this.swalError(error.message + '<br/>You need to click on a link in email to verify your email address.')
@@ -87,6 +87,18 @@
             this.swalError(error.message)
           }
         })
+      },
+      notifySessionExpired () {
+        this.$notify({
+            component: {
+              template: `<span>Your session was expired.<br/>Please continue site with login.</span>`
+            },
+            timeout: 3000,
+            icon: 'nc-icon nc-bulb-63',
+            horizontalAlign: 'right',
+            verticalAlign: 'bottom',
+            type: 'primary'
+          })
       }
     },
     beforeMount () {

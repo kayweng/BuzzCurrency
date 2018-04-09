@@ -1,14 +1,21 @@
+import axios from 'axios'
+
 const actions = {
   undo () {
 
   },
-  async retrieveUserProfileDetail ({commit}, payload) {
+  async getUserProfileInfo ({commit}, payload) {
     if (payload !== null) {
-      
+      return new Promise((resolve, reject) => {
+        axios.get('/user/' + payload.username)
+        .then(response => {
+          commit('setUserProfileInfo', response.data)
+          resolve(response)
+        }, error => { 
+          reject(error)
+        })
+      })
     }
-  },
-  async saveUserProfileDetail ({commit}, payload) {
-
   }
 }
 

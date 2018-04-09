@@ -2,7 +2,7 @@
   <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}">
     <notifications></notifications>
     <side-bar>
-      <user-menu :title="'kay weng'" :subtitle="'Genuine User'" :image="'kayweng.png'">
+      <user-menu :title="'kay weng'" :subtitle="'Genuine User'" :image="'static/img/faces/user.jpg'">
         <li class="nav-item">
           <a class="nav-link sidebar-menu-item" href="#/user-profile">
             <i class="nc-icon nc-circle-09"></i>

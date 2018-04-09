@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { sync } from 'vuex-router-sync';
 import vMediaQuery from 'v-media-query'
 import LightBootstrap from './light-bootstrap-main'
 import globalMixins from './globalMixins'
-import { store } from './store/store'
+import { store } from './store/index'
 import routes from './routes/routes'
 import axios from 'axios'
 import Vuelidate from 'vuelidate'
@@ -19,20 +20,22 @@ Vue.use(Vuelidate)
 Vue.mixin(globalMixins)
 
 /* default axios */
-axios.defaults.baseURL = '' // tobe app server
+axios.defaults.baseURL = '' 
 
 // configure router
 const router = new VueRouter({
-  routes, // short for routes: routes
+  routes,
   linkActiveClass: 'active'
 })
+
+sync(store, router)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   store,
-  render: h => h(App),
-  router
+  router,
+  render: h => h(App)
 })
 
 /* We import element-ui variables at the end so they can override the default element-ui colors */

@@ -3,22 +3,19 @@ import mutations from './mutations'
 
 const state = {
   user: {
-    username: '', // email
+    username: null | '',
     tokens: null | {
-      IdToken: '', // in JWT format
-      RefreshToken: '', // in JWT format
-      AccessToken: '' // in JWT format
+      IdToken: '',
+      RefreshToken: '',
+      AccessToken: '',
     },
-    attributes: {
-      name: null,
-      phone_number: null
-    }
+    attributes: {}
   }
-}
+};
 
 export default class CognitoAuth {
   constructor (config) {
-    this.state = state
+    this.state = state  
     this.actions = new ActionsFactory(config)
     this.mutations = mutations
   }

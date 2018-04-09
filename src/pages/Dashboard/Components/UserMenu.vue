@@ -1,7 +1,7 @@
 <template>
   <div class="user">
     <div class="photo">
-      <img :src="'/static/img/team/' + image" alt="profile"/>
+      <img :src="image" alt="profile"/>
     </div>
     <div class="info">
       <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">

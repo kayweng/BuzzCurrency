@@ -1,3 +1,5 @@
+import { routeAuth } from './routeActions'
+
 // General pages
 import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'
 
@@ -19,7 +21,8 @@ import UserProfile from 'src/pages/Profile/Layout/UserProfile.vue'
 let loginPage = {
   path: '/login',
   name: 'Login',
-  component: Login
+  component: Login,
+  props: true
 }
 
 let signUpPage = {
@@ -30,37 +33,44 @@ let signUpPage = {
 
 let resendConfirmationPage = {
   path: '/resend-confirmation',
+  name: 'ResendConfirmation',
   component: ResendConfirmation
 }
 
 let forgotPasswordPage = {
   path: '/reset-password',
+  name: 'ResetPassword',
   component: ForgotPassword
 }
 
 let confirmForgotPasswordPage = {
   path: '/confirm-password',
+  name: 'ConfirmPassword',
   component: ConfirmForgotPassword
 }
 
 let changePasswordPage = {
   path: '/change-password',
+  name: 'ChangePassword',
   component: ChangePassword
 }
 
 let dashboardLayoutPage = {
   path: '/dashboard',
   name: 'Dashboard',
-  component: DashboardLayout
+  component: DashboardLayout,
+  beforeEnter: routeAuth
 }
 
 let profileMenuPage = {
   path: '/profile',
+  name: 'Profile',
   component: DashboardLayout,
+  beforeEnter: routeAuth,
   children: [
     {
       path: '/user-profile',
-      name: 'My Profile',
+      name: 'UserProfile',
       component: UserProfile
     }
   ]
@@ -70,7 +80,7 @@ const routes = [
   {
     path: '/',
     component: Home,
-    naem: 'home'
+    name: 'Home'
   },
   loginPage,
   signUpPage,
