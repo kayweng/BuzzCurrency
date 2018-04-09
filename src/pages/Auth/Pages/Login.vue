@@ -103,6 +103,11 @@
     },
     beforeMount () {
       this.model.resetState()
+    },
+    mounted () {
+      if (this.$route.query.s !== undefined && this.$route.query.s === 'true') {
+        this.notifySessionExpired()
+      }
     }
   }
 </script>
