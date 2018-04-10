@@ -1,16 +1,16 @@
 <template>
   <div class="user">
     <div class="photo">
-      <img :src="image" alt="profile"/>
+      <img :src="value.imageUrl" alt="profile"/>
     </div>
     <div class="info">
       <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">
-        <span class="title" v-if="title">
-          {{title}}
+        <span class="title" v-if="value.name">
+          {{value.name}}
           <b class="caret"></b>
         </span>
-        <span class="subtitle" v-if="subtitle">
-          <small>{{ subtitle }}</small>
+        <span class="subtitle" v-if="value.status">
+          <small>{{ value.status }}</small>
         </span>
       </a>
       <div class="clearfix"></div>
@@ -40,7 +40,7 @@
   .subtitle {
     padding-top: 4px;
     font-size: medium;
-    color: grey;
+    color: silver;
   }
   
   .nav {
@@ -64,17 +64,7 @@
     components: {
       [CollapseTransition.name]: CollapseTransition
     },
-    props: {
-      title: {
-        type: String
-      },
-      subtitle: {
-        type: String
-      },
-      image: {
-        type: String
-      }
-    },
+    props: ['value'],
     data () {
       return {
         isClosed: true

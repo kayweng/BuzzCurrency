@@ -2,7 +2,7 @@
   <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}">
     <notifications></notifications>
     <side-bar>
-      <user-menu :title="'kay weng'" :subtitle="'Genuine User'" :image="'static/img/faces/user.jpg'">
+      <user-menu v-model="userInfo">
         <li class="nav-item">
           <a class="nav-link sidebar-menu-item" href="#/user-profile">
             <i class="nc-icon nc-circle-09"></i>
@@ -44,13 +44,22 @@
   import TopNavbar from './Layout/TopNavbar.vue'
   import ContentFooter from './Layout/ContentFooter.vue'
   import DashboardContent from './Layout/Content.vue'
-  
+
   export default {
     components: {
       UserMenu,
       TopNavbar,
       ContentFooter,
       DashboardContent
+    },
+    data () {
+      return {
+        userInfo: {
+          name: this.userName,
+          status: null,
+          imageUrl: null
+        }
+      }
     },
     methods: {
       ...mapActions([
@@ -62,13 +71,20 @@
         }
       },
       retrieveUserInfo() {
-        if (this.$store.state.user.profile.length === 0 
-            && this.$store.state.cognito.user.attributes !== null) {
-            this.getUserProfileInfo(this.$store.state.cognito.user.attributes['email']).then(response => {
-            console.log(response)
+        if (this.$store.state.user.profile.length === 0 && this.userEmail !== null) {
+          this.getUserProfileInfo(this.userEmail).then(response => {
+            this.userInfo.name = this.userName
+            this.userInfo.status = this.$store.state.user.profile.userTypeDescription
+            this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
           })
         }
       }
+    },
+    computed: {
+      ...mapGetters([
+        'userEmail',
+        'userName'
+      ])
     },
     beforeRouteEnter (to, from, next) {
       next(vm => {

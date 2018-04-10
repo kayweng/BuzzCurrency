@@ -33,6 +33,7 @@ class userModel extends basedModel {
     this.address = null
     this.country = null
     this.userType = null
+    this.userTypeDescription = null
     this.imageUrl = null
     this.active = null
     this.createdOn = null

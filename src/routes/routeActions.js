@@ -36,17 +36,18 @@ function authRoute (to, from, next) {
       store.dispatch('getUserAttributes').then((attributes) => {
         next()
       }).catch((error) => {
+        console.log(error)
         next('Error')
       })
-    }else{
+    } else {
       next()
     }
-  }else{
+  } else {
     next('/login?s=true')
   }
 }
 
-export  {
+export {
   loginRoute,
   authRoute
 }

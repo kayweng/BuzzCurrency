@@ -9,9 +9,9 @@ const actions = {
       return new Promise((resolve, reject) => {
         axios.get('/user/' + payload)
         .then(response => {
-          commit('setUserProfileInfo', response.data)
+          commit('setUserProfileState', response.data)
           resolve(response)
-        }, error => { 
+        }, error => {
           reject(error)
         })
       })
@@ -20,4 +20,3 @@ const actions = {
 }
 
 export default actions
-

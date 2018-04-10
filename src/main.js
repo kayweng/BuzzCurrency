@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { sync } from 'vuex-router-sync';
+import { sync } from 'vuex-router-sync'
 import vMediaQuery from 'v-media-query'
 import LightBootstrap from './light-bootstrap-main'
 import globalMixins from './globalMixins'
@@ -20,7 +20,7 @@ Vue.use(Vuelidate)
 Vue.mixin(globalMixins)
 
 /* default axios */
-axios.defaults.baseURL = 'https://ixsm7jb4vh.execute-api.ap-southeast-1.amazonaws.com/Stage/' 
+axios.defaults.baseURL = 'https://whbtwrwfq9.execute-api.ap-southeast-1.amazonaws.com/Stage/'
 
 // configure router
 const router = new VueRouter({
