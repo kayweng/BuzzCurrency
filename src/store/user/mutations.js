@@ -1,6 +1,6 @@
 const mutations = {
   setUserProfileInfo(state, data) {
-    state.userInfo.name = ''
+    console.log(data)
   }
 }
 

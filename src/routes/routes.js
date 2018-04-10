@@ -1,4 +1,4 @@
-import { routeAuth } from './routeActions'
+import { authRoute, loginRoute }  from './routeActions'
 
 // General pages
 import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'
@@ -22,13 +22,15 @@ let loginPage = {
   path: '/login',
   name: 'Login',
   component: Login,
-  props: true
+  props: true,
+  beforeEnter: loginRoute
 }
 
 let signUpPage = {
   path: '/signup',
   name: 'SignUp',
-  component: SignUp
+  component: SignUp,
+  beforeEnter: loginRoute
 }
 
 let resendConfirmationPage = {
@@ -59,14 +61,14 @@ let dashboardLayoutPage = {
   path: '/dashboard',
   name: 'Dashboard',
   component: DashboardLayout,
-  beforeEnter: routeAuth
+  beforeEnter: authRoute
 }
 
 let profileMenuPage = {
   path: '/profile',
   name: 'Profile',
   component: DashboardLayout,
-  beforeEnter: routeAuth,
+  beforeEnter: authRoute,
   children: [
     {
       path: '/user-profile',

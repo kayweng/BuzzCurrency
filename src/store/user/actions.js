@@ -7,7 +7,7 @@ const actions = {
   async getUserProfileInfo ({commit}, payload) {
     if (payload !== null) {
       return new Promise((resolve, reject) => {
-        axios.get('/user/' + payload.username)
+        axios.get('/user/' + payload)
         .then(response => {
           commit('setUserProfileInfo', response.data)
           resolve(response)

@@ -236,13 +236,13 @@
       this.model.resetState()
     },
     mounted () {
-      this.$store.dispatch('getUserProfileInfo',{
-          username: this.$store.state.cognito.user.username
-        }).then((data) =>{
-          console.log(data)
-        }).catch((error) => {
-          console.log(error)
-        })
+      // this.$store.dispatch('getUserProfileInfo',{
+      //     username: this.$store.state.cognito.user.username
+      //   }).then((data) =>{
+      //     console.log(data)
+      //   }).catch((error) => {
+      //     console.log(error)
+      //   })
     }
   }
 

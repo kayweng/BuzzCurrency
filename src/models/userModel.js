@@ -5,15 +5,7 @@ class userModel extends basedModel {
   constructor () {
     super()
 
-    this.firstName = null
-    this.lastName = null
-    this.email = null
-    this.mobile = null
-    this.birthdate = null
-    this.gender = null
-    this.address = null
-    this.country = null
-    this.profileImage = null
+    this.resetState()
     this.edit = false
   }
 
@@ -40,7 +32,11 @@ class userModel extends basedModel {
     this.gender = null
     this.address = null
     this.country = null
-    this.profileImage = null
+    this.userType = null
+    this.imageUrl = null
+    this.active = null
+    this.createdOn = null
+    this.modifiedOn = null
   }
 }
 

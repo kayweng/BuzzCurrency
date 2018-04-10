@@ -3,16 +3,11 @@ import actions from './actions'
 import mutations from './mutations'
 
 const state = {
-  userInfo: model
-}
-
-const getters = {
-  
+  profile: model
 }
 
 export default {
   state,
-  getters,
   actions,
   mutations
 }

@@ -1,8 +1,18 @@
 import { store } from 'src/store/index'
 
 let authPages = ['Home', 'Login', 'SignUp', 'ResetPassword', 'ResendConfirmation', 'PageNotFound', 'Error']
+
+function loginRoute (to, from, next) {
   
-function routeAuth (to, from, next) {
+  if (store.state.cognito.user.username !== 0 || store.state.cognito.user.tokens !== 0) { 
+    next('Dashboard')
+    return
+  }
+
+  next()
+}
+
+function authRoute (to, from, next) {
   // Unknown route name
   if (to.name === undefined) {
     next('PageNotFound')
@@ -21,28 +31,22 @@ function routeAuth (to, from, next) {
     return
   }
 
-  if (store.state.cognito.user.username === 0) {
-    store.dispatch('getCurrentUser').then((user) => {
-      if (store.state.cognito.user.attributes === undefined) {
-        store.dispatch('getUserAttributes').then((attributes) => {
-          next()
-          return
-        }).catch((error) => {
-          console.log(error)
-          next('Error')
-          return
-        })
-      }
-    }).catch((error) => {
-      console.log(error)
-      next('Login') //invalid session, require login
-      return
-    })
+  if (store.state.cognito.user.username !== 0) {
+    if (store.state.cognito.user.attributes === undefined) {
+      store.dispatch('getUserAttributes').then((attributes) => {
+        next()
+      }).catch((error) => {
+        next('Error')
+      })
+    }else{
+      next()
+    }
+  }else{
+    next('/login?s=true')
   }
-
-  next()
 }
 
-export {
-  routeAuth
-} 
+export  {
+  loginRoute,
+  authRoute
+}

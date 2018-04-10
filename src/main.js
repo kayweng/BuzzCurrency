@@ -20,7 +20,7 @@ Vue.use(Vuelidate)
 Vue.mixin(globalMixins)
 
 /* default axios */
-axios.defaults.baseURL = '' 
+axios.defaults.baseURL = 'https://ixsm7jb4vh.execute-api.ap-southeast-1.amazonaws.com/Stage/' 
 
 // configure router
 const router = new VueRouter({

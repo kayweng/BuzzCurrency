@@ -39,6 +39,7 @@
   </div>
 </template>
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   import UserMenu from './Components/UserMenu.vue'
   import TopNavbar from './Layout/TopNavbar.vue'
   import ContentFooter from './Layout/ContentFooter.vue'
@@ -52,11 +53,27 @@
       DashboardContent
     },
     methods: {
+      ...mapActions([
+        'getUserProfileInfo'
+      ]),
       toggleSidebar () {
         if (this.$sidebar.showSidebar) {
           this.$sidebar.displaySidebar(false)
         }
+      },
+      retrieveUserInfo() {
+        if (this.$store.state.user.profile.length === 0 
+            && this.$store.state.cognito.user.attributes !== null) {
+            this.getUserProfileInfo(this.$store.state.cognito.user.attributes['email']).then(response => {
+            console.log(response)
+          })
+        }
       }
+    },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        vm.retrieveUserInfo()
+      })
     }
   }
 
