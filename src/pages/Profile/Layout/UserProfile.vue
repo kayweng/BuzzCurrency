@@ -178,8 +178,8 @@
   }
 </style>
 
-
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   import { DatePicker, Select, Option } from 'element-ui'
   import { FadeRenderTransition, Switch as LSwitch } from 'src/components/index'
   import CircleImage from 'src/components/CircleImage.vue'
@@ -208,10 +208,22 @@
     validations: {
       model: UserModel.validationScheme()
     },
+    computed: {
+      ...mapGetters([
+        'cognitoUserEmail',
+      ])
+    },
     methods: {
+      ...mapActions([
+        'getUserProfileInfo'
+      ]),
       resetForm () {
         this.model.resetState()
         this.$v.model.$reset()
+      },
+      initProfile () {
+        console.log(this.$store.state.user.profile)
+        this.model = this.$store.state.user.profile
       },
       saveProfile () {
         if (this.$v.model.$invalid || this.$v.model.$error) {
@@ -235,14 +247,16 @@
     beforeMount () {
       this.model.resetState()
     },
-    mounted () {
-      // this.$store.dispatch('getUserProfileInfo',{
-      //     username: this.$store.state.cognito.user.username
-      //   }).then((data) =>{
-      //     console.log(data)
-      //   }).catch((error) => {
-      //     console.log(error)
-      //   })
+    beforeMount: async function () {
+      if (this.$store.state.user.profile.length === 0 && this.cognitoUserEmail !== null) {
+        await this.getUserProfileInfo(this.cognitoUserEmail).then(response => {
+          console.log(response)
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+
+      this.initProfile()
     }
   }
 

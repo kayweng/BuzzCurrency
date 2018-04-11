@@ -2,48 +2,47 @@ import { store } from 'src/store/index'
 
 let authPages = ['Home', 'Login', 'SignUp', 'ResetPassword', 'ResendConfirmation', 'PageNotFound', 'Error']
 
-function loginRoute (to, from, next) {
-  
-  if (store.state.cognito.user.username !== 0 || store.state.cognito.user.tokens !== 0) { 
-    next('Dashboard')
-    return
-  }
-
-  next()
-}
-
-function authRoute (to, from, next) {
-  // Unknown route name
-  if (to.name === undefined) {
-    next('PageNotFound')
-    return
-  }
-
-  // Auth pages, no token check is needed
-  if (authPages.indexOf(to.name) > -1) {
+// Navigate sign up & login destination to dashboard if user is logon
+async function loginRoute (to, from, next) {
+  await store.dispatch('getCurrentUser').catch((error) => {
+    console.log(error)
     next()
     return
-  }
-  
-  // Other pages, no token found and require login
-  if (store.state.cognito.user.tokens === 0) {
-    next('/login?s=true')
-    return
-  }
+  })
 
-  if (store.state.cognito.user.username !== 0) {
+  next('Dashboard')
+}
+
+async function authRoute (to, from, next) {
+  console.log(store.state)
+  // Auth pages, no authentication check
+  if (authPages.indexOf(to.name) > -1) {
+    next()
+  } else {
+    // Other pages, no token found and require login
+    if (store.state.cognito.user === null) {
+      next('/login?s=true')
+      return
+    }
+
+    if (store.state.cognito.user.tokens === 0) {
+      // try to retrieve token first; if session expired force user to re-login
+      await store.dispatch('getCurrentUser').catch((error) => {
+        console.log(error)
+        next('/login?s=true')
+        return
+      })
+    }
+
     if (store.state.cognito.user.attributes === undefined) {
-      store.dispatch('getUserAttributes').then((attributes) => {
-        next()
-      }).catch((error) => {
+      await store.dispatch('getUserAttributes').catch((error) => {
         console.log(error)
         next('Error')
+        return
       })
-    } else {
-      next()
     }
-  } else {
-    next('/login?s=true')
+
+    next()
   }
 }
 

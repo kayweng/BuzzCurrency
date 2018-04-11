@@ -14,8 +14,8 @@ const state = {
 }
 
 const getters = {
-  userEmail: state => state.user.attributes['email'],
-  userName: state => state.user.attributes['name']
+  cognitoUserEmail: state => state.user.attributes['email'],
+  cognitoUserName: state => state.user.attributes['name']
 }
 
 export default class CognitoAuth {

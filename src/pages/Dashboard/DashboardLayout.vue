@@ -55,11 +55,17 @@
     data () {
       return {
         userInfo: {
-          name: this.userName,
+          name: null,
           status: null,
           imageUrl: null
         }
       }
+    },
+    computed: {
+      ...mapGetters([
+        'cognitoUserEmail',
+        'cognitoUserName'
+      ])
     },
     methods: {
       ...mapActions([
@@ -70,21 +76,17 @@
           this.$sidebar.displaySidebar(false)
         }
       },
-      retrieveUserInfo() {
-        if (this.$store.state.user.profile.length === 0 && this.userEmail !== null) {
-          this.getUserProfileInfo(this.userEmail).then(response => {
-            this.userInfo.name = this.userName
-            this.userInfo.status = this.$store.state.user.profile.userTypeDescription
-            this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
+      async retrieveUserInfo() {
+        if (this.$store.state.user.profile.email === undefined && this.cognitoUserEmail !== null) {
+          await this.getUserProfileInfo(this.cognitoUserEmail).catch((error) => {
+            console.log(error)
           })
         }
+
+        this.userInfo.name = this.cognitoUserName
+        this.userInfo.status = this.$store.state.user.profile.userTypeDescription
+        this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
       }
-    },
-    computed: {
-      ...mapGetters([
-        'userEmail',
-        'userName'
-      ])
     },
     beforeRouteEnter (to, from, next) {
       next(vm => {

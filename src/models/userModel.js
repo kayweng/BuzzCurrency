@@ -2,11 +2,28 @@ import * as validator from 'src/validations/customValidator'
 import basedModel from './baseModel'
 
 class userModel extends basedModel {
-  constructor () {
+  constructor (data) {
     super()
 
     this.resetState()
     this.edit = false
+
+    if (data !== null) {
+      this.firstName = data.FirstName
+      this.lastName = data.LastName
+      this.email = data.Email
+      this.mobile = data.Mobile
+      this.birthdate = data.Birthdate
+      this.gender = data.Gender
+      this.address = data.Address
+      this.country = data.Country
+      this.userType = data.UserType
+      this.userTypeDescription = data.UserTypeDescription
+      this.imageUrl = data.ImageUrl
+      this.active = data.Active
+      this.createdOn = data.CreatedOn
+      this.modifiedOn = data.ModifiedOn
+    }
   }
 
   static validationScheme () {
