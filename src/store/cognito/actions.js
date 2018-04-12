@@ -1,5 +1,6 @@
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
 import * as types from './mutations-types'
+import axios from 'axios'
 
 function constructUser (cognitoUser, session) {
   return {

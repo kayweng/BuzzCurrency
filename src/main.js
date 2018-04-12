@@ -21,6 +21,9 @@ Vue.mixin(globalMixins)
 
 /* default axios */
 axios.defaults.baseURL = 'https://whbtwrwfq9.execute-api.ap-southeast-1.amazonaws.com/Stage/'
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*'
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS, HEAD'
 
 // configure router
 const router = new VueRouter({
