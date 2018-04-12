@@ -1,4 +1,4 @@
-import { authRoute, loginRoute }  from './routeActions'
+import { authRoute, loginRoute } from './routeActions'
 
 // General pages
 import NotFound from 'src/pages/GeneralViews/NotFoundPage.vue'

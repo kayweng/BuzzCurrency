@@ -3,6 +3,8 @@ import * as types from './mutations-types'
 import axios from 'axios'
 
 function constructUser (cognitoUser, session) {
+  axios.defaults.headers.common['Authorization'] = session.getIdToken().getJwtToken()
+
   return {
     username: cognitoUser.getUsername(),
     tokens: {
@@ -38,9 +40,10 @@ export default function actionsFactory (config) {
             reject(err)
             return
           }
-          
+
           const constructedUser = constructUser(cognitoUser, session)
           // Call AUTHENTICATE because it's utterly the same
+          console.log('cognito: getCurrentUser')
           commit(types.AUTHENTICATE, constructedUser)
           resolve(constructedUser)
         })
@@ -257,7 +260,8 @@ export default function actionsFactory (config) {
             accum[item.Name] = item.Value
             return accum
           }, {})
-
+          
+          console.log('cognito:getUserAttributes')
           commit(types.ATTRIBUTES, attributesMap)
           resolve(attributesMap)
         })
