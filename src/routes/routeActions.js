@@ -13,11 +13,10 @@ async function loginRoute (to, from, next) {
     await store.dispatch('getCurrentUser').catch((error) => {
       console.log(error)
       next()
-      return
     })
+  } else {
+    next('Dashboard')
   }
-
-  next('Dashboard')
 }
 
 async function authRoute (to, from, next) {

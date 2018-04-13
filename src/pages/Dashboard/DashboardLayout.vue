@@ -77,17 +77,18 @@
         }
       },
       async retrieveUserInfo() {
-        console.log('retrieve user profile')
+        console.log(this.$store)
         if (this.$store.state.user.profile.email === undefined && this.cognitoUserEmail !== null) {
           await this.getUserProfileInfo(this.cognitoUserEmail).catch((error) => {
-            console.log('error')
+            console.log(error)
           })
         }
 
-        // console.log(this.$store.state.user)
-        // this.userInfo.name = this.$store.state.user.profile.lastName
-        // this.userInfo.status = this.$store.state.user.profile.userTypeDescription
-        // this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
+        console.log(this.$store.state.user.profile)
+       
+        this.userInfo.name = this.$store.state.user.profile.lastName
+        this.userInfo.status = this.$store.state.user.profile.userTypeDescription
+        this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
       }
     },
     beforeRouteEnter (to, from, next) {

@@ -1,17 +1,20 @@
-import api from 'src/axios/axios_db'
+import aws from 'src/axios/axios_db'
 
 const actions = {
   undo () {
 
   },
-  async getUserProfileInfo ({commit}, payload) {
+  getUserProfileInfo ({commit}, payload) {
     if (payload !== null) {
       return new Promise((resolve, reject) => {
-        api.get('/user/' + payload).then(response => {
+        aws.get('/user/' + payload).then(response => {
           commit('setUserProfileState', response.data)
           resolve(response)
+        }, (error) => {
+          console.log(error)
+          reject(error)
         }).catch((error) => {
-          console.log(error.response)
+          console.log(error)
           reject(error)
         })
       })
