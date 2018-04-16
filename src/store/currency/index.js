@@ -1,5 +1,5 @@
 import fixer from 'src/axios/axios_fixer'
-import { date } from 'src/plugins/date'
+import { date } from 'src/js/date'
 
 // state
 const state = {
@@ -19,9 +19,9 @@ const mutations = {
     state.currencies = {}
     state.currencyRates = []
     // allocate data to local storage
-    localStorage.setItem('fxier_currencies', JSON.stringify(data))
+    localStorage.setItem('fixer_currencies', JSON.stringify(data))
     // set state currency string
-    state.currency_data = JSON.parse(localStorage.getItem('fxier_currencies'))
+    state.currency_data = JSON.parse(localStorage.getItem('fixer_currencies'))
     // set state currency data
     for (var i = 0; i < Object.keys(state.currency_data['rates']).length; i++) {
       var key = Object.keys(state.currency_data['rates'])[i]
@@ -37,7 +37,7 @@ const mutations = {
 // actions
 const actions = {
   async getCurrencies ({commit}) {
-    var localCurrencies = localStorage.getItem('fxier_currencies')
+    var localCurrencies = localStorage.getItem('fixer_currencies')
 
     if (localCurrencies !== null) {
       var json = JSON.parse(localCurrencies)

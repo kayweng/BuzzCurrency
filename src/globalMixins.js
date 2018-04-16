@@ -53,6 +53,11 @@ export default {
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-info btn-round btn-wd'
       })
+    },
+
+    logoutUser () {
+      this.$store.dispatch('signOut')
+      this.$router.push('/login?s=true')
     }
   }
 }

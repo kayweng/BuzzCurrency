@@ -8,12 +8,14 @@ import { store } from './store/index'
 import routes from './routes/routes'
 import Vuelidate from 'vuelidate'
 import App from './App.vue'
+import VueLoading from 'vuex-loading'
 
 /* user plugins */
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
 Vue.use(vMediaQuery)
 Vue.use(Vuelidate)
+Vue.use(VueLoading)
 
 /* user mixins */
 Vue.mixin(globalMixins)
@@ -31,6 +33,7 @@ new Vue({
   el: '#app',
   store,
   router,
+  vueLoading: new VueLoading({registerComponents: false}),
   render: h => h(App)
 })
 

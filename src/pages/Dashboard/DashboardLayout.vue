@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}">
     <notifications></notifications>
+    <progress-bar v-if="$loading.anyLoading">Please wait...</progress-bar>
     <side-bar>
       <user-menu v-model="userInfo">
         <li class="nav-item">
@@ -57,8 +58,9 @@
         userInfo: {
           name: null,
           status: null,
-          imageUrl: null
-        }
+          imageUrl: 'static/img/faces/user.jpg'
+        },
+        visible: false
       }
     },
     computed: {
@@ -77,18 +79,19 @@
         }
       },
       async retrieveUserInfo() {
-        console.log(this.$store.state)
         if (this.cognitoUserEmail !== null) {
           await this.getUserProfileInfo(this.cognitoUserEmail).then((response) => {
-            this.userInfo.name = this.$store.state.user.profile.lastName
-            this.userInfo.status = this.$store.state.user.profile.userTypeDescription
-            this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
-          }, (error) => {
-            console.log(error)
-            this.$router.push('/login?s=true')
+            if (response === null || response === undefined) {
+                this.logoutUser()
+            } else {  
+              this.userInfo.name = this.$store.state.user.profile.lastName
+              this.userInfo.status = this.$store.state.user.profile.userTypeDescription
+              this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 
+                'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
+            }
           })
         } else {
-          this.$router.push('/login?s=true')
+          this.logoutUser()
         }
       }
     },

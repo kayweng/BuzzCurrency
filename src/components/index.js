@@ -22,8 +22,6 @@ import BreadcrumbItem from './Breadcrumb/BreadcrumbItem.vue'
 
 import Pagination from './Pagination.vue'
 
-import Loading from './Loading.vue'
-
 import SidebarPlugin from './SidebarPlugin'
 
 let components = {
@@ -45,8 +43,7 @@ let components = {
   FadeRenderTransition,
   SlideRenderTransition,
   Breadcrumb,
-  BreadcrumbItem,
-  Loading
+  BreadcrumbItem
 }
 
 export {
@@ -68,8 +65,7 @@ export {
   FadeRenderTransition,
   SlideRenderTransition,
   Breadcrumb,
-  BreadcrumbItem,
-  Loading
+  BreadcrumbItem
 }
 
 export default components

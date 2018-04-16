@@ -33,3 +33,9 @@
     font-weight: 900;
   }
 </style>
+
+<script>
+  export default {
+    name: 'landing-nav'
+  }
+</script>

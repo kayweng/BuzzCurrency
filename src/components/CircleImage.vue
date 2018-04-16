@@ -44,11 +44,11 @@
   import { FadeRenderTransition, SlideRenderTransition } from 'src/components/index'
 
   export default {
+    name: 'circleImg',
     components: {
       FadeRenderTransition,
       SlideRenderTransition
     },
-    name: 'circleImg',
     props: {
       imagePath: {
         type: String

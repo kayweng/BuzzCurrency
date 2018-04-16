@@ -1,5 +1,5 @@
 import { required, email, between, sameAs } from 'vuelidate/lib/validators'
-import { date } from 'src/plugins/date'
+import { date } from 'src/js/date'
 
 const firstName = {
   required,
