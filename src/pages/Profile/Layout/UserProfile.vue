@@ -197,11 +197,6 @@
     data () {
       return {
         calendarDate: null,
-        genders: [
-          {value: 'M', label: 'Male'},
-          {value: 'F', label: 'Female'}
-        ],
-        username: '',
         model: new UserModel()
       }
     },
@@ -221,9 +216,12 @@
         this.model.resetState()
         this.$v.model.$reset()
       },
-      initProfile () {
-        console.log(this.$store.state.user.profile)
-        this.model = this.$store.state.user.profile
+      async initUserProfile () {
+        await this.getUserProfileInfo(this.cognitoUserEmail).then((data) => {
+          this.model = data
+        }, (error) => {
+          console.log(error)
+        })
       },
       saveProfile () {
         if (this.$v.model.$invalid || this.$v.model.$error) {
@@ -244,19 +242,8 @@
         }
       }
     },
-    beforeMount () {
-      this.model.resetState()
-    },
     beforeMount: async function () {
-      if (this.$store.state.user.profile.length === 0 && this.cognitoUserEmail !== null) {
-        await this.getUserProfileInfo(this.cognitoUserEmail).then(response => {
-          console.log(response)
-        }).catch((error) => {
-          console.log(error)
-        })
-      }
-
-      this.initProfile()
+      this.initUserProfile()
     }
   }
 

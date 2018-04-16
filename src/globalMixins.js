@@ -22,6 +22,12 @@ export default {
       ]
 
       return countries
+    },
+    genders () {
+      var genders = [
+        {value: 'M', label: 'Male'},
+        {value: 'F', label: 'Female'}
+      ]
     }
   },
   methods: {

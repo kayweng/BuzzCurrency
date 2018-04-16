@@ -5,18 +5,24 @@ const actions = {
 
   },
   getUserProfileInfo ({commit}, payload) {
-    if (payload !== null) {
-      return new Promise((resolve, reject) => {
-        aws.get('/user/' + payload).then(response => {
-          commit('setUserProfileState', response.data)
-          resolve(response)
-        }, (error) => {
-          console.log(error)
-          reject(error)
-        }).catch((error) => {
-          console.log(error)
-          reject(error)
+    var userProfile = JSON.parse(localStorage.getItem('userProfile'))
+
+    if (userProfile === null) {
+      if (payload !== null) {
+        return new Promise((resolve, reject) => {
+          aws.get('/user/' + payload).then(response => {
+            commit('setUserProfileState', response.data)
+            resolve(response.data)
+          }, (error) => {
+            console.log(error)
+            reject(error)
+          })
         })
+      }
+    } else {
+      return new Promise((resolve, reject) => {
+        commit('setUserProfileState', userProfile)
+        return resolve(userProfile)
       })
     }
   }

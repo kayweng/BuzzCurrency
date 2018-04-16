@@ -9,20 +9,21 @@ class userModel extends basedModel {
     this.edit = false
 
     if (data !== null) {
-      this.firstName = data.FirstName
-      this.lastName = data.LastName
-      this.email = data.Email
-      this.mobile = data.Mobile
-      this.birthdate = data.Birthdate
-      this.gender = data.Gender
-      this.address = data.Address
-      this.country = data.Country
-      this.userType = data.UserType
-      this.userTypeDescription = data.UserTypeDescription
-      this.imageUrl = data.ImageUrl
-      this.active = data.Active
-      this.createdOn = data.CreatedOn
-      this.modifiedOn = data.ModifiedOn
+      this.firstName = data.firstName
+      this.lastName = data.lastName
+      this.email = data.email
+      this.mobile = data.mobile
+      this.birthdate = data.birthdate
+      this.gender = data.gender
+      this.address = data.address
+      this.country = data.country
+      this.userType = data.userType
+      this.userTypeDescription = data.userTypeDescription
+      this.imageUrl = data.imageUrl
+      this.active = data.active
+      this.createdOn = data.createdOn
+      this.modifiedOn = data.modifiedOn
+      this.lastUpdate = new Date()
     }
   }
 
@@ -55,6 +56,8 @@ class userModel extends basedModel {
     this.active = null
     this.createdOn = null
     this.modifiedOn = null
+    this.lastUpdate = null
+    this.edit = false
   }
 }
 
