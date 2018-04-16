@@ -10,6 +10,7 @@ const actions = {
     if (userProfile === null) {
       if (payload !== null) {
         return new Promise((resolve, reject) => {
+          console.log('calling web api ...')
           aws.get('/user/' + payload).then(response => {
             commit('setUserProfileState', response.data)
             resolve(response.data)
@@ -20,6 +21,7 @@ const actions = {
         })
       }
     } else {
+      console.log('using local storage ...')
       return new Promise((resolve, reject) => {
         commit('setUserProfileState', userProfile)
         return resolve(userProfile)

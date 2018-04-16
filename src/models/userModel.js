@@ -8,7 +8,7 @@ class userModel extends basedModel {
     this.resetState()
     this.edit = false
 
-    if (data !== null) {
+    if (data !== null && data !== undefined) {
       this.firstName = data.firstName
       this.lastName = data.lastName
       this.email = data.email

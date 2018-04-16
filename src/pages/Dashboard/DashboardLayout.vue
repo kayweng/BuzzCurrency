@@ -77,6 +77,7 @@
         }
       },
       async retrieveUserInfo() {
+        console.log(this.$store.state)
         if (this.cognitoUserEmail !== null) {
           await this.getUserProfileInfo(this.cognitoUserEmail).then((response) => {
             this.userInfo.name = this.$store.state.user.profile.lastName

@@ -286,6 +286,9 @@ export default function actionsFactory (config) {
 
         cognitoUser.signOut()
         commit(types.SIGNOUT)
+
+        localStorage.removeItem('userProfile')
+        
         resolve()
       })
     }

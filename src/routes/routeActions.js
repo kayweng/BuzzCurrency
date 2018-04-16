@@ -3,15 +3,14 @@ import { store } from 'src/store/index'
 let noAuthPage = ['Home', 'Login', 'SignUp', 'ResetPassword', 'ResendConfirmation', 'PageNotFound', 'Error']
  
 async function loginRoute (to, from, next) {
-  // console.log(store.state.cognito.user)
-  store.dispatch('signOut')
   if (store.state.cognito.user === null) {
     store.dispatch('signOut')
     next()
-  } else { 
-    await store.dispatch('getCurrentUser').then((response) =>{
+  } else {
+    await store.dispatch('getCurrentUser').then((response) => {
       next('Dashboard')
     }, (error) => {
+      console.log(error)
       next()
     })
   }
