@@ -16,7 +16,7 @@ export default {
       return device
     },
     countries () {
-      var countries = [
+      const countries = [
         {value: 'MY', label: 'Malaysia'},
         {value: 'SG', label: 'Singapore'}
       ]
@@ -24,10 +24,12 @@ export default {
       return countries
     },
     genders () {
-      var genders = [
+      const genders = [
         {value: 'M', label: 'Male'},
         {value: 'F', label: 'Female'}
       ]
+
+      return genders
     }
   },
   methods: {
@@ -55,9 +57,21 @@ export default {
       })
     },
 
-    logoutUser () {
-      this.$store.dispatch('signOut')
-      this.$router.push('/login?s=true')
+    logoutUser (sessionExpired) {
+      swal({
+        type: 'warning',
+        title: 'Logout',
+        html: '<small>Are you sure want to logout ?</small>',
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonClass: 'btn btn-warning btn-round btn-wd',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.value) {
+          this.$store.dispatch('signOut')
+          this.$router.push(sessionExpired ? '/login?s=true' : 'Login')
+        }
+      })
     }
   }
 }

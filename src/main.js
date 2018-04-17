@@ -33,7 +33,7 @@ new Vue({
   el: '#app',
   store,
   router,
-  vueLoading: new VueLoading({registerComponents: false}),
+  vueLoading: new VueLoading({ useVuex: true, moduleName: 'loading', registerComponents: true }),
   render: h => h(App)
 })
 

@@ -1,26 +1,35 @@
 <template>
   <div class="user">
-    <div class="photo">
-      <img :src="value.imageUrl" alt="profile"/>
+    <div class="center" v-if="this.$loading.anyLoading">
+      <v-loading loader='loadUserMenu'>
+        <template slot='spinner'>
+          <loading-spinner height='30px' width='30px' />
+        </template>
+      </v-loading>
     </div>
-    <div class="info">
-      <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">
-        <span class="title" v-if="value.name">
-          {{value.name}}
-          <b class="caret"></b>
-        </span>
-        <span class="subtitle" v-if="value.status">
-          <small>{{ value.status }}</small>
-        </span>
-      </a>
-      <div class="clearfix"></div>
-      <div>
-        <el-collapse-transition>
-          <ul class="nav" v-show="!isClosed">
-            <slot>
-            </slot>
-          </ul>
-        </el-collapse-transition>
+    <div v-else>
+      <div class="photo" >
+        <img :src="value.imageUrl" alt="profile"/>
+      </div>
+      <div class="info">
+        <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">
+          <span class="title" v-if="value.name">
+            {{value.name}}
+            <b class="caret"></b>
+          </span>
+          <span class="subtitle" v-if="value.status">
+            <small>{{ value.status }}</small>
+          </span>
+        </a>
+        <div class="clearfix"></div>
+        <div>
+          <el-collapse-transition>
+            <ul class="nav" v-show="!isClosed">
+              <slot>
+              </slot>
+            </ul>
+          </el-collapse-transition>
+        </div>
       </div>
     </div>
   </div>
@@ -35,6 +44,7 @@
     height: 60px;
     width: 60px;
     margin-left: 11px !important;
+    border: 0.1em solid snow;
   }
 
   .subtitle {
@@ -59,10 +69,12 @@
 
 <script>
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
+  import loadingSpinner from 'vuex-loading/src/spinners/spinner.vue'
 
   export default {
     components: {
-      [CollapseTransition.name]: CollapseTransition
+      [CollapseTransition.name]: CollapseTransition,
+      loadingSpinner
     },
     props: ['value'],
     data () {
@@ -74,6 +86,16 @@
       toggleMenu () {
         this.isClosed = !this.isClosed
       }
+    },
+    watch: {
+      'value.name' (value) {
+        if (value) {
+          this.$loading.endLoading('loadUserMenu')
+        }
+      }
+    },
+    mounted () {
+      this.$loading.startLoading('loadUserMenu')
     }
   }
 </script>

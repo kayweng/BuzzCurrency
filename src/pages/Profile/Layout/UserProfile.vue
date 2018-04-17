@@ -9,7 +9,7 @@
                 <i class="fa fa-times" slot="off"></i>
               </l-switch>
             </div>
-            <h4 class="card-title">{{username}}</h4>
+            <h6 class="card-title left">{{model.email}}</h6>
           </div>
           <div class="row text-center">
             <circleImg  :imagePath="model.profileImage == null ? 'static/img/faces/user.jpg' : model.profileImage"
@@ -161,7 +161,7 @@
           <div class="row" v-if="model.edit">
             <div class="text-center col-12">
               <div class="button-inline">
-                <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
+                <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Clear</button>
                 <button type="submit" @click.prevent="saveProfile" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
@@ -213,12 +213,12 @@
         'getUserProfileInfo'
       ]),
       resetForm () {
-        this.model.resetState()
-        this.$v.model.$reset()
+        
       },
       async initUserProfile () {
         await this.getUserProfileInfo(this.cognitoUserEmail).then((data) => {
-          this.model = data
+          console.log(data)
+          this.model = new UserModel(data)
         }, (error) => {
           console.log(error)
         })

@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}">
     <notifications></notifications>
-    <progress-bar v-if="$loading.anyLoading">Please wait...</progress-bar>
     <side-bar>
       <user-menu v-model="userInfo">
         <li class="nav-item">
@@ -30,11 +29,7 @@
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
-
-      <dashboard-content @click="toggleSidebar">
-
-      </dashboard-content>
-
+      <dashboard-content @click="toggleSidebar"></dashboard-content>
       <content-footer></content-footer>
     </div>
   </div>
@@ -59,8 +54,7 @@
           name: null,
           status: null,
           imageUrl: 'static/img/faces/user.jpg'
-        },
-        visible: false
+        }
       }
     },
     computed: {
@@ -82,7 +76,7 @@
         if (this.cognitoUserEmail !== null) {
           await this.getUserProfileInfo(this.cognitoUserEmail).then((response) => {
             if (response === null || response === undefined) {
-                this.logoutUser()
+                this.logoutUser(true)
             } else {  
               this.userInfo.name = this.$store.state.user.profile.lastName
               this.userInfo.status = this.$store.state.user.profile.userTypeDescription
@@ -91,7 +85,7 @@
             }
           })
         } else {
-          this.logoutUser()
+          this.logoutUser(true)
         }
       }
     },

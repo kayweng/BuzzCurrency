@@ -6,7 +6,7 @@
           <i :class="$sidebar.isMinimized ? 'fa fa-ellipsis-v' : 'fa fa-navicon'"></i>
         </button>
       </div>
-      <a class="navbar-brand">{{this.$route.name}}</a>
+      <!-- <a class="navbar-brand">{{this.$route.name}}</a> -->
       <button type="button"
               class="navbar-toggler navbar-toggler-right"
               :class="{toggled: $sidebar.showSidebar}"
@@ -20,21 +20,9 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav">
-          <drop-down>
-            <template slot="title">
-              <i class="nc-icon nc-bell-55"></i>
-              <span class="notification">1</span>
-              <span class="d-lg-none">Notification</span>
-            </template>
-            <a class="dropdown-item" href="#">Notification 1</a>
-          </drop-down>
           <drop-down position="right">
             <i slot="title" class="nc-icon nc-bullet-list-67"></i>
-            <a class="dropdown-item" href="#">
-              <i class="nc-icon nc-umbrella-13"></i> Help Center
-            </a>
-            <div class="divider"></div>
-            <a href="#" class="dropdown-item text-danger">
+            <a href="#" @click="logout" class="dropdown-item text-danger">
               <i class="nc-icon nc-button-power"></i> Log out
             </a>
           </drop-down>
@@ -43,6 +31,7 @@
     </div>
   </nav>
 </template>
+
 <script>
   export default {
     computed: {
@@ -74,6 +63,9 @@
       },
       minimizeSidebar () {
         this.$sidebar.toggleMinimize()
+      },
+      logout () {
+        this.logoutUser(false)
       }
     }
   }
