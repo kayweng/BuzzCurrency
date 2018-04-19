@@ -90,15 +90,15 @@
       },
       notifySessionExpired () {
         this.$notify({
-            component: {
-              template: `<span>Your session was expired.<br/>Please continue site with login.</span>`
-            },
-            timeout: 3000,
-            icon: 'nc-icon nc-bulb-63',
-            horizontalAlign: 'right',
-            verticalAlign: 'bottom',
-            type: 'primary'
-          })
+          component: {
+            template: `<span>Your session was expired.<br/>Please continue site with login.</span>`
+          },
+          timeout: 3000,
+          icon: 'nc-icon nc-bulb-63',
+          horizontalAlign: 'right',
+          verticalAlign: 'bottom',
+          type: 'primary'
+        })
       }
     },
     beforeMount () {

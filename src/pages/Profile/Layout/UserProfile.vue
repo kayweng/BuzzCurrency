@@ -205,7 +205,7 @@
     },
     computed: {
       ...mapGetters([
-        'cognitoUserEmail',
+        'cognitoUserEmail'
       ])
     },
     methods: {
@@ -237,8 +237,8 @@
         this.model.birthdate = val
       },
       'model.edit' (val) {
-        if (!val){
-          //todo: undo user profile changes
+        if (!val) {
+          // todo: undo user profile changes
         }
       }
     },

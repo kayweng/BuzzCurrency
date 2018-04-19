@@ -7,7 +7,9 @@ const aws = axios.create({
   headers: {
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With,Authorization, Content-Type, Accept',
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD'
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Accept': 'application/json, text/plain, */*'
   }
 })
 
@@ -19,16 +21,17 @@ aws.interceptors.request.use(config => {
   return error
 })
 
-aws.interceptors.response.use(response => {
+aws.interceptors.response.use(function (response) {
+  console.log(response)
   return response
-}, (error) => {
-  console.log(error)
-  if (error.response && error.response.status === 401) {
-    console.log('unauthorized, logging out ...')
+}, function (error) {
+  if (!error.response) {
+    console.log('axios - network error')
   } else {
-    console.log('unknown error')
+    console.log(error.response.status + '-' + error.response.data)
   }
-  return error
+
+  return Promise.reject(error)
 })
 
 export default aws

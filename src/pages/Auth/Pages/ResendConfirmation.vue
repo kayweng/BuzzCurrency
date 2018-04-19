@@ -58,7 +58,7 @@
         }).then(() => {
           this.$notify({
             component: {
-              template: `<span>You will receive a confirmation email with link</span>`
+              template: `<span>You will receive a confirmation email shortly.</span>`
             },
             timeout: 3000,
             icon: 'nc-icon nc-send',

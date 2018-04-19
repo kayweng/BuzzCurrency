@@ -58,20 +58,25 @@ export default {
     },
 
     logoutUser (sessionExpired) {
-      swal({
-        type: 'warning',
-        title: 'Logout',
-        html: '<small>Are you sure want to logout ?</small>',
-        buttonsStyling: false,
-        showCancelButton: true,
-        confirmButtonClass: 'btn btn-warning btn-round btn-wd',
-        confirmButtonText: 'Yes'
-      }).then((result) => {
-        if (result.value) {
-          this.$store.dispatch('signOut')
-          this.$router.push(sessionExpired ? '/login?s=true' : 'Login')
-        }
-      })
+      if (!sessionExpired) {
+        swal({
+          type: 'warning',
+          title: 'Logout',
+          html: '<small>Are you sure want to logout ?</small>',
+          buttonsStyling: false,
+          showCancelButton: true,
+          confirmButtonClass: 'btn btn-warning btn-round btn-wd',
+          confirmButtonText: 'Yes'
+        }).then((result) => {
+          if (result.value) {
+            this.$store.dispatch('signOut')
+            this.$router.push(sessionExpired ? '/login?s=true' : 'Login')
+          }
+        })
+      } else {
+        this.$store.dispatch('signOut')
+        this.$router.push(sessionExpired ? '/login?s=true' : 'Login')
+      }
     }
   }
 }

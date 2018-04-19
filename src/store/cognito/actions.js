@@ -271,6 +271,7 @@ export default function actionsFactory (config) {
     // Only for authenticated users
     signOut ({ commit, state }) {
       return new Promise((resolve, reject) => {
+        localStorage.removeItem('userProfile')
         // Make sure the user is authenticated
         if (state.user === null || (state.user && state.user.tokens === null)) {
           reject({
@@ -286,9 +287,6 @@ export default function actionsFactory (config) {
 
         cognitoUser.signOut()
         commit(types.SIGNOUT)
-
-        localStorage.removeItem('userProfile')
-        
         resolve()
       })
     }

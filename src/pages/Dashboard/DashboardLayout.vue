@@ -72,17 +72,19 @@
           this.$sidebar.displaySidebar(false)
         }
       },
-      async retrieveUserInfo() {
+      async retrieveUserInfo () {
         if (this.cognitoUserEmail !== null) {
           await this.getUserProfileInfo(this.cognitoUserEmail).then((response) => {
             if (response === null || response === undefined) {
-                this.logoutUser(true)
-            } else {  
+              this.logoutUser(true)
+            } else {
               this.userInfo.name = this.$store.state.user.profile.lastName
               this.userInfo.status = this.$store.state.user.profile.userTypeDescription
-              this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 
-                'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
+              this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === '-' ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
             }
+          }).catch((error) => {
+            console.log(error)
+            this.logoutUser(true)
           })
         } else {
           this.logoutUser(true)
