@@ -1,13 +1,21 @@
 import aws from 'src/axios/axios_db'
+import base64 from 'src/js/base64.js'
 
 const actions = {
   undo () {
 
   },
   getUserProfileInfo ({commit}, payload) {
-    var userProfile = JSON.parse(localStorage.getItem('userProfile'))
+    var json = localStorage.getItem('up')
 
-    if (userProfile === null) {
+    if (json !== null) {
+      var userProfile = JSON.parse(base64.decode(json))
+
+      return new Promise((resolve, reject) => {
+        commit('setUserProfileState', userProfile)
+        return resolve(userProfile)
+      })
+    } else {
       if (payload !== null) {
         return new Promise((resolve, reject) => {
           aws.get('/user/' + payload).then(response => {
@@ -18,12 +26,9 @@ const actions = {
             reject(error)
           })
         })
+      } else {
+        return new Promise(null)
       }
-    } else {
-      return new Promise((resolve, reject) => {
-        commit('setUserProfileState', userProfile)
-        return resolve(userProfile)
-      })
     }
   }
 }

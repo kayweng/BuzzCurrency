@@ -9,6 +9,12 @@
             <p class="sidebar-normal">My Profile</p>
           </a>
         </li>
+        <li class="nav-item" v-if="this.$sidebar.showSidebar">
+          <a class="nav-link sidebar-menu-item text-danger" @click="logout">
+            <i class="nc-icon nc-button-power"></i>
+            <p class="sidebar-normal text-danger">Logout</p>
+          </a>
+        </li>
       </user-menu>
       <template slot-scope="props" slot="links">
         <!-- dashboard: show summary info -->
@@ -72,6 +78,9 @@
           this.$sidebar.displaySidebar(false)
         }
       },
+      logout() {
+        this.logoutUser(false)
+      },
       async retrieveUserInfo () {
         if (this.cognitoUserEmail !== null) {
           await this.getUserProfileInfo(this.cognitoUserEmail).then((response) => {
@@ -79,7 +88,7 @@
               this.logoutUser(true)
             } else {
               this.userInfo.name = this.$store.state.user.profile.lastName
-              this.userInfo.status = this.$store.state.user.profile.userTypeDescription
+              this.userInfo.status = this.$store.state.user.profile.userType === 1 ? 'User' : 'Genuine User'
               this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === '-' ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
             }
           }).catch((error) => {

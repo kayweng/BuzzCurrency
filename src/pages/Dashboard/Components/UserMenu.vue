@@ -25,8 +25,7 @@
         <div>
           <el-collapse-transition>
             <ul class="nav" v-show="!isClosed">
-              <slot>
-              </slot>
+              <slot></slot>
             </ul>
           </el-collapse-transition>
         </div>
@@ -89,6 +88,7 @@
     },
     watch: {
       'value.name' (value) {
+        console.log(value)
         if (value) {
           this.$loading.endLoading('loadUserMenu')
         }
