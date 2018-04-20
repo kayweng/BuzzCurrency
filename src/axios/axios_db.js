@@ -3,12 +3,7 @@ import { store } from 'src/store/index'
 
 const aws = axios.create({
   baseURL: 'https://nyandnoemj.execute-api.ap-southeast-1.amazonaws.com/Stage/',
-  timeout: 30000,
-  // headers: {
-  //   'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept',
-    'Access-Control-Allow-Origin': '*',
-  //   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD'
-  // }
+  timeout: 30000
 })
 
 // interceptors setup
