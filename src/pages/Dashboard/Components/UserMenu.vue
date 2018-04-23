@@ -88,7 +88,6 @@
     },
     watch: {
       'value.name' (value) {
-        console.log(value)
         if (value) {
           this.$loading.endLoading('loadUserMenu')
         }

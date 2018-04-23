@@ -5,4 +5,3 @@ class basedModel {
 }
 
 export default basedModel
-

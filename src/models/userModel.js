@@ -13,12 +13,11 @@ class userModel extends basedModel {
       this.lastName = data.lastName
       this.email = data.email
       this.mobile = data.mobile
-      this.birthdate = data.birthdate
-      this.gender = data.gender
-      this.address = data.address
-      this.country = data.country
+      this.birthdate = new Date(data.birthdate)
+      this.gender = data.gender === '-' ? '' : data.gender
+      this.address = data.address === '-' ? '' : data.address
+      this.country = data.country === '-' ? '' : data.country
       this.userType = data.userType
-      this.userTypeDescription = data.userTypeDescription
       this.imageUrl = data.imageUrl
       this.active = data.active
       this.createdOn = data.createdOn
@@ -51,13 +50,11 @@ class userModel extends basedModel {
     this.address = null
     this.country = null
     this.userType = null
-    this.userTypeDescription = null
     this.imageUrl = null
     this.active = null
     this.createdOn = null
     this.modifiedOn = null
     this.lastUpdate = null
-    this.edit = false
   }
 }
 

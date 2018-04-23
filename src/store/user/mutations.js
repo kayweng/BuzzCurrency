@@ -1,5 +1,6 @@
 import UserModel from 'src/models/userModel'
 import base64 from 'src/js/base64.js'
+import { state } from './index'
 
 const mutations = {
   setUserProfileState (state, data) {

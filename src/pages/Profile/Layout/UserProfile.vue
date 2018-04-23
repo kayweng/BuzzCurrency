@@ -14,8 +14,12 @@
           <div class="row text-center">
             <circleImg  :imagePath="model.profileImage == null ? 'static/img/faces/user.jpg' : model.profileImage"
                         :sizeStyle="'width: 120px; height:120px'"
-                        :isUpload="model.edit">
+                        :isUpload="model.edit"
+                        @change="uploadedImage">
             </circleImg>
+            <div class="col-12 text-center error-message">
+                <span v-if="model.edit && !$v.model.profileImage.required" class="error-message">The profile image field is required</span>
+              </div>
           </div>
           <hr/>
           <!-- User Info -->
@@ -104,7 +108,7 @@
                         :readonly="!model.edit"
                         v-model="model.birthdate">
                 <el-date-picker v-model="calendarDate"
-                                format="dd-MMM-yyyy"
+                                format="dd-MM-yyyy"
                                 type="date"
                                 :class="{'input-error': $v.model.birthdate.$error }"
                                 :readonly="!model.edit"
@@ -161,7 +165,7 @@
           <div class="row" v-if="model.edit">
             <div class="text-center col-12">
               <div class="button-inline">
-                <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Clear</button>
+                <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
                 <button type="submit" @click.prevent="saveProfile" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
@@ -184,7 +188,9 @@
   import { FadeRenderTransition, Switch as LSwitch } from 'src/components/index'
   import CircleImage from 'src/components/CircleImage.vue'
   import UserModel from 'src/models/userModel'
-  
+  import swal from 'sweetalert2'
+  import cloneDeep from 'clone-deep'
+
   export default {
     components: {
       [Option.name]: Option,
@@ -197,7 +203,8 @@
     data () {
       return {
         calendarDate: null,
-        model: new UserModel()
+        model: new UserModel(),
+        originalState: null
       }
     },
     validations: {
@@ -213,12 +220,15 @@
         'getUserProfileInfo'
       ]),
       resetForm () {
-        
+        this.model = cloneDeep(this.originalState)
+      },
+      uploadedImage (value) {
+        console.log(value)
       },
       async initUserProfile () {
         await this.getUserProfileInfo(this.cognitoUserEmail).then((data) => {
-          console.log(data)
           this.model = new UserModel(data)
+          this.calendarDate = this.model.birthdate
         }, (error) => {
           console.log(error)
         })
@@ -229,7 +239,19 @@
           return
         }
 
-        alert('saved')
+        swal({
+          type: 'info',
+          title: 'Save Profile',
+          html: '<small>Are you sure want to save changes ?</small>',
+          buttonsStyling: false,
+          showCancelButton: true,
+          confirmButtonClass: 'btn btn-primary btn-round btn-wd',
+          confirmButtonText: 'Yes'
+        }).then((result) => {
+          if (result.value) {
+            alert('saved')
+          }
+        })
       }
     },
     watch: {
@@ -237,9 +259,13 @@
         this.model.birthdate = val
       },
       'model.edit' (val) {
-        if (!val) {
-          // todo: undo user profile changes
+        if (val) {
+          this.originalState = cloneDeep(this.model)
+        } else {
+          this.model = this.originalState
         }
+
+        this.model.edit = val
       }
     },
     beforeMount: async function () {

@@ -3,7 +3,7 @@ import base64 from 'src/js/base64.js'
 
 const actions = {
   undo () {
-
+    
   },
   getUserProfileInfo ({commit}, payload) {
     var json = localStorage.getItem('up')

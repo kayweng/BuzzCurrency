@@ -12,7 +12,10 @@
             <div class="imgUrl">
               <small>{{ imageUrl }}</small>
             </div>
-            <button type="button" @click="uploadImage" class="btn btn-primary btn-sm">Upload Profile Image</button>
+            <p class="file">
+              <input type="file" @change="uploadImage" name="file" id="fileUpload" accept="image/x-png,image/gif,image/jpeg"/>
+              <label for="fileUpload">Upload</label>
+            </p>
           </div>
         </slot>
       </slide-render-transition>
@@ -71,7 +74,26 @@
     },
     methods: {
       uploadImage () {
+        var uploadControl = document.getElementById("fileUpload")
 
+        if (uploadControl.files.length > 0) {
+          var file = uploadControl.files[0]
+
+          // check file size, 450KB
+          if (file.size > 450000) {
+            this.swalError('Image file size exceeds 450 KB.')
+            return
+          }
+
+          // check image types
+          if (file.type.substring(0,5) !== 'image') {
+            this.swalError('Accept only image file such as PNG, JPEG and GIF')
+            return
+          }
+
+          // return image object
+          this.$emit('change', file)
+        }
       }
     }
   }
