@@ -30,6 +30,22 @@ const actions = {
         return new Promise(null)
       }
     }
+  },
+  uploadUserProfileImage (imagefile) {
+    var formData = new FormData()
+    formData.append('image', imagefile)
+
+    return new Promise((resolve, reject) => {
+      aws.post('/user/image', { headers:
+        {'Content-Type': 'multipart/form-data'}
+      }).then(response => {
+        commit('setUserProfileImageState', response.data)
+        resolve(response.data)
+      }).catch(error => {
+        console.log(error)
+        reject(error)
+      })
+    })
   }
 }
 

@@ -35,8 +35,7 @@ class userModel extends basedModel {
       birthdate: validator.birthdate,
       gender: validator.gender,
       address: validator.address,
-      country: validator.country,
-      profileImage: validator.image
+      country: validator.country
     }
   }
 

@@ -12,13 +12,13 @@
             <h6 class="card-title left">{{model.email}}</h6>
           </div>
           <div class="row text-center">
-            <circleImg  :imagePath="model.profileImage == null ? 'static/img/faces/user.jpg' : model.profileImage"
+            <circleImg  :imagePath="model.imageUrl == null ? 'static/img/faces/user.jpg' : model.imageUrl"
                         :sizeStyle="'width: 120px; height:120px'"
                         :isUpload="model.edit"
                         @change="uploadedImage">
             </circleImg>
             <div class="col-12 text-center error-message">
-                <span v-if="model.edit && !$v.model.profileImage.required" class="error-message">The profile image field is required</span>
+                <span v-if="model.edit && this.selectedImageFile == null || !$v.model.imageUrl" class="error-message">Please upload your profile image</span>
               </div>
           </div>
           <hr/>
@@ -204,7 +204,8 @@
       return {
         calendarDate: null,
         model: new UserModel(),
-        originalState: null
+        originalState: null,
+        selectedImageFile: null
       }
     },
     validations: {
@@ -217,13 +218,16 @@
     },
     methods: {
       ...mapActions([
-        'getUserProfileInfo'
+        'getUserProfileInfo',
+        'uploadUserProfileImage'
       ]),
       resetForm () {
         this.model = cloneDeep(this.originalState)
       },
       uploadedImage (value) {
-        console.log(value)
+        if (value) {
+          this.selectedImageFile = value
+        }
       },
       async initUserProfile () {
         await this.getUserProfileInfo(this.cognitoUserEmail).then((data) => {
@@ -236,6 +240,11 @@
       saveProfile () {
         if (this.$v.model.$invalid || this.$v.model.$error) {
           this.$v.model.$touch()
+          return
+        }
+
+        if (this.model.imageUrl == undefined &&  this.this.selectedImageFile == null) {
+          this.swalError('Please upload your profile image')
           return
         }
 

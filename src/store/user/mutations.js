@@ -1,6 +1,5 @@
 import UserModel from 'src/models/userModel'
 import base64 from 'src/js/base64.js'
-import { state } from './index'
 
 const mutations = {
   setUserProfileState (state, data) {
@@ -9,6 +8,11 @@ const mutations = {
     if (state.profile.email !== null) {
       var json = base64.encode(JSON.stringify(state.profile))
       localStorage.setItem('up', json)
+    }
+  },
+  setUserProfileImageState (state, data) {
+    if (state.profile !== null) {
+      state.profile.imageUrl = data
     }
   }
 }
