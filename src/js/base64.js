@@ -2,7 +2,6 @@ var Base64 = {
   characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=,-!@#$%^&*()',
 
   encode (string) {
-    var characters = Base64.characters
     var result = ''
     var i = 0
 
@@ -11,9 +10,9 @@ var Base64 = {
       var b = string.charCodeAt(i++)
       var c = string.charCodeAt(i++)
 
-      a = a ? a : 0
-      b = b ? b : 0
-      c = c ? c : 0
+      a = a | 0
+      b = b | 0
+      c = c | 0
 
       var b1 = (a >> 2) & 0x3F
       var b2 = ((a & 0x3) << 4) | ((b >> 4) & 0xF)
@@ -33,8 +32,7 @@ var Base64 = {
   },
 
   decode (string) {
-    var characters = Base64.characters
-    var result  = ''
+    var result = ''
     var i = 0
     
     do {
