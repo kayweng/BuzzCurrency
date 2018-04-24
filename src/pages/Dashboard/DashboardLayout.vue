@@ -78,7 +78,7 @@
           this.$sidebar.displaySidebar(false)
         }
       },
-      logout() {
+      logout () {
         this.logoutUser(false)
       },
       async retrieveUserInfo () {

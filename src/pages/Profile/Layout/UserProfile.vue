@@ -243,7 +243,7 @@
           return
         }
 
-        if (this.model.imageUrl == undefined &&  this.this.selectedImageFile == null) {
+        if (this.model.imageUrl === undefined && this.this.selectedImageFile === null) {
           this.swalError('Please upload your profile image')
           return
         }

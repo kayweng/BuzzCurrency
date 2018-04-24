@@ -74,7 +74,7 @@
     },
     methods: {
       uploadImage () {
-        var uploadControl = document.getElementById("fileUpload")
+        var uploadControl = document.getElementById('fileUpload')
 
         if (uploadControl.files.length > 0) {
           var file = uploadControl.files[0]
@@ -86,7 +86,7 @@
           }
 
           // check image types
-          if (file.type.substring(0,5) !== 'image') {
+          if (file.type.substring(0, 5) !== 'image') {
             this.swalError('Accept only image file such as PNG, JPEG and GIF')
             return
           }
