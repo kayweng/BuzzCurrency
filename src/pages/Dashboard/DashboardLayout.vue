@@ -89,7 +89,7 @@
             } else {
               this.userInfo.name = this.$store.state.user.profile.lastName
               this.userInfo.status = this.$store.state.user.profile.userType === 1 ? 'User' : 'Genuine User'
-              this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === '-' ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
+              this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
             }
           }).catch(error => {
             console.log(error)

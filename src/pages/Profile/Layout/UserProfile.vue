@@ -18,8 +18,9 @@
                         @change="uploadedImage">
             </circleImg>
             <div class="col-12 text-center error-message">
-                <span v-if="model.edit && this.selectedImageFile == null || !$v.model.imageUrl" class="error-message">Please upload your profile image</span>
-              </div>
+              <span v-if="model.edit && this.selectedImageFile === null && model.imageUrl === null" class="error-message">Please upload your profile image</span>
+              <span v-if="model.edit && this.selectedImageFile !== null" class="note-message">{{this.selectedImageFile.name}}</span>
+            </div>
           </div>
           <hr/>
           <!-- User Info -->
@@ -108,7 +109,7 @@
                         :readonly="!model.edit"
                         v-model="model.birthdate">
                 <el-date-picker v-model="calendarDate"
-                                format="dd-MM-yyyy"
+                                format="dd-MMM-yyyy"
                                 type="date"
                                 :class="{'input-error': $v.model.birthdate.$error }"
                                 :readonly="!model.edit"
@@ -155,10 +156,10 @@
                              :disabled="!model.edit"
                              :key="option.label">
                   </el-option>
-                </el-select>
-                <div class="error-message">
-                  <span v-if="model.edit && !$v.model.country.required">The country field is required</span>
-                </div> 
+              </el-select>
+              <div class="error-message">
+                <span v-if="model.edit && !$v.model.country.required">The country field is required</span>
+              </div> 
             </div> 
           </div>
           <div class="empty-row"></div>
@@ -222,7 +223,9 @@
         'uploadUserProfileImage'
       ]),
       resetForm () {
+        this.selectedImageFile = null
         this.model = cloneDeep(this.originalState)
+        this.calendarDate = this.model.birthdate
       },
       uploadedImage (value) {
         if (value) {
@@ -243,7 +246,7 @@
           return
         }
 
-        if (this.model.imageUrl === undefined && this.this.selectedImageFile === null) {
+        if (this.model.imageUrl === null && this.selectedImageFile === null) {
           this.swalError('Please upload your profile image')
           return
         }
@@ -258,7 +261,12 @@
           confirmButtonText: 'Yes'
         }).then((result) => {
           if (result.value) {
-            alert('saved')
+            var payload = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
+            this.uploadUserProfileImage(payload).then((response) => {
+              console.log(response)
+            }, (error) => {
+              console.log(error)
+            })
           }
         })
       }

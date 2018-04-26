@@ -9,7 +9,6 @@ const aws = axios.create({
 // interceptors setup
 aws.interceptors.request.use(config => {
   config.headers.common['Authorization'] = store.state.cognito.user.tokens.IdToken
-  console.log(config.headers)
   return config
 }, (error) => {
   return error
