@@ -7,7 +7,7 @@ const mutations = {
 
     if (state.profile.email !== null) {
       var json = base64.encode(JSON.stringify(state.profile))
-      localStorage.setItem('up', json)
+      localStorage.setItem('user', json)
     }
   },
   setUserProfileImageState (state, data) {

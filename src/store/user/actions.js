@@ -6,7 +6,7 @@ const actions = {
     
   },
   getUserProfileInfo ({commit}, payload) {
-    var json = localStorage.getItem('up')
+    var json = localStorage.getItem('user')
 
     if (json !== null) {
       var userProfile = JSON.parse(base64.decode(json))
@@ -38,7 +38,7 @@ const actions = {
     formData.append('image', payload.image)
 
     return new Promise((resolve, reject) => {
-      aws.post('/user/image/' + username, { headers:
+      aws.post('/user/image/', { headers:
         {'Content-Type': 'multipart/form-data'}
       }).then(response => {
         commit('setUserProfileImageState', response.data)

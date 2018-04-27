@@ -31,6 +31,14 @@
               <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
             </div>
           </div>
+          <!-- Remember Me -->
+          <div class="empty-row"></div>
+          {{Boolean(loggedMeIn)}}
+          <div class="row">
+            <check-box ref="chkLoggedIn" :checked="Boolean(loggedMeIn)" @input="keepMeLoggedIn">
+              <span class="note-message">keep me logged in</span>
+            </check-box>
+          </div>
           <div class="empty-row"></div>
           <!-- Buttons -->
           <div class="text-center">
@@ -51,14 +59,15 @@
 </template>
 
 <script>
-  import { FadeRenderTransition } from 'src/components/index'
+  import { FadeRenderTransition, Checkbox } from 'src/components/index'
   import { LoginModel } from 'src/models/loginModel'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
 
   export default {
     components: {
       FadeRenderTransition,
-      LandingLayout
+      LandingLayout,
+      checkBox: Checkbox
     },
     data () {
       return {
@@ -87,6 +96,9 @@
             this.swalError(error.message)
           }
         })
+      },
+      keepMeLoggedIn (checked) {
+        localStorage.setItem('keepmeloggedin', checked)
       },
       notifySessionExpired () {
         this.$notify({

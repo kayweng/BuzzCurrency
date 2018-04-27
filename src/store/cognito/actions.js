@@ -271,7 +271,7 @@ export default function actionsFactory (config) {
     // Only for authenticated users
     signOut ({ commit, state }) {
       return new Promise((resolve, reject) => {
-        localStorage.removeItem('up')
+        localStorage.removeItem('user')
         // Make sure the user is authenticated
         if (state.user === null || (state.user && state.user.tokens === null)) {
           reject({
