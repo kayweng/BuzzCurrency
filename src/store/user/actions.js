@@ -35,10 +35,11 @@ const actions = {
     var username = payload.username
     var formData = new FormData()
 
-    formData.append('image', payload.image)
+    formData.append('username', username)
+    formData.append('username', payload.image)
 
     return new Promise((resolve, reject) => {
-      aws.post('/user/image/', { headers:
+      aws.post('/user/image/' + username, { headers:
         {'Content-Type': 'multipart/form-data'}
       }).then(response => {
         commit('setUserProfileImageState', response.data)
