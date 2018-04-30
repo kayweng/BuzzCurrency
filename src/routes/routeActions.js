@@ -3,7 +3,10 @@ import { store } from 'src/store/index'
 let noAuthPage = ['Home', 'Login', 'SignUp', 'ResetPassword', 'ResendConfirmation', 'PageNotFound', 'Error']
  
 async function loginRoute (to, from, next) {
-  if (store.state.cognito.user === null) {
+  var _logged = localStorage.getItem('keepmeloggedin')
+  var rememberLoggedIn =  _logged === undefined ? false : (_logged === 'true')
+
+  if (!rememberLoggedIn || store.state.cognito.user === null) {
     store.dispatch('signOut')
     next()
   } else {

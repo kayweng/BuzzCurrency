@@ -31,12 +31,9 @@ export default {
 
       return genders
     },
-    
-  },
-  watch: {
     loggedMeIn () {
       const val = localStorage.getItem('keepmeloggedin')
-      return val === undefined ? false : val
+      return val === undefined ? false : (val === 'true')
     }
   },
   methods: {

@@ -33,9 +33,8 @@
           </div>
           <!-- Remember Me -->
           <div class="empty-row"></div>
-          {{Boolean(loggedMeIn)}}
           <div class="row">
-            <check-box ref="chkLoggedIn" :checked="Boolean(loggedMeIn)" @input="keepMeLoggedIn">
+            <check-box ref="chkLoggedIn" :checked="this.loggedMeIn" @input="keepMeLoggedIn">
               <span class="note-message">keep me logged in</span>
             </check-box>
           </div>

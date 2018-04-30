@@ -38,6 +38,11 @@
       <dashboard-content @click="toggleSidebar"></dashboard-content>
       <content-footer></content-footer>
     </div>
+    <v-loading v-if="$loading.isLoading('loading')" class="overlay" loader='loading'>
+      <template slot='spinner'>
+        <loading-spinner height='30px' width='30px' />
+      </template>
+    </v-loading>
   </div>
 </template>
 <script>
@@ -46,13 +51,15 @@
   import TopNavbar from './Layout/TopNavbar.vue'
   import ContentFooter from './Layout/ContentFooter.vue'
   import DashboardContent from './Layout/Content.vue'
-
+  import loadingSpinner from 'vuex-loading/src/spinners/spinner.vue'
+  
   export default {
     components: {
       UserMenu,
       TopNavbar,
       ContentFooter,
-      DashboardContent
+      DashboardContent,
+      loadingSpinner
     },
     data () {
       return {
@@ -79,6 +86,7 @@
         }
       },
       logout () {
+        console.log('logout')
         this.logoutUser(false)
       },
       async retrieveUserInfo () {

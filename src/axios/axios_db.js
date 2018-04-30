@@ -15,9 +15,9 @@ aws.interceptors.request.use(config => {
 })
 
 aws.interceptors.response.use(function (response) {
-  console.log(response)
   return response
 }, function (error) {
+  console.log(error)
   if (!error.response) {
     console.log('axios - network error')
   } else {

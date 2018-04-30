@@ -33,15 +33,16 @@ const actions = {
   },
   uploadUserProfileImage ({commit}, payload) {
     var username = payload.username
-    var formData = new FormData()
+    var form = new FormData()
+    
+    form.append("file", payload.image)
 
-    formData.append('username', username)
-    formData.append('username', payload.image)
-
+    console.log(payload.image)
     return new Promise((resolve, reject) => {
-      aws.post('/user/image/' + username, { headers:
-        {'Content-Type': 'multipart/form-data'}
+      aws.post('/user/image/' + username, form, { 
+        headers:{ 'Content-Type': 'multipart/form-data' }
       }).then(response => {
+        console.log(response)
         commit('setUserProfileImageState', response.data)
         resolve(response.data)
       }).catch(error => {

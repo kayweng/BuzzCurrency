@@ -6,7 +6,7 @@
             <div class="row switch">
               <l-switch v-model="model.edit">
                 <i class="fa fa-pencil" slot="on"></i>
-                <i class="fa fa-times" slot="off"></i>
+                <i class="fa fa-pencil" slot="off"></i>
               </l-switch>
             </div>
             <h6 class="card-title left">{{model.email}}</h6>
@@ -191,7 +191,7 @@
   import UserModel from 'src/models/userModel'
   import swal from 'sweetalert2'
   import cloneDeep from 'clone-deep'
-
+  
   export default {
     components: {
       [Option.name]: Option,
@@ -261,11 +261,15 @@
           confirmButtonText: 'Yes'
         }).then((result) => {
           if (result.value) {
+            this.$loading.startLoading('loading')
+
             var payload = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
             this.uploadUserProfileImage(payload).then((response) => {
               console.log(response)
+              this.$loading.endLoading('loading')
             }, (error) => {
               console.log(error)
+              this.$loading.endLoading('loading')
             })
           }
         })
@@ -281,7 +285,7 @@
         } else {
           this.model = this.originalState
         }
-
+        
         this.model.edit = val
       }
     },
