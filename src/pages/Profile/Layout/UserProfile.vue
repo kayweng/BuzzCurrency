@@ -246,10 +246,10 @@
           return
         }
 
-        if (this.model.imageUrl === null && this.selectedImageFile === null) {
-          this.swalError('Please upload your profile image')
-          return
-        }
+        // if (this.model.imageUrl === null && this.selectedImageFile === null) {
+        //   this.swalError('Please upload your profile image')
+        //   return
+        // }
 
         swal({
           type: 'info',
@@ -263,14 +263,16 @@
           if (result.value) {
             this.$loading.startLoading('loading')
 
-            var payload = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
-            this.uploadUserProfileImage(payload).then((response) => {
-              console.log(response)
-              this.$loading.endLoading('loading')
-            }, (error) => {
-              console.log(error)
-              this.$loading.endLoading('loading')
-            })
+            // var payload = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
+            // this.uploadUserProfileImage(payload).then((response) => {
+            //   console.log(response)
+            //   this.$loading.endLoading('loading')
+            // }, (error) => {
+            //   console.log(error)
+            //   this.$loading.endLoading('loading')
+            // })
+
+            
           }
         })
       }
