@@ -61,6 +61,19 @@ export default {
       })
     },
 
+    showNotifyMessage (message, duration, type, icon, hAlign, vAlign) {
+      this.$notify({
+        component: {
+          template: `<span>${message}</span>`
+        },
+        timeout: duration || 3000,
+        icon: 'nc-icon ' + (icon || 'nc-bulb-63'),
+        horizontalAlign: hAlign || 'right',
+        verticalAlign: vAlign || 'top',
+        type: type || 'primary'
+      })
+    },
+
     logoutUser (sessionExpired) {
       if (!sessionExpired) {
         swal({

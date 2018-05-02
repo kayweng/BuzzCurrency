@@ -10,6 +10,7 @@ const mutations = {
       localStorage.setItem('user', json)
     }
   },
+  
   setUserProfileImageState (state, data) {
     if (state.profile !== null) {
       state.profile.imageUrl = data

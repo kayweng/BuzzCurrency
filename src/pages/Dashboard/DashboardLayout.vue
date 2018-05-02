@@ -86,7 +86,6 @@
         }
       },
       logout () {
-        console.log('logout')
         this.logoutUser(false)
       },
       async retrieveUserInfo () {

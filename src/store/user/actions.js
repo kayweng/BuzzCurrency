@@ -32,29 +32,52 @@ const actions = {
     }
   },
 
-  uploadUserProfileImage ({commit}, payload) {
-    var username = payload.username
-    var form = new FormData()
-    
-    form.append('file', payload.image)
+  // uploadUserProfileImage ({commit}, payload) {
+  //   var config = {
+  //     headers: { 'content-type': 'multipart/form-data' }
+  //   }
+  //   var reader = new FileReader()
+  //   reader.readAsDataURL(payload.image)
 
-    console.log(payload.image)
+  //   return new Promise((resolve, reject) => {
+  //     reader.onload = (upload) => {
+  //       console.log(upload.target.result)
+  //       aws.post('/user/image/' + payload.username, { data: upload.target.result }, config).then(response => {
+  //         resolve(response)
+  //       }).catch(error => {
+  //         reject(error)
+  //       })
+  //     }
+  //   })
+  // },
+  uploadUserProfileImage ({commit}, payload) {
+    var formData = new FormData()
+
+    formData.append('file', payload.image)
+
+    var config = {
+      headers: { 'content-type': payload.image.type }
+    }
+
     return new Promise((resolve, reject) => {
-      aws.post('/user/image/' + username, form, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      }).then(response => {
-        console.log(response)
-        commit('setUserProfileImageState', response.data)
-        resolve(response.data)
+      aws.post('/user/image/' + payload.username, formData, config).then(response => {
+        resolve(response)
       }).catch(error => {
-        console.log(error)
         reject(error)
       })
     })
   },
 
   saveUser ({commit}, payload) {
-   
+    return new Promise((resolve, reject) => {
+      aws.post('/user/' + payload.email, payload).then(response => {
+        commit('setUserProfileState', response.data)
+        resolve(response.data)
+      }).catch(error => {
+        console.log(error)
+        reject(error)
+      })
+    })
   }
 }
 

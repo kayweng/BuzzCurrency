@@ -34,6 +34,10 @@ body{
   background-color: orangered !important;
 }
 
+.indianred {
+  color:#CD5C5C !important;
+}
+
 /* shape */
 .img-circle{
   border-radius: 50%;

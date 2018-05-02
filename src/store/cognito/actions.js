@@ -1,4 +1,4 @@
-import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
+import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails, CognitoRefreshToken } from 'amazon-cognito-identity-js'
 import * as types from './mutations-types'
 import axios from 'axios'
 
@@ -42,8 +42,7 @@ export default function actionsFactory (config) {
           }
 
           const constructedUser = constructUser(cognitoUser, session)
-          // Call AUTHENTICATE because it's utterly the same
-          console.log('cognito: getCurrentUser')
+          
           commit(types.AUTHENTICATE, constructedUser)
           resolve(constructedUser)
         })
@@ -261,7 +260,6 @@ export default function actionsFactory (config) {
             return accum
           }, {})
           
-          console.log('cognito:getUserAttributes')
           commit(types.ATTRIBUTES, attributesMap)
           resolve(attributesMap)
         })
@@ -288,6 +286,34 @@ export default function actionsFactory (config) {
         cognitoUser.signOut()
         commit(types.SIGNOUT)
         resolve()
+      })
+    },
+
+    refreshSession ({commit, state}) {
+      return new Promise((resolve, reject) => {
+        if (state.user === null || (state.user && state.user.tokens === null)) {
+          reject({
+            message: 'User is unauthenticated'
+          })
+          return
+        }
+        
+        const cognitoUser = cognitoUserPool.getCurrentUser()
+        const refreshToken = new CognitoRefreshToken({RefreshToken: state.user.tokens.RefreshToken})
+        
+        cognitoUser.refreshSession(refreshToken, (err, session) => {
+          if (err !== null){
+            reject({
+              message: 'Session expired'
+            })
+            return
+          }
+
+          const constructedUser = constructUser(cognitoUser, session)
+          
+          commit(types.AUTHENTICATE, constructedUser)
+          resolve(constructedUser)
+        })
       })
     }
   }

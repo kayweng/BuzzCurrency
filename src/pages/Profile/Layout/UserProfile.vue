@@ -18,7 +18,11 @@
                         @change="uploadedImage">
             </circleImg>
             <div class="col-12 text-center error-message">
-              <span v-if="model.edit && this.selectedImageFile === null && model.imageUrl === null" class="error-message">Please upload your profile image</span>
+              <span v-if="model.edit && this.selectedImageFile === null && model.imageUrl === null" class="error-message">
+                <i class="fa fa-lightbulb-o indianred" style="font-size: 16px; cursor:pointer;" 
+                  title="click for more tips" @click="showImageTips" aria-hidden="true"></i>
+                  Update profile picture
+              </span>
               <span v-if="model.edit && this.selectedImageFile !== null" class="note-message">{{this.selectedImageFile.name}}</span>
             </div>
           </div>
@@ -220,12 +224,16 @@
     methods: {
       ...mapActions([
         'getUserProfileInfo',
-        'uploadUserProfileImage'
+        'uploadUserProfileImage',
+        'saveUser'
       ]),
       resetForm () {
         this.selectedImageFile = null
         this.model = cloneDeep(this.originalState)
         this.calendarDate = this.model.birthdate
+      },
+      showImageTips () {
+        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 500KB', 5000)
       },
       uploadedImage (value) {
         if (value) {
@@ -246,10 +254,10 @@
           return
         }
 
-        // if (this.model.imageUrl === null && this.selectedImageFile === null) {
-        //   this.swalError('Please upload your profile image')
-        //   return
-        // }
+        if (this.model.imageUrl === null && this.selectedImageFile === null) {
+          this.swalError('Please upload your profile image')
+          return
+        }
 
         swal({
           type: 'info',
@@ -262,17 +270,41 @@
         }).then((result) => {
           if (result.value) {
             this.$loading.startLoading('loading')
+            
+            if (this.selectedImageFile) {
+              var profileImage = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
+              
+              this.uploadUserProfileImage(profileImage).then((response) => {
+                console.log(response)
+                this.$loading.endLoading('loading')
+              }, (error) => {
+                console.log(error)
+                this.$loading.endLoading('loading')
+                return
+              })
+            }
 
-            // var payload = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
-            // this.uploadUserProfileImage(payload).then((response) => {
-            //   console.log(response)
+            // var profileInfo = {
+            //   'email': this.cognitoUserEmail,
+            //   'firstName': this.model.firstName,
+            //   'lastName': this.model.lastName,
+            //   'mobile': this.model.mobile,
+            //   'birthdate': this.model.birthdate.toString(),
+            //   'gender': this.model.gender,
+            //   'address': this.model.address,
+            //   'country': this.model.country,
+            //   'modifiedOn': new Date().toString()
+            // }
+
+            // this.saveUser(profileInfo).then((response) => {
+            //   this.model = new UserModel(response)
+            //   this.originalState = cloneDeep(this.model)
+            //   this.model.edit = false
             //   this.$loading.endLoading('loading')
-            // }, (error) => {
+            // }, (error) =>{
             //   console.log(error)
             //   this.$loading.endLoading('loading')
             // })
-
-            
           }
         })
       }
@@ -286,6 +318,7 @@
           this.originalState = cloneDeep(this.model)
         } else {
           this.model = this.originalState
+          this.selectedImageFile = null
         }
         
         this.model.edit = val

@@ -85,10 +85,10 @@ const mandatory = {
   required
 }
 
-const image = {
+const profileImage = {
   required
 }
 
 export { firstName, lastName, birthdate, emailAddress, mobile,
   mobile2, gender, address, country, password, confirmPassword,
-  confirmNewPassword, mandatory, image }
+  confirmNewPassword, mandatory, profileImage }
