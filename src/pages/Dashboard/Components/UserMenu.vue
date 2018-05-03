@@ -12,7 +12,7 @@
         <img :src="value.imageUrl" alt="profile"/>
       </div>
       <div class="info">
-        <a data-toggle="collapse" :aria-expanded="!isClosed" @click.stop="toggleMenu" href="#">
+        <a data-toggle="collapse" style="cursor:pointer;" :aria-expanded="!isClosed" @click.stop="toggleMenu">
           <span class="title" v-if="value.name">
             {{value.name}}
             <b class="caret"></b>

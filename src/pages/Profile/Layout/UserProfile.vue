@@ -18,10 +18,10 @@
                         @change="uploadedImage">
             </circleImg>
             <div class="col-12 text-center error-message">
-              <span v-if="model.edit && this.selectedImageFile === null && model.imageUrl === null" class="error-message">
+              <span v-if="model.edit" class="error-message">
                 <i class="fa fa-lightbulb-o indianred" style="font-size: 16px; cursor:pointer;" 
                   title="click for more tips" @click="showImageTips" aria-hidden="true"></i>
-                  Update profile picture
+                  <span v-if="model.edit && model.imageUrl === null && this.selectedImageFile === null">Update profile picture</span>
               </span>
               <span v-if="model.edit && this.selectedImageFile !== null" class="note-message">{{this.selectedImageFile.name}}</span>
             </div>
@@ -233,7 +233,7 @@
         this.calendarDate = this.model.birthdate
       },
       showImageTips () {
-        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 500KB', 5000)
+        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 450KB', 5000)
       },
       uploadedImage (value) {
         if (value) {
