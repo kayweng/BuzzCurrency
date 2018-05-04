@@ -6,7 +6,6 @@ const aws = axios.create({
   timeout: 30000
 })
 
-// interceptors setup
 aws.interceptors.request.use(config => {
   config.headers.common['Authorization'] = store.state.cognito.user.tokens.IdToken
   return config
@@ -17,11 +16,13 @@ aws.interceptors.request.use(config => {
 aws.interceptors.response.use(function (response) {
   return response
 }, function (error) {
-  console.log(error)
   if (!error.response) {
     console.log('axios - network error')
   } else {
     console.log(error.response.status + '-' + error.response.data)
+    if (error.response.state == '401') {
+      console.log('logout user here ...')
+    }
   }
 
   return Promise.reject(error)

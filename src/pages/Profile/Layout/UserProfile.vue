@@ -171,7 +171,7 @@
             <div class="text-center col-12">
               <div class="button-inline">
                 <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
-                <button type="submit" @click.prevent="saveProfile" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
+                <button type="submit" @click.prevent="saveUserProfile" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
           </div>
@@ -233,7 +233,7 @@
         this.calendarDate = this.model.birthdate
       },
       showImageTips () {
-        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 450KB', 5000)
+        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 500 KB', 5000)
       },
       uploadedImage (value) {
         if (value) {
@@ -248,7 +248,30 @@
           console.log(error)
         })
       },
-      saveProfile () {
+      saveUserInfo () {
+        var profileInfo = {
+          'email': this.cognitoUserEmail,
+          'firstName': this.model.firstName,
+          'lastName': this.model.lastName,
+          'mobile': this.model.mobile,
+          'birthdate': this.model.birthdate.toString(),
+          'gender': this.model.gender,
+          'address': this.model.address,
+          'country': this.model.country,
+          'modifiedOn': new Date().toString()
+        }
+
+        this.saveUser(profileInfo).then((response) => {
+          this.model = new UserModel(response)
+          this.originalState = cloneDeep(this.model)
+          this.model.edit = false
+          this.$loading.endLoading('loading')
+        }, (error) =>{
+          console.log(error)
+          this.$loading.endLoading('loading')
+        })
+      },
+      saveUserProfile () {
         if (this.$v.model.$invalid || this.$v.model.$error) {
           this.$v.model.$touch()
           return
@@ -276,35 +299,20 @@
               
               this.uploadUserProfileImage(profileImage).then((response) => {
                 console.log(response)
-                this.$loading.endLoading('loading')
+                if (response.status === 200) {
+                  this.saveUserInfo()
+                } else {
+                  this.swalError('Update profile picture failed.')
+                  this.$loading.endLoading('loading')
+                }
               }, (error) => {
                 console.log(error)
                 this.$loading.endLoading('loading')
                 return
               })
+            } else {
+              this.saveUserInfo()
             }
-
-            // var profileInfo = {
-            //   'email': this.cognitoUserEmail,
-            //   'firstName': this.model.firstName,
-            //   'lastName': this.model.lastName,
-            //   'mobile': this.model.mobile,
-            //   'birthdate': this.model.birthdate.toString(),
-            //   'gender': this.model.gender,
-            //   'address': this.model.address,
-            //   'country': this.model.country,
-            //   'modifiedOn': new Date().toString()
-            // }
-
-            // this.saveUser(profileInfo).then((response) => {
-            //   this.model = new UserModel(response)
-            //   this.originalState = cloneDeep(this.model)
-            //   this.model.edit = false
-            //   this.$loading.endLoading('loading')
-            // }, (error) =>{
-            //   console.log(error)
-            //   this.$loading.endLoading('loading')
-            // })
           }
         })
       }

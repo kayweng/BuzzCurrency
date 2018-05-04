@@ -13,7 +13,7 @@
               <small>{{ imageUrl }}</small>
             </div>
             <p class="file">
-              <input type="file" @change="uploadImage" name="file" id="fileUpload" accept="image/x-png,image/gif,image/jpeg"/>
+              <input type="file" @change="uploadImage" name="file" id="fileUpload" accept="image/x-jpg,image/jpeg"/>
               <label for="fileUpload">Upload</label>
             </p>
           </div>
@@ -65,6 +65,10 @@
       isUpload: {
         type: Boolean,
         default: false
+      },
+      maxSize: {
+        type: Number,
+        default: 500000  //500KB
       }
     },
     data () {
@@ -80,14 +84,14 @@
           var file = uploadControl.files[0]
 
           // check file size, 450KB
-          if (file.size > 450000) {
-            this.swalError('Image file size exceeds 450 KB.')
+          if (file.size > this.maxSize) {
+            this.swalError(`Image file size exceeds ${this.maxSize/1000} KB.`)
             return
           }
 
           // check image types
           if (file.type.substring(0, 5) !== 'image') {
-            this.swalError('Accept only image file such as PNG, JPEG and GIF')
+            this.swalError('Accept only image file such as JPG/JPEG')
             return
           }
 

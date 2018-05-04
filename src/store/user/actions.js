@@ -49,23 +49,6 @@ const actions = {
       }
     })
   },
-  // uploadUserProfileImage ({commit}, payload) {
-  //   var formData = new FormData()
-
-  //   formData.append('file', payload.image)
-
-  //   var config = {
-  //     headers: { 'content-type': 'multipart/form-data' }
-  //   }
-
-  //   return new Promise((resolve, reject) => {
-  //     aws.post('/user/image/' + payload.username, formData, config).then(response => {
-  //       resolve(response)
-  //     }).catch(error => {
-  //       reject(error)
-  //     })
-  //   })
-  // },
 
   saveUser ({commit}, payload) {
     return new Promise((resolve, reject) => {
