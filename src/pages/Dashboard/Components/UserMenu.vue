@@ -9,16 +9,16 @@
     </div>
     <div v-else>
       <div class="photo" >
-        <img :src="value.imageUrl" alt="profile"/>
+        <img :src="value.imageData" alt="profile"/>
       </div>
       <div class="info">
         <a data-toggle="collapse" style="cursor:pointer;" :aria-expanded="!isClosed" @click.stop="toggleMenu">
-          <span class="title" v-if="value.name">
-            {{value.name}}
+          <span class="title" v-if="value.lastName">
+            {{value.lastName}}
             <b class="caret"></b>
           </span>
-          <span class="subtitle" v-if="value.status">
-            <small>{{ value.status }}</small>
+          <span class="subtitle" v-if="value.userStatus">
+            <small>{{ value.userStatus }}</small>
           </span>
         </a>
         <div class="clearfix"></div>
@@ -87,7 +87,7 @@
       }
     },
     watch: {
-      'value.name' (value) {
+      'value.lastName' (value) {
         if (value) {
           this.$loading.endLoading('loadUserMenu')
         }

@@ -4,7 +4,7 @@ import basedModel from './baseModel'
 class userModel extends basedModel {
   constructor (data) {
     super()
-
+    
     this.resetState()
     this.edit = false
 
@@ -18,7 +18,8 @@ class userModel extends basedModel {
       this.address = data.address === '-' ? null : data.address
       this.country = data.country === '-' ? null : data.country
       this.userType = data.userType
-      this.imageUrl = data.imageUrl === '-' ? null : data.imageUrl
+      this.userStatus = data.userTypeDescription
+      this.imageUrl = data.imageUrl === '-' ? 'static/img/faces/user.jpg' : data.imageUrl
       this.active = data.active
       this.createdOn = data.createdOn
       this.modifiedOn = data.modifiedOn
@@ -49,11 +50,14 @@ class userModel extends basedModel {
     this.address = null
     this.country = null
     this.userType = null
+    this.userStatus = null
     this.imageUrl = null
     this.active = null
     this.createdOn = null
     this.modifiedOn = null
     this.lastUpdate = null
+    //custom
+    this.imageData = null
   }
 }
 

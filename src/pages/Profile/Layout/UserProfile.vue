@@ -12,7 +12,7 @@
             <h6 class="card-title left">{{model.email}}</h6>
           </div>
           <div class="row text-center">
-            <circleImg  :imagePath="model.imageUrl == null ? 'static/img/faces/user.jpg' : model.imageUrl"
+            <circleImg  :imagePath="model.imageUrl == null ? 'static/img/faces/user.jpg' : model.imageData"
                         :sizeStyle="'width: 120px; height:120px'"
                         :isUpload="model.edit"
                         @change="uploadedImage">
@@ -191,6 +191,7 @@
   import { mapGetters, mapActions } from 'vuex'
   import { DatePicker, Select, Option } from 'element-ui'
   import { FadeRenderTransition, Switch as LSwitch } from 'src/components/index'
+  import { readImageFileData } from 'src/js/image'
   import CircleImage from 'src/components/CircleImage.vue'
   import UserModel from 'src/models/userModel'
   import swal from 'sweetalert2'
@@ -224,8 +225,8 @@
     methods: {
       ...mapActions([
         'getUserProfileInfo',
-        'uploadUserProfileImage',
-        'saveUser'
+        'saveUserProfileImage',
+        'saveUserProfile'
       ]),
       resetForm () {
         this.selectedImageFile = null
@@ -237,11 +238,15 @@
       },
       uploadedImage (value) {
         if (value) {
-          this.selectedImageFile = value
+          readImageFileData(value).then(response =>{
+            this.selectedImageFile = value
+            this.model.imageUrl = response
+          })
         }
       },
       async initUserProfile () {
         await this.getUserProfileInfo(this.cognitoUserEmail).then((data) => {
+          console.log('1')
           this.model = new UserModel(data)
           this.calendarDate = this.model.birthdate
         }, (error) => {
@@ -258,14 +263,16 @@
           'gender': this.model.gender,
           'address': this.model.address,
           'country': this.model.country,
+          'imageUrl': this.model.imageUrl,
           'modifiedOn': new Date().toString()
         }
 
-        this.saveUser(profileInfo).then((response) => {
+        this.saveUserProfile(profileInfo).then((response) => {
           this.model = new UserModel(response)
           this.originalState = cloneDeep(this.model)
           this.model.edit = false
           this.$loading.endLoading('loading')
+          this.showNotifyMessage('User profile information has been updated successfully.', 3000, 'info','nc-check-2')
         }, (error) =>{
           console.log(error)
           this.$loading.endLoading('loading')
@@ -285,7 +292,7 @@
         swal({
           type: 'info',
           title: 'Save Profile',
-          html: '<small>Are you sure want to save changes ?</small>',
+          html: '<small>Are you confirm to save changes ?</small>',
           buttonsStyling: false,
           showCancelButton: true,
           confirmButtonClass: 'btn btn-primary btn-round btn-wd',
@@ -295,11 +302,11 @@
             this.$loading.startLoading('loading')
             
             if (this.selectedImageFile) {
-              var profileImage = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
+              let profileImage = { 'username': this.cognitoUserEmail, 'image': this.selectedImageFile }
               
-              this.uploadUserProfileImage(profileImage).then((response) => {
-                console.log(response)
+              this.saveUserProfileImage(profileImage).then((response) => {
                 if (response.status === 200) {
+                  this.model.imageUrl = this.profileImageUrl
                   this.saveUserInfo()
                 } else {
                   this.swalError('Update profile picture failed.')

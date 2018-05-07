@@ -34,6 +34,9 @@ export default {
     loggedMeIn () {
       const val = localStorage.getItem('keepmeloggedin')
       return val === undefined ? false : (val === 'true')
+    },
+    profileImageUrl () {
+      return `https://s3-ap-southeast-1.amazonaws.com/profileimage.buzzcurrency.com/${this.cognitoUserEmail}.jpg`
     }
   },
   methods: {

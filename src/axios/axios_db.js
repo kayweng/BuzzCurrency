@@ -9,19 +9,16 @@ const aws = axios.create({
 aws.interceptors.request.use(config => {
   config.headers.common['Authorization'] = store.state.cognito.user.tokens.IdToken
   return config
-}, (error) => {
-  return error
 })
 
-aws.interceptors.response.use(function (response) {
-  return response
-}, function (error) {
+aws.interceptors.response.use(null, function (error) {
   if (!error.response) {
     console.log('axios - network error')
   } else {
     console.log(error.response.status + '-' + error.response.data)
-    if (error.response.state == '401') {
-      console.log('logout user here ...')
+    if (error.response.state === 401) {
+      console.log('token was expired.')
+      store.dispatch('signOut')
     }
   }
 

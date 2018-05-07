@@ -2,7 +2,7 @@
   <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}">
     <notifications></notifications>
     <side-bar>
-      <user-menu v-model="userInfo">
+      <user-menu v-model="model">
         <li class="nav-item">
           <a class="nav-link sidebar-menu-item" href="#/user-profile">
             <i class="nc-icon nc-circle-09"></i>
@@ -47,12 +47,14 @@
 </template>
 <script>
   import { mapGetters, mapActions } from 'vuex'
+  import UserModel from 'src/models/userModel'
   import UserMenu from './Components/UserMenu.vue'
   import TopNavbar from './Layout/TopNavbar.vue'
   import ContentFooter from './Layout/ContentFooter.vue'
   import DashboardContent from './Layout/Content.vue'
   import loadingSpinner from 'vuex-loading/src/spinners/spinner.vue'
-  
+  import swal from 'sweetalert2'
+
   export default {
     components: {
       UserMenu,
@@ -63,11 +65,7 @@
     },
     data () {
       return {
-        userInfo: {
-          name: null,
-          status: null,
-          imageUrl: 'static/img/faces/user.jpg'
-        }
+        model : new UserModel()
       }
     },
     computed: {
@@ -94,9 +92,7 @@
             if (response === null || response === undefined) {
               this.logoutUser(true)
             } else {
-              this.userInfo.name = this.$store.state.user.profile.lastName
-              this.userInfo.status = this.$store.state.user.profile.userType === 1 ? 'User' : 'Genuine User'
-              this.userInfo.imageUrl = this.$store.state.user.profile.imageUrl === null ? 'static/img/faces/user.jpg' : this.$store.state.user.profile.imageUrl
+              this.model = this.$store.state.user.profile
             }
           }).catch(error => {
             console.log(error)
@@ -105,10 +101,37 @@
         } else {
           this.logoutUser(true)
         }
+      },
+      resetSessionExpire (vm) {
+        setTimeout(function () {
+          swal({
+            type: 'warning',
+            title: 'Session Expire',
+            html: '<small>Your session will expire in 60 seconds.<br/>Click Yes to continue, or Cancel to logout.</small>',
+            buttonsStyling: false,
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-primary btn-round btn-wd',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+              vm.$store.dispatch('refreshSession').then(response => {
+                vm.resetSessionExpire(vm)
+              }, (error) => {
+                console.log(error)
+                vm.logoutUser(true)
+              })
+            } else {
+              vm.logoutUser(true)
+            }
+          })
+        }, 3600000)
       }
     },
     beforeRouteEnter (to, from, next) {
-      next(vm => { vm.retrieveUserInfo() })
+      next(vm => { 
+        vm.retrieveUserInfo() 
+        vm.resetSessionExpire(vm)
+      })
     }
 }
 </script>
