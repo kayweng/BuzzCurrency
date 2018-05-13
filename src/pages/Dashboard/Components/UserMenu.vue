@@ -17,8 +17,8 @@
             {{value.lastName}}
             <b class="caret"></b>
           </span>
-          <span class="subtitle" v-if="value.userStatus">
-            <small>{{ value.userStatus }}</small>
+          <span class="subtitle" v-if="value.userTypeDescription">
+            <small>{{ value.userTypeDescription }}</small>
           </span>
         </a>
         <div class="clearfix"></div>

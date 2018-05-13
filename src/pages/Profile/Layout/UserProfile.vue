@@ -171,7 +171,7 @@
             <div class="text-center col-12">
               <div class="button-inline">
                 <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
-                <button type="submit" @click.prevent="saveUserProfile" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
+                <button type="submit" @click.prevent="saveForm" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
           </div>
@@ -229,9 +229,21 @@
         'saveUserProfile'
       ]),
       resetForm () {
-        this.selectedImageFile = null
-        this.model = cloneDeep(this.originalState)
-        this.calendarDate = this.model.birthdate
+        swal({
+          type: 'warning',
+          title: 'Reset Profile',
+          html: '<small>Are you confirm to revert changes ?</small>',
+          buttonsStyling: false,
+          showCancelButton: true,
+          confirmButtonClass: 'btn btn-primary btn-round btn-wd',
+          confirmButtonText: 'Yes'
+        }).then((result) => {
+          if (result.value) {
+            this.selectedImageFile = null
+            this.model = cloneDeep(this.originalState)
+            this.calendarDate = this.model.birthdate
+          }
+        })
       },
       showImageTips () {
         this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 500 KB', 5000)
@@ -240,20 +252,22 @@
         if (value) {
           readImageFileData(value).then(response =>{
             this.selectedImageFile = value
-            this.model.imageUrl = response
+            readImageFileData(value).then(response => {
+              this.model.imageData = response
+            })
           })
         }
       },
       async initUserProfile () {
         await this.getUserProfileInfo(this.cognitoUserEmail).then((data) => {
-          console.log('1')
-          this.model = new UserModel(data)
+          this.model = this.$store.state.user.profile
           this.calendarDate = this.model.birthdate
         }, (error) => {
           console.log(error)
+          this.logoutUser()
         })
       },
-      saveUserInfo () {
+      async saveUserInfo () {
         var profileInfo = {
           'email': this.cognitoUserEmail,
           'firstName': this.model.firstName,
@@ -268,17 +282,18 @@
         }
 
         this.saveUserProfile(profileInfo).then((response) => {
-          this.model = new UserModel(response)
+          this.model = this.$store.state.user.profile
           this.originalState = cloneDeep(this.model)
           this.model.edit = false
           this.$loading.endLoading('loading')
           this.showNotifyMessage('User profile information has been updated successfully.', 3000, 'info','nc-check-2')
-        }, (error) =>{
+        }, (error) => {
           console.log(error)
+          this.showNotifyMessage('User profile information failed to updated', 3000, 'error','nc-check-2')
           this.$loading.endLoading('loading')
         })
       },
-      saveUserProfile () {
+      saveForm () {
         if (this.$v.model.$invalid || this.$v.model.$error) {
           this.$v.model.$touch()
           return
@@ -337,6 +352,11 @@
         }
         
         this.model.edit = val
+      },
+      '$store.state.user.profile.imageData' (val) {
+        if (val) {
+          this.model.imageData = val  
+        }
       }
     },
     beforeMount: async function () {

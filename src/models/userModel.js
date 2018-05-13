@@ -18,12 +18,14 @@ class userModel extends basedModel {
       this.address = data.address === '-' ? null : data.address
       this.country = data.country === '-' ? null : data.country
       this.userType = data.userType
-      this.userStatus = data.userTypeDescription
+      this.userTypeDescription = data.userTypeDescription
       this.imageUrl = data.imageUrl === '-' ? 'static/img/faces/user.jpg' : data.imageUrl
       this.active = data.active
       this.createdOn = data.createdOn
       this.modifiedOn = data.modifiedOn
       this.lastUpdate = new Date()
+
+      this.imageData = data.imageData
     }
   }
 
@@ -50,7 +52,7 @@ class userModel extends basedModel {
     this.address = null
     this.country = null
     this.userType = null
-    this.userStatus = null
+    this.userTypeDescription = null
     this.imageUrl = null
     this.active = null
     this.createdOn = null

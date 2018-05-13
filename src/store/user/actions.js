@@ -2,29 +2,27 @@ import aws from 'src/axios/axios_db'
 import base64 from 'src/js/base64.js'
 
 const actions = {
+  // action return boolean result; get user profile info from 'user' state
   getUserProfileInfo ({commit}, payload) {
-    var json = localStorage.getItem('user')
-
     return new Promise((resolve,reject) => {
+      var json = localStorage.getItem('user')
+
       if (json !== null) {
-        // var userProfile = JSON.parse(base64.decode(json))
-        var userProfile = JSON.parse(json)
-  
-        commit('setUserProfileState', userProfile)
-        commit('setUserProfileImageState', userProfile.imageUrl)
+        var userJSON = JSON.parse(json)
         
-        resolve(userProfile)
-      } else if (payload !== null) {
+        commit('setUserProfileState', userJSON)
+        resolve(true)
+      } else if (payload === null) {
+        resolve(false)
+      } else {
         aws.get('/user/' + payload).then(response => {
           commit('setUserProfileState', response.data)
           commit('setUserProfileImageState', response.data.imageUrl)
-        
-          resolve(response.data)
+          resolve(true)
         }).catch(error => {
-          reject(error)
+          console.log(error)
+          resolve(false)
         })
-      } else {
-        reject(null)
       }
     })
   },
@@ -52,6 +50,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       aws.post('/user/' + payload.email, payload).then(response => {
         commit('setUserProfileState', response.data)
+        commit('setUserProfileImageState', response.data.imageUrl)
         resolve(response.data)
       }).catch(error => {
         console.log(error)

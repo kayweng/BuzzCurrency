@@ -1,7 +1,14 @@
 <template>
   <fade-render-transition :duration="200">
     <div class="container-fluid">
-      <img :src="imagePath" :style="sizeStyle" alt=""/>
+      <div class="center" v-if="this.$loading.anyLoading">
+        <v-loading loader='loadImage'>
+          <template slot='spinner'>
+            <loading-spinner height='30px' width='30px' />
+          </template>
+        </v-loading>
+      </div>
+      <img :src="imagePath" :style="sizeStyle" alt="" v-else/>
       <slot name="title" v-if="$slots.title || title">
         <h5>{{ title }}</h5>
       </slot>
@@ -33,8 +40,8 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
-    min-width: 100px;
-    min-height: 100px;
+    min-width: 120px;
+    min-height: 120px;
   }
 
   .imgUrl {
@@ -45,12 +52,14 @@
 
 <script>
   import { FadeRenderTransition, SlideRenderTransition } from 'src/components/index'
+  import loadingSpinner from 'vuex-loading/src/spinners/spinner.vue'
 
   export default {
     name: 'circleImg',
     components: {
       FadeRenderTransition,
-      SlideRenderTransition
+      SlideRenderTransition,
+      loadingSpinner
     },
     props: {
       imagePath: {
@@ -97,6 +106,15 @@
 
           // return image object
           this.$emit('change', file)
+        }
+      }
+    },
+    watch: {
+      imagePath (val) {
+        if (val) {
+          this.$loading.endLoading('loadImage')
+        } else {
+          this.$loading.startLoading('loadImage')
         }
       }
     }

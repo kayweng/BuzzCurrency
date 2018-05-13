@@ -87,20 +87,13 @@
         this.logoutUser(false)
       },
       async retrieveUserInfo () {
-        if (this.cognitoUserEmail !== null) {
-          await this.getUserProfileInfo(this.cognitoUserEmail).then(response => {
-            if (response === null || response === undefined) {
-              this.logoutUser(true)
-            } else {
-              this.model = this.$store.state.user.profile
-            }
-          }).catch(error => {
-            console.log(error)
+        await this.getUserProfileInfo(this.cognitoUserEmail).then(response => {
+          if (response) {
+            this.model = this.$store.state.user.profile
+          } else {
             this.logoutUser(true)
-          })
-        } else {
-          this.logoutUser(true)
-        }
+          }
+        })
       },
       resetSessionExpire (vm) {
         setTimeout(function () {
@@ -124,7 +117,7 @@
               vm.logoutUser(true)
             }
           })
-        }, 3600000)
+        }, 3000000)
       }
     },
     beforeRouteEnter (to, from, next) {

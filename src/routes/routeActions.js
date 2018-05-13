@@ -6,7 +6,7 @@ async function loginRoute (to, from, next) {
   var _logged = localStorage.getItem('keepmeloggedin')
   var rememberLoggedIn =  _logged === undefined ? false : (_logged === 'true')
   if (!rememberLoggedIn || store.state.cognito.user === null) {
-    //store.dispatch('signOut')
+    store.dispatch('signOut')
     next()
   } else {
     await store.dispatch('getCurrentUser').then((response) => {

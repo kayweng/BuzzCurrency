@@ -5,17 +5,14 @@ import { readImageUrlData } from 'src/js/image'
 const mutations = {
   setUserProfileState (state, data) {
     state.profile = new UserModel(data)
-    if (state.profile.email !== null) {
-      //var json = base64.encode(JSON.stringify(state.profile))
-      localStorage.setItem('user', JSON.stringify(state.profile))
-    }
+    localStorage.setItem('user', JSON.stringify(state.profile))
   },
   
-  setUserProfileImageState (state, data) {
+  async setUserProfileImageState (state, data) {
     if (state.profile !== null) {
-      readImageUrlData(data).then(response => {
+      await readImageUrlData(data).then(response => {
         state.profile.imageData = response
-        localStorage.setItem('userImage', state.profile.imageData)
+        localStorage.setItem('user', JSON.stringify(state.profile))
       })
     }
   }
