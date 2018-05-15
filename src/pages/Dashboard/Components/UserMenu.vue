@@ -43,7 +43,7 @@
     height: 60px;
     width: 60px;
     margin-left: 11px !important;
-    border: 0.1em solid snow;
+    border: 2px solid snow;
   }
 
   .subtitle {

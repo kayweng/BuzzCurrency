@@ -9,7 +9,7 @@
                 <i class="fa fa-pencil" slot="off"></i>
               </l-switch>
             </div>
-            <h6 class="card-title left">{{model.email}}</h6>
+            <h5 class="card-title left">{{ model.email }}</h5>
           </div>
           <div class="row text-center">
             <circleImg  :imagePath="model.imageUrl == null ? 'static/img/faces/user.jpg' : model.imageData"
@@ -231,11 +231,11 @@
       resetForm () {
         swal({
           type: 'warning',
-          title: 'Reset Profile',
-          html: '<small>Are you confirm to revert changes ?</small>',
+          title: 'Undo Changes',
+          html: '<small>Are you confirm to revert back changes in profile ?</small>',
           buttonsStyling: false,
           showCancelButton: true,
-          confirmButtonClass: 'btn btn-primary btn-round btn-wd',
+          confirmButtonClass: 'btn btn-warning btn-round btn-wd',
           confirmButtonText: 'Yes'
         }).then((result) => {
           if (result.value) {
@@ -246,21 +246,20 @@
         })
       },
       showImageTips () {
-        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 500 KB', 5000)
+        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 500 KB', 5000, 'info')
       },
       uploadedImage (value) {
         if (value) {
           readImageFileData(value).then(response =>{
             this.selectedImageFile = value
-            readImageFileData(value).then(response => {
-              this.model.imageData = response
-            })
+            this.model.imageData = response
           })
         }
       },
       async initUserProfile () {
         await this.getUserProfileInfo(this.cognitoUserEmail).then((data) => {
-          this.model = this.$store.state.user.profile
+          // this.model = this.$store.state.user.profile
+          this.model = cloneDeep(this.$store.state.user.profile)
           this.calendarDate = this.model.birthdate
         }, (error) => {
           console.log(error)
@@ -355,7 +354,7 @@
       },
       '$store.state.user.profile.imageData' (val) {
         if (val) {
-          this.model.imageData = val  
+          this.model.imageData = val
         }
       }
     },

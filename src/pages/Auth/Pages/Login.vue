@@ -35,7 +35,7 @@
           <div class="empty-row"></div>
           <div class="row">
             <check-box ref="chkLoggedIn" :checked="this.loggedMeIn" @input="keepMeLoggedIn">
-              <span class="note-message">keep me logged in</span>
+              <span class="note-message">keep me signed in</span>
             </check-box>
           </div>
           <div class="empty-row"></div>

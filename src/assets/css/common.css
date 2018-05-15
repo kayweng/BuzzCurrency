@@ -120,6 +120,7 @@ body{
   font-size: .75rem;
   min-height: 18px;
   margin-left: 2px;
+  text-transform: none !important;
 }
 
 .medium {
