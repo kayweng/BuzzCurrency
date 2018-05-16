@@ -170,7 +170,7 @@
           <div class="row" v-if="model.edit">
             <div class="text-center col-12">
               <div class="button-inline">
-                <button type="reset" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
+                <button type="buttons" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
                 <button type="submit" @click.prevent="saveForm" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
@@ -196,7 +196,8 @@
   import UserModel from 'src/models/userModel'
   import swal from 'sweetalert2'
   import cloneDeep from 'clone-deep'
-  
+  import { UserProfileBus } from 'src/eventBus/userProfileBus.js'
+
   export default {
     components: {
       [Option.name]: Option,
@@ -246,11 +247,11 @@
         })
       },
       showImageTips () {
-        this.showNotifyMessage('Profile image must be jpg/jpeg and size less than 500 KB', 5000, 'info')
+        this.showNotifyMessage('Only JPEG/JPG image is allowed and file size should less than 500 KB', 5000, 'info')
       },
       uploadedImage (value) {
         if (value) {
-          readImageFileData(value).then(response =>{
+          readImageFileData(value).then(response => {
             this.selectedImageFile = value
             this.model.imageData = response
           })
@@ -285,10 +286,10 @@
           this.originalState = cloneDeep(this.model)
           this.model.edit = false
           this.$loading.endLoading('loading')
-          this.showNotifyMessage('User profile information has been updated successfully.', 3000, 'info','nc-check-2')
+          this.showNotifyMessage('User profile information has been updated successfully.', 3000, 'info', 'nc-check-2')
         }, (error) => {
           console.log(error)
-          this.showNotifyMessage('User profile information failed to updated', 3000, 'error','nc-check-2')
+          this.showNotifyMessage('User profile information failed to updated', 3000, 'error', 'nc-check-2')
           this.$loading.endLoading('loading')
         })
       },
@@ -355,6 +356,7 @@
       '$store.state.user.profile.imageData' (val) {
         if (val) {
           this.model.imageData = val
+          UserProfileBus.setUserProfileImage(val)
         }
       }
     },

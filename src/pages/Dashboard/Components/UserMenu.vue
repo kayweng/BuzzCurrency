@@ -14,7 +14,7 @@
       <div class="info">
         <a data-toggle="collapse" style="cursor:pointer;" :aria-expanded="!isClosed" @click.stop="toggleMenu">
           <span class="title" v-if="value.lastName">
-            {{value.lastName}}
+            {{ value.lastName }}
             <b class="caret"></b>
           </span>
           <span class="subtitle" v-if="value.userTypeDescription">
@@ -69,6 +69,7 @@
 <script>
   import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
   import loadingSpinner from 'vuex-loading/src/spinners/spinner.vue'
+  import { UserProfileBus } from 'src/eventBus/userProfileBus.js'
 
   export default {
     components: {
@@ -95,6 +96,16 @@
     },
     mounted () {
       this.$loading.startLoading('loadUserMenu')
+    },
+    created () {
+      UserProfileBus.$on('setUserImage', (data) => {
+        if (data) {
+          this.value.imageData = data
+        }
+      })
+    },
+    beforeDestroy () {
+      UserProfileBus.$off('setUserImage')
     }
   }
 </script>

@@ -77,7 +77,7 @@
       },
       maxSize: {
         type: Number,
-        default: 500000  //500KB
+        default: 500000  // 500KB
       }
     },
     data () {
@@ -94,7 +94,7 @@
 
           // check file size, 450KB
           if (file.size > this.maxSize) {
-            this.swalError(`Image file size exceeds ${this.maxSize/1000} KB.`)
+            this.swalError(`Image file size exceeds ${this.maxSize / 1000} KB.`)
             return
           }
 

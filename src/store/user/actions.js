@@ -1,10 +1,9 @@
 import aws from 'src/axios/axios_db'
-import base64 from 'src/js/base64.js'
 
 const actions = {
   // action return boolean result; get user profile info from 'user' state
   getUserProfileInfo ({commit}, payload) {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       var json = localStorage.getItem('user')
 
       if (json !== null) {

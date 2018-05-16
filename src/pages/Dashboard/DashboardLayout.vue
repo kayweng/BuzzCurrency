@@ -65,7 +65,7 @@
     },
     data () {
       return {
-        model : new UserModel()
+        model: new UserModel()
       }
     },
     computed: {
@@ -121,8 +121,8 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-      next(vm => { 
-        vm.retrieveUserInfo() 
+      next(vm => {
+        vm.retrieveUserInfo()
         vm.resetSessionExpire(vm)
       })
     }

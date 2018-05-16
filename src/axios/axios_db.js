@@ -16,7 +16,7 @@ aws.interceptors.response.use(null, function (error) {
     console.log('axios - network error')
   } else {
     console.log(error.response.status + '-' + error.response.data)
-    if (error.response.state === 401) {
+    if (error.response.status === 401) {
       console.log('token was expired.')
       store.dispatch('signOut')
     }

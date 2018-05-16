@@ -1,4 +1,3 @@
-import axios from 'axios'
 import aws from 'src/axios/axios_db'
 
 function readImageUrlData (url) {
@@ -8,7 +7,7 @@ function readImageUrlData (url) {
   }
 
   return new Promise((resolve, reject) => {
-    axios.get(url, config).then(response =>{
+    aws.get(url, config).then(response => {
       var reader = new FileReader()
       reader.readAsDataURL(response.data)
       reader.onload = (e) => {

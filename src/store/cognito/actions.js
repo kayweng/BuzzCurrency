@@ -271,7 +271,7 @@ export default function actionsFactory (config) {
       return new Promise((resolve, reject) => {
         localStorage.removeItem('user')
         localStorage.removeItem('userImage')
-        localStorage.removeItem('keepmeloggedin')
+        localStorage.removeItem('keepMeSignedIn')
         // Make sure the user is authenticated
         if (state.user === null || (state.user && state.user.tokens === null)) {
           reject({
@@ -304,7 +304,7 @@ export default function actionsFactory (config) {
         const refreshToken = new CognitoRefreshToken({RefreshToken: state.user.tokens.RefreshToken})
         
         cognitoUser.refreshSession(refreshToken, (err, session) => {
-          if (err !== null){
+          if (err !== null) {
             reject({
               message: 'Session expired'
             })

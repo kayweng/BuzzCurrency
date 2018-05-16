@@ -58,7 +58,6 @@ class userModel extends basedModel {
     this.createdOn = null
     this.modifiedOn = null
     this.lastUpdate = null
-    //custom
     this.imageData = null
   }
 }

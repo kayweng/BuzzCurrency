@@ -32,7 +32,7 @@ export default {
       return genders
     },
     loggedMeIn () {
-      const val = localStorage.getItem('keepmeloggedin')
+      const val = localStorage.getItem('keepMeSignedIn')
       return val === undefined ? false : (val === 'true')
     },
     profileImageUrl () {

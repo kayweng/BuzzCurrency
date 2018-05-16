@@ -97,7 +97,7 @@
         })
       },
       keepMeLoggedIn (checked) {
-        localStorage.setItem('keepmeloggedin', checked)
+        localStorage.setItem('keepMeSignedIn', checked)
       },
       notifySessionExpired () {
         this.$notify({
