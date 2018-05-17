@@ -5,7 +5,7 @@
         <label v-if="label" class="control-label" :class="labelClasses">
           {{label}}
         </label>
-        <i v-if="iconClasses" :class="iconClasses" class="help-icon" @click="$emit('hint', $event.target.value)"></i>
+        <i v-if="hintClasses" :class="hintClasses" class="hint-icon" @click="$emit('hint', $event.target.value)"></i>
       </span>
     </slot>
     <slot name="addonLeft">
@@ -51,8 +51,7 @@
       addonRightIcon: String,
       addonLeftIcon: String,
       maxLength: Number,
-      iconClasses: String,
-
+      hintClasses: String
     },
     computed: {
       hasIcon () {
@@ -67,8 +66,9 @@
   .form-group {
     margin-bottom: 0em!important;
   }
-  .help-icon {
+  .hint-icon {
     float: right;
     margin-top: 18px;
+    margin-right: 4px;
   }
 </style>

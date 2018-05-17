@@ -25,7 +25,7 @@
                       @blur="$v.model.password.$touch()"
                       :class="{'input-error': $v.model.password.$error }"
                       :maxLength="20"
-                      :iconClasses="passwordIconClasses"
+                      :hintClasses="passwordIconClasses"
                       @hint="showPassword"
                       v-model="model.password"
                       ref="txtPassword">

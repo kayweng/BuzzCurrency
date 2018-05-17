@@ -64,7 +64,7 @@
                         @blur="$v.model.mobile.$touch()"
                         :class="{'input-error': $v.model.mobile.$error }"
                         :maxLength="14"
-                        iconClasses="pointer fa fa-mobile green-sea"
+                        hintClasses="pointer fa fa-mobile green-sea"
                         @hint="showMobileHint"
                         v-model="model.mobile">
               </fg-input>  

@@ -19,9 +19,9 @@
             </circleImg>
             <div class="col-12 text-center error-message">
               <span v-if="model.edit" class="error-message">
-                <i class="fa fa-lightbulb-o indianred" style="font-size: 16px; cursor:pointer;" 
+                <i class="fa fa-info-circle green-sea" style="font-size: 18px; cursor:pointer;" 
                   title="click for more tips" @click="showImageTips" aria-hidden="true"></i>
-                  <span v-if="model.edit && model.imageUrl === null && this.selectedImageFile === null">Update profile picture</span>
+                <span v-if="model.edit && model.imageUrl === null && this.selectedImageFile === null">Update profile picture</span>
               </span>
               <span v-if="model.edit && this.selectedImageFile !== null" class="note-message">{{this.selectedImageFile.name}}</span>
             </div>
@@ -170,7 +170,7 @@
           <div class="row" v-if="model.edit">
             <div class="text-center col-12">
               <div class="button-inline">
-                <button type="buttons" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
+                <button type="button" @click="resetForm" :disabled="!model.edit" class="btn btn-round btn-reset btn-wd">Reset</button>
                 <button type="submit" @click.prevent="saveForm" :disabled="!model.edit" class="btn btn-round btn-submit btn-wd">Save</button>
               </div>
             </div>
@@ -233,7 +233,7 @@
         swal({
           type: 'warning',
           title: 'Undo Changes',
-          html: '<small>Are you confirm to revert back changes in profile ?</small>',
+          html: '<small>Are you sure that you want to undo changes in profile ?</small>',
           buttonsStyling: false,
           showCancelButton: true,
           confirmButtonClass: 'btn btn-warning btn-round btn-wd',
@@ -247,7 +247,7 @@
         })
       },
       showImageTips () {
-        this.showNotifyMessage('Only JPEG/JPG image is allowed and file size should less than 500 KB', 5000, 'info')
+        this.showNotifyMessage('Profile image must be a jpeg/jpg file type and file size of image less than 500 KB.', 3000, 'info', 'fa fa-file-image-o')
       },
       uploadedImage (value) {
         if (value) {

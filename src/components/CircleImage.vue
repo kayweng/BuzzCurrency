@@ -94,7 +94,7 @@
 
           // check file size, 450KB
           if (file.size > this.maxSize) {
-            this.swalError(`Image file size exceeds ${this.maxSize / 1000} KB.`)
+            this.swalError(`Selected file size of image exceeds ${this.maxSize / 1000} KB.`)
             return
           }
 
