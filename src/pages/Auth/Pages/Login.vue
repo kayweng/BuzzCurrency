@@ -20,12 +20,15 @@
             </div>
             <!-- password -->
              <fg-input label="Password"
-                      type="password"
+                      :type="passwordType"
                       name="password"
                       @blur="$v.model.password.$touch()"
                       :class="{'input-error': $v.model.password.$error }"
                       :maxLength="20"
-                      v-model="model.password">
+                      :iconClasses="passwordIconClasses"
+                      @hint="showPassword"
+                      v-model="model.password"
+                      ref="txtPassword">
             </fg-input>
             <div class="error-message">
               <span v-if="!$v.model.password.required" class="error-message">The password field is required</span>
@@ -70,13 +73,20 @@
     },
     data () {
       return {
-        model: new LoginModel()
+        model: new LoginModel(),
+        passwordIconClasses: 'pointer fa fa-eye green-sea',
+        passwordType: 'password'
       }
     },
     validations: {
       model: LoginModel.validationScheme()
     },
     methods: {
+      showPassword () {
+        const type = this.$refs.txtPassword.$attrs.type
+        this.passwordType = type === 'password' ? 'text' : 'password'
+        this.passwordIconClasses = type === 'password' ? 'pointer fa fa-eye-slash green-sea' : 'pointer fa fa-eye green-sea'
+      },
       submitForm (event) {
         if (this.$v.model.$invalid || this.$v.model.$error) {
           this.$v.model.$touch()

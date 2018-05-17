@@ -1,9 +1,12 @@
 <template>
   <div class="form-group" :class="[{'input-group': hasIcon}, {'has-error': error}, {'is-error el-form-item': error}]">
     <slot name="label">
-      <label v-if="label" class="control-label" :class="labelClasses">
-        {{label}}
-      </label>
+      <span style="display:block;">
+        <label v-if="label" class="control-label" :class="labelClasses">
+          {{label}}
+        </label>
+        <i v-if="iconClasses" :class="iconClasses" class="help-icon" @click="$emit('hint', $event.target.value)"></i>
+      </span>
     </slot>
     <slot name="addonLeft">
       <span v-if="addonLeftIcon" class="input-group-addon">
@@ -47,7 +50,9 @@
       value: [String, Number, Date],
       addonRightIcon: String,
       addonLeftIcon: String,
-      maxLength: Number
+      maxLength: Number,
+      iconClasses: String,
+
     },
     computed: {
       hasIcon () {
@@ -61,5 +66,9 @@
 <style scoped>
   .form-group {
     margin-bottom: 0em!important;
+  }
+  .help-icon {
+    float: right;
+    margin-top: 18px;
   }
 </style>

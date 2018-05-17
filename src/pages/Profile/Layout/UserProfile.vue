@@ -286,10 +286,10 @@
           this.originalState = cloneDeep(this.model)
           this.model.edit = false
           this.$loading.endLoading('loading')
-          this.showNotifyMessage('User profile information has been updated successfully.', 3000, 'info', 'nc-check-2')
+          this.showNotifyMessage('User profile information has been updated successfully.', 3000, 'info', 'nc-icon nc-check-2')
         }, (error) => {
           console.log(error)
-          this.showNotifyMessage('User profile information failed to updated', 3000, 'error', 'nc-check-2')
+          this.showNotifyMessage('User profile information failed to updated', 3000, 'error', 'nc-icon nc-check-2')
           this.$loading.endLoading('loading')
         })
       },

@@ -64,6 +64,8 @@
                         @blur="$v.model.mobile.$touch()"
                         :class="{'input-error': $v.model.mobile.$error }"
                         :maxLength="14"
+                        iconClasses="pointer fa fa-mobile green-sea"
+                        @hint="showMobileHint"
                         v-model="model.mobile">
               </fg-input>  
               <div class="error-message">
@@ -188,9 +190,24 @@
       model: SignUpModel.validationScheme()
     },
     methods: {
+      showMobileHint () {
+        this.showNotifyMessage('Please add country code to a mobile number.', 3000, 'info', 'fa fa-mobile')
+      },
       resetForm () {
-        this.model.resetState()
-        this.$v.model.$reset()
+        swal({
+          type: 'warning',
+          title: 'Reset Sign Up Form',
+          html: '<small>Are you confirm to reset all field data in sign up form ?</small>',
+          buttonsStyling: false,
+          showCancelButton: true,
+          confirmButtonClass: 'btn btn-warning btn-round btn-wd',
+          confirmButtonText: 'Yes'
+        }).then((result) => {
+          if (result.value) {
+            this.model.resetState()
+            this.$v.model.$reset()
+          }
+        })
       },
 
       submitForm (event) {
