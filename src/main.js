@@ -41,3 +41,4 @@ new Vue({
 import './assets/sass/element_variables.scss'
 import './assets/css/common.css'
 import './assets/css/animation.css'
+import 'element-ui/lib/theme-chalk/index.css'

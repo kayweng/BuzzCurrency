@@ -166,7 +166,6 @@
 </template>
 
 <script>
-  import { DatePicker } from 'element-ui'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
   import SignUpModel from 'src/models/signUpModel'
   import swal from 'sweetalert2'
@@ -176,8 +175,7 @@
     components: {
       FadeRenderTransition,
       LandingLayout,
-      checkBox: Checkbox,
-      [DatePicker.name]: DatePicker
+      checkBox: Checkbox
     },
     data () {
       return {

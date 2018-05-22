@@ -68,7 +68,7 @@
             <!-- gender -->
             <div class="col-md-6 col-12 form-group" :class="{'input-error': $v.model.gender.$error }">
               <label class="control-label">GENDER</label>
-              <el-select class="select-default"
+                <el-select class="select-default"
                           size="large"
                           placeholder="Select Gender"
                           :disabled="!model.edit"
@@ -189,7 +189,6 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex'
-  import { DatePicker, Select, Option } from 'element-ui'
   import { FadeRenderTransition, Switch as LSwitch } from 'src/components/index'
   import { readImageFileData } from 'src/js/image'
   import CircleImage from 'src/components/CircleImage.vue'
@@ -200,10 +199,7 @@
 
   export default {
     components: {
-      [Option.name]: Option,
-      [Select.name]: Select,
       FadeRenderTransition,
-      [DatePicker.name]: DatePicker,
       [CircleImage.name]: CircleImage,
       LSwitch
     },

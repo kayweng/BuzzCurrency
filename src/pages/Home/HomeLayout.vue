@@ -2,9 +2,9 @@
   <div class="wrapper">
     <transition-group name="fade" mode="out-in">
       <app-header :key="1"></app-header>
-      <app-benefits :key="2"></app-benefits>
-      <app-today-currency :key="3"></app-today-currency>
-      <app-team :key="4"></app-team>
+      <app-features :key="2"></app-features>
+      <app-currency-data :key="3"></app-currency-data>
+      <app-currency-converter :key="4"></app-currency-converter>
       <app-get-started :key="5"></app-get-started>
       <app-footer :key="6"></app-footer>
     </transition-group>
@@ -18,20 +18,22 @@
 </style>
 
 <script>
-    import Header from '../../pages/Home/Components/Header.vue'
-    import Footer from '../../pages/Home/Components/Footer.vue'
-    import Benefits from '../../pages/Home/Components/Benefits.vue'
-    import TodayCurrency from '../../pages/Home/Components/TodayCurrency.vue'
-    import Team from '../../pages/Home/Components/Team.vue'
-    import GetStarted from '../../pages/Home/Components/GetStarted.vue'
+    import Header from './Components/Header.vue'
+    import Footer from './Components/Footer.vue'
+    import Features from './Components/Features.vue'
+    import CurrencyData from './Components/CurrencyData.vue'
+    import CurrencyConverter from './Components/CurrencyConverter.vue'
+    // import Team from '../../pages/Home/Components/Team.vue'
+    import GetStarted from './Components/GetStarted.vue'
     
     export default {
       components: {
         'appHeader': Header,
         'appFooter': Footer,
-        'appBenefits': Benefits,
-        'appTodayCurrency': TodayCurrency,
-        'appTeam': Team,
+        'appFeatures': Features,
+        'appCurrencyData': CurrencyData,
+        'appCurrencyConverter': CurrencyConverter,
+        // 'appTeam': Team,
         'appGetStarted': GetStarted
       }
     }

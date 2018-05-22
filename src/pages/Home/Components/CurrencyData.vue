@@ -1,9 +1,9 @@
 <template>
-  <div class="container-fluid">
-    <div class="center">
-      <h4>Exchange Rates <span style="font-size: 10px;">{{ currency_data['base'] }}</span></h4>
-    </div>
-    <div class="row container-currency">
+  <el-container direction="vertical" class="container-fluid">
+    <el-row class="center">
+      <h4>Currency Data <span style="font-size: 10px;">1 {{ currency_data['base'] }}</span></h4>
+    </el-row>
+    <el-row class="container-currency">
       <div class="currencies">
         <transition name="fade" tag="div" mode="out-in">
           <carousel v-if="currencyRates.length > 0">
@@ -20,8 +20,8 @@
           </div>
         </transition>
       </div>
-    </div>
-  </div>
+    </el-row>
+  </el-container>
 </template>
 
 <style scoped>
@@ -32,8 +32,9 @@
     text-align: center;
   }
 
-  .container-currency{
+  .container-fluid{
     background-color: #F7F9F9;
+    min-height: 100vh;
   }
 
   .container-currency > div:not(.fixer) {
