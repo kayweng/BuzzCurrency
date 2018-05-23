@@ -1,61 +1,66 @@
 <template>
-  <fade-render-transtion>
+  <fade-render-transition>
     <el-container direction="vertical" class="container-fluid center">
       <el-row>
-        <h3>Currency Converter</h3>
+        <h5><i class="fa fa-calculator" />&nbsp;&nbsp;Currency Converter</h5>
       </el-row>
-      <el-row>
-        <el-container direction="verticial" class="center">
-          <el-col :span="5"></el-col>
-          <el-col :span="6">
-            <el-input type="number" clearable></el-input>
-          </el-col>
-          <el-col :span="2">
-            <i class="fa fa-exchange"></i>
-          </el-col>
-          <el-col :span="6">
-            <el-input readonly></el-input>
-          </el-col>
-          <el-col :span="5"></el-col>
-        </el-container>
-      </el-row>
-      <el-row>
-        <el-container direction="verticial" class="center">
-          <el-col :span="5"></el-col>
-          <el-col :span="6">
-            <currency-input class="select-default full-width" @change="ChangeFromCurrency"></currency-input>
-          </el-col>
-          <el-col :span="2"></el-col>
-          <el-col :span="6">
-            <currency-input class="select-default full-width" @change="ChangeToCurrency"></currency-input>
-          </el-col>
-          <el-col :span="5"></el-col>
-        </el-container>
-      </el-row>
-      <el-row v-show="showMoreResult" class="converter-result">
-        <el-contaner direction="vertical">
-          <el-row>
-            <el-button type="success" @click="ShowMoreRates" round>More Rates</el-button>
-          </el-row>
-        </el-contaner>
+      <el-row class="row">
+        <el-col :span="6"></el-col>
+        <el-col :span="12">
+          <card class="card-form">
+            <el-container direction="vertical" class="center">
+              <!-- Amount -->
+              <el-row>
+                <el-col :span="11">
+                  <fg-input type="number"
+                            name="from amount"
+                            label="From Amount"
+                            placeholder= "0.00"
+                            :maxLength="20"
+                            v-model="model.fromAmount">
+                  </fg-input>
+                </el-col>
+                <el-col :span="2">
+                  <i class="fa fa-exchange"></i>
+                </el-col>
+                <el-col :span="11">
+                  <fg-input type="number"
+                            name="to amount"
+                            label="To Amount"
+                            placeholder= "0.00"
+                            :maxLength="20"
+                            readonly 
+                            v-model="model.toAmount">
+                  </fg-input>
+                </el-col>
+              </el-row>
+              <!-- Currency Code -->
+              <el-row>
+                <el-col :span="11">
+                  <currency-select class="select-default full-width" @changed="model.fromCurrency = $event"></currency-select>
+                </el-col>
+                <el-col :span="2">&nbsp;</el-col>
+                <el-col :span="11">
+                  <currency-select class="select-default full-width" @changed="model.toCurrency = $event"></currency-select>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24">
+                  <el-button type="primary" @click="convertedCurrencyAmount" round>Convert</el-button>
+                </el-col>
+              </el-row>
+            </el-container>
+          </card>
+        </el-col>
+        <el-col :span="6"></el-col> 
       </el-row>
     </el-container>
-  </fade-render-transtion>
+  </fade-render-transition>
 </template>
 
 <style scoped>
-  h3 {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-align: center;
-  }
-
   .container-fluid {
     padding: 25px;
-  }
-
-  .row {
-    padding-top: 10px;
   }
 
   i{
@@ -68,28 +73,30 @@
 </style>
 
 <script>
-  import { FadeRenderTransition, CurrencyInput } from 'src/components/index'
+  import { FadeRenderTransition, CurrencySelect } from 'src/components/index'
   export default {
     components: {
       FadeRenderTransition,
-      CurrencyInput
+      CurrencySelect
     },
     data () {
       return {
-        showMoreResult: false,
-        fromCurrency: '',
-        toCurrency: ''
+        model: {
+          fromAmount: null,
+          toAmount: null,
+          fromCurrency: '',
+          toCurrency: ''
+        }
       }
     },
     methods: {
-      ShowMoreRates () {
-        this.$router.push('/Dashboard')
-      },
-      ChangeFromCurrency (val) {
-        fromCurrency = val
-      },
-      ChangeToCurrency () {
-        toCurrency = val
+      convertedCurrencyAmount () {
+        console.log(this.model.fromAmount)
+        console.log(this.model.fromCurrency)
+        console.log(this.model.toCurrency)
+        if(this.fromAmount > 0 && this.fromCurrency !== null && this.toCurrency !== null) {
+          this.toAmount = "100"
+        }
       }
     }
   }

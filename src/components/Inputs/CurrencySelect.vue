@@ -1,9 +1,9 @@
 <template>
-  <el-select v-model="selectedCurrency" @change="$emit('change',selectedCurrency)" placeholder="Select">
+  <el-select v-model="selectedCurrency" @change="$emit('changed',selectedCurrency)" placeholder="Select">
     <el-option
-      v-for="item in currencies"
-      :key="item.currency_code"
-      :label="item.country"
+      v-for="(item, index) in currencies"
+      :key="index" 
+      :label="item.currency_code"
       :value="item.currency_code">
       <span style="float: left">{{ item.country }}</span>
       <span style="float: right; color: #8492a6; font-size: 12px">{{ item.currency_code }}</span>
