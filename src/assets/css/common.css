@@ -172,7 +172,7 @@ body{
 .btn-signup{
   background-color: transparent;
   border: 2px solid #1F618D;
-  color: navy !important;
+  color: white !important;
 }
 
 .btn-signup:hover{
@@ -184,7 +184,7 @@ body{
 .btn-login{
   background-color: transparent;
   border: 0px !important;
-  color: navy !important;
+  color: white !important;
 }
 
 .btn-login:hover{

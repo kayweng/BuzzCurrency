@@ -1,20 +1,20 @@
 <template>
   <fade-render-transtion>
-    <el-container direction="vertical" class="container-fluid">
-      <el-row class="center">
+    <el-container direction="vertical" class="container-fluid center">
+      <el-row>
         <h3>Currency Converter</h3>
       </el-row>
       <el-row>
         <el-container direction="verticial" class="center">
           <el-col :span="5"></el-col>
           <el-col :span="6">
-            <el-input clearable></el-input>
+            <el-input type="number" clearable></el-input>
           </el-col>
           <el-col :span="2">
             <i class="fa fa-exchange"></i>
           </el-col>
           <el-col :span="6">
-            <el-input clearable></el-input>
+            <el-input readonly></el-input>
           </el-col>
           <el-col :span="5"></el-col>
         </el-container>
@@ -23,30 +23,22 @@
         <el-container direction="verticial" class="center">
           <el-col :span="5"></el-col>
           <el-col :span="6">
-            <el-select class="select-default full-width" placeholder="Select Currency">
-              <el-option v-for="option in countries"
-                          class="select-default"
-                          :value="option.value"
-                          :label="option.label"
-                          :key="option.label">
-              </el-option>
-            </el-select>
+            <currency-input class="select-default full-width" @change="ChangeFromCurrency"></currency-input>
           </el-col>
           <el-col :span="2"></el-col>
           <el-col :span="6">
-            <el-select class="select-default full-width" placeholder="Select Currency">
-              <el-option v-for="option in countries"
-                          class="select-default"
-                          :value="option.value"
-                          :label="option.label"
-                          :key="option.label">
-              </el-option>
-            </el-select>
+            <currency-input class="select-default full-width" @change="ChangeToCurrency"></currency-input>
           </el-col>
           <el-col :span="5"></el-col>
         </el-container>
       </el-row>
-      <el-row></el-row>
+      <el-row v-show="showMoreResult" class="converter-result">
+        <el-contaner direction="vertical">
+          <el-row>
+            <el-button type="success" @click="ShowMoreRates" round>More Rates</el-button>
+          </el-row>
+        </el-contaner>
+      </el-row>
     </el-container>
   </fade-render-transtion>
 </template>
@@ -59,8 +51,7 @@
   }
 
   .container-fluid {
-    padding-top: 25px;
-    padding-bottom: 50px
+    padding: 25px;
   }
 
   .row {
@@ -70,14 +61,36 @@
   i{
     margin-top: 44px;
   }
+
+  .converter-result{
+    padding-top: 50px;
+  }
 </style>
 
 <script>
-  import { FadeRenderTransition } from 'src/components/index'
-
+  import { FadeRenderTransition, CurrencyInput } from 'src/components/index'
   export default {
     components: {
-      FadeRenderTransition
+      FadeRenderTransition,
+      CurrencyInput
+    },
+    data () {
+      return {
+        showMoreResult: false,
+        fromCurrency: '',
+        toCurrency: ''
+      }
+    },
+    methods: {
+      ShowMoreRates () {
+        this.$router.push('/Dashboard')
+      },
+      ChangeFromCurrency (val) {
+        fromCurrency = val
+      },
+      ChangeToCurrency () {
+        toCurrency = val
+      }
     }
   }
 </script>

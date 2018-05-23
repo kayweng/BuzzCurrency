@@ -34,7 +34,6 @@
 
   .container-fluid{
     background-color: #F7F9F9;
-    min-height: 100vh;
   }
 
   .container-currency > div:not(.fixer) {

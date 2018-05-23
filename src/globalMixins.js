@@ -1,4 +1,5 @@
 import swal from 'sweetalert2'
+import currency_data from 'src/js/currency_data.js'
 
 export default {
   computed: {
@@ -14,6 +15,9 @@ export default {
       }
 
       return device
+    },
+    currencies () {
+      return currency_data
     },
     countries () {
       const countries = [

@@ -4,7 +4,7 @@
       <h2>Key Features</h2>
     </el-row>
     <el-row>
-      <el-col :lg="6" :sm="12" :xs="24" v-for="(item, index) in items" :key="index">
+      <el-col :lg="6" :md="6" :sm="12" :xs="24" v-for="(item, index) in items" :key="index">
         <info-card  :imgName="item.img" 
                     :title="item.title"
                     :message="item.message" ></info-card>
@@ -23,10 +23,11 @@
   }
 
   .container-fluid{
-      padding-left: 30px;
-      padding-right: 30px;
-      min-height: 100vh;
+    padding-left: 30px;
+    padding-right: 30px;
+    min-height: 100px;
   }
+
 </style>
 
 <script>

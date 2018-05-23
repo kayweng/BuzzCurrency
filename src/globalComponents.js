@@ -1,7 +1,7 @@
 import fgInput from './components/Inputs/formGroupInput.vue'
 import DropDown from './components/Dropdown.vue'
 import Card from './components/Cards/Card.vue'
-import { Input, InputNumber, DatePicker, Select, Option, Container, Row, Col, Header, Aside, Main, Footer } from 'element-ui'
+import { Input, InputNumber, DatePicker, Button, Select, Option, Container, Row, Col, Header, Aside, Main, Footer } from 'element-ui'
 /**
  * You can register global components here and use them as a plugin in your main Vue instance
  */
@@ -14,6 +14,7 @@ const GlobalComponents = {
     Vue.component(Input.name, Input)
     Vue.component(InputNumber.name, InputNumber)
     Vue.component(DatePicker.name, DatePicker)
+    Vue.component(Button.name, Button)
     Vue.component(Select.name, Select)
     Vue.component(Option.name, Option)
     Vue.component(Container.name, Container)
