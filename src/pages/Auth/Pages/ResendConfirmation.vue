@@ -27,7 +27,7 @@
 
 <script>
   import { FadeRenderTransition } from 'src/components/index'
-  import * as validator from 'src/validations/customValidator'
+  import * as validator from 'src/validations/userValidator'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
 
   export default {

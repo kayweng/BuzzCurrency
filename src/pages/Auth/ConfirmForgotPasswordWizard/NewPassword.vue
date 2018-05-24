@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import { password, confirmNewPassword } from 'src/validations/customValidator.js'
+  import { password, confirmNewPassword } from 'src/validations/userValidator.js'
 
   export default {
     data () {

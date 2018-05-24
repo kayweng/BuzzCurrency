@@ -74,6 +74,9 @@
 
 <script>
   import { FadeRenderTransition, CurrencySelect } from 'src/components/index'
+  import { mapActions } from 'vuex'
+  import { required } from 'vuelidate/lib/validators'
+
   export default {
     components: {
       FadeRenderTransition,
@@ -89,14 +92,25 @@
         }
       }
     },
+    validations: {
+      'model.fromAmount': required,
+      'model.fromCurrency': required,
+      'model.toCurency': required
+    },
     methods: {
+      ...mapActions([
+        'convertCurrencyRate'
+      ]),
       convertedCurrencyAmount () {
-        console.log(this.model.fromAmount)
-        console.log(this.model.fromCurrency)
-        console.log(this.model.toCurrency)
-        if(this.fromAmount > 0 && this.fromCurrency !== null && this.toCurrency !== null) {
-          this.toAmount = "100"
-        }
+        // console.log(this.$v.model)
+        // if (this.$v.model.$invalid || this.$v.model.$error) {
+        //   this.$v.model.$touch()
+        //   return
+        // }
+
+        this.convertCurrencyRate(this.model.fromCurrency + '_' + this.model.toCurrency).then(response => {
+          console.log(response)
+        })
       }
     }
   }

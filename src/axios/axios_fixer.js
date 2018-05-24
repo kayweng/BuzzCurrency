@@ -1,7 +1,11 @@
 import axios from 'axios'
 
-const fixer = axios.create({
+const fixerApi = axios.create({
   baseURL: 'https://api.fixer.io/'
 })
 
-export default fixer
+const freeCurrencyAPI = axios.create({
+  baseURL: 'https://free.currencyconverterapi.com/api/v5/'
+})
+
+export { fixerApi, freeCurrencyAPI }

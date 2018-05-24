@@ -1,5 +1,5 @@
 import { required, numeric, requiredIf } from 'vuelidate/lib/validators'
-import * as validator from 'src/validations/customValidator'
+import * as validator from 'src/validations/userValidator'
 import basedModel from './baseModel'
 
 class PasswordModel extends basedModel {

@@ -1,12 +1,12 @@
 <template>
   <el-container direction="vertical" class="container-fluid">
     <el-row class="center">
-      <h4>Currency Data <span style="font-size: 10px;">1 {{ currency_data['base'] }}</span></h4>
+      <h4>Currency Data <span style="font-size: 10px;">1 {{ $store.state.currency.currencyBasedCode }}</span></h4>
     </el-row>
     <el-row class="container-currency">
       <div class="currencies">
         <transition name="fade" tag="div" mode="out-in">
-          <carousel v-if="currencyRates.length > 0">
+          <carousel v-if="baseCurrencyRates.length > 0">
             <slide v-for="(arr, i) in carouselPages" :key="i">
               <transition-group name="fade" tag="div">
                 <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
@@ -15,8 +15,12 @@
               </transition-group>
               </slide>
           </carousel>
-          <div v-if="currencyRates.length === 0">
-            <small>Loading ...</small>
+          <div class="center" v-if="baseCurrencyRates.length === 0">
+            <v-loading loader='loadBaseCurrency'>
+              <template slot='spinner'>
+                <loading-spinner height='30px' width='30px' />
+              </template>
+            </v-loading>
           </div>
         </transition>
       </div>
@@ -64,22 +68,24 @@
   import { mapGetters, mapActions } from 'vuex'
   import { SmallNoteCard } from 'src/components/index'
   import { Carousel, Slide } from 'vue-carousel'
+  import loadingSpinner from 'vuex-loading/src/spinners/spinner.vue'
 
   export default {
     components: {
       SmallNoteCard,
       Carousel,
-      Slide
+      Slide,
+      loadingSpinner
     },
     methods: {
       ...mapActions([
-        'getCurrencies'
+        'getBaseCurrencies'
       ])
     },
     computed: {
       ...mapGetters([
-        'currency_data',
-        'currencyRates'
+        'currencyBasedCode',
+        'baseCurrencyRates'
       ]),
       carouselPages () {
         var count = 0
@@ -100,7 +106,7 @@
             break
         }
        
-        var temp = JSON.parse(JSON.stringify(this.currencyRates))
+        var temp = JSON.parse(JSON.stringify(this.baseCurrencyRates))
      
         for (var i = 0; i < temp.length; i++) {
           var increament = i + 1
@@ -116,13 +122,12 @@
       }
     },
     mounted () {
-      setTimeout(vm => {
-        this.getCurrencies().then(response => {
-          
-        }, error => {
-          console.log(error)
-        })
-      }, 1000)
+      this.$loading.startLoading('loadBaseCurrency')
+      this.getBaseCurrencies().then(response => {
+        this.$loading.endLoading('loadBaseCurrency')
+      }, error => {
+        console.log(error)
+      })
     }
   }
 </script>

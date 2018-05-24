@@ -1,4 +1,4 @@
-import * as validator from 'src/validations/customValidator'
+import * as validator from 'src/validations/userValidator'
 import basedModel from './baseModel'
 
 class LoginModel extends basedModel {
