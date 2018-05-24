@@ -3,6 +3,22 @@ body{
   height: 100%;
 }
 
+h1{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h2{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h3{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h4{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+/* element */
 .el-row {
   padding-top: 15px;
 }
@@ -12,8 +28,12 @@ body{
   padding: 1px;
 }
 
-.full-width{
+.element-fluid{
   width: 100%;
+}
+
+.default-row{
+  min-height: 44px;
 }
 
 /* font style */
@@ -27,6 +47,45 @@ body{
 
 .gill-Sans{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.copyright {
+  font-family: 'Sanomat Grab Web Regular', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  outline: none;
+  text-align: center;
+}
+
+.terms {
+  text-transform: initial !important;
+  color: black;
+}
+
+.note {
+  color: darkgrey !important;
+  font-size: 0.75em !important;
+  padding-top: 10px !important;
+}
+
+.note-message {
+  color: grey !important;
+  font-size: .75rem;
+  min-height: 18px;
+  margin-left: 2px;
+  text-transform: none !important;
+}
+
+.medium {
+  font-size: 0.75em !important;
 }
 
 /* color */
@@ -69,11 +128,7 @@ body{
   box-shadow: 0 10px 6px -6px grey;
 }
 
-.border-white{
-  border: 2px solid white;
-}
-
-/*Position*/
+/* position */
 .center{
   text-align: center;
 }
@@ -103,47 +158,7 @@ body{
   align-items: center; /* for vertical alignment */
 }
 
-/*font style*/
-.bold{
-  font-weight: bold;
-}
-
-.copyright {
-  font-family: 'Sanomat Grab Web Regular', sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  font-size: 12px;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.5;
-  outline: none;
-  text-align: center;
-}
-
-.terms {
-  text-transform: initial !important;
-  color: black;
-}
-
-.note {
-  color: darkgrey !important;
-  font-size: 0.75em !important;
-  padding-top: 10px !important;
-}
-
-.note-message {
-  color: grey !important;
-  font-size: .75rem;
-  min-height: 18px;
-  margin-left: 2px;
-  text-transform: none !important;
-}
-
-.medium {
-  font-size: 0.75em !important;
-}
-
-/*border*/
+/* border */
 .border-orangered {
   border-color: orangered !important;
 }
@@ -152,7 +167,19 @@ body{
   border-color: white !important;
 }
 
-/*button*/
+.border-green {
+  border-color: green !important;
+}
+
+.border-green > input {
+  border-color: green !important;
+}
+
+.border-white{
+  border: 2px solid white;
+}
+
+/* button */
 .btn-home {
   color: #0976b4;
   background-color: transparent;
@@ -176,25 +203,25 @@ body{
 .btn-signup{
   background-color: transparent;
   border: 2px solid #1F618D;
-  color: white !important;
+  color: orangered !important;
 }
 
 .btn-signup:hover{
-  background-color: white !important;
+  background-color: orangered !important;
   border: 2px solid white;
-  color: darkgrey !important;
+  color: white !important;
 }
 
 .btn-login{
   background-color: transparent;
   border: 0px !important;
-  color: white !important;
+  color: orangered !important;
 }
 
 .btn-login:hover{
-  background-color: white !important;
+  background-color: orangered !important;
   border: 0px !important;
-  color: darkgrey !important;
+  color: white !important;
 }
 
 .btn-reset{
@@ -218,23 +245,13 @@ body{
 .btn-email{
   color: white !important;
   background-color: transparent !important;
-  border: 1px solid skyblue !important;
+  border: 1px solid #A93226 !important;
 }
 
 .btn-email:hover{
-  border: 1px solid skyblue !important;
-  background-color: skyblue !important;
-  color: #FFFFFF;
-}
-
-.btn-convertor{
-  border: 1px solid grey !important;
-}
-
-.btn-convertor:hover{
-  border: 1px solid grey !important;
-  background-color: grey !important;
-  color: #FFFFFF;
+  border: 1px solid #A93226 !important;
+  background-color: #A93226 !important;
+  color: white;
 }
 
 .swal2-cancel {
@@ -319,6 +336,7 @@ body{
   color: #39D2B4;
 }
 
+/* overlay */
 .overlay{
   opacity:0.4;
   background-color: #ccc;

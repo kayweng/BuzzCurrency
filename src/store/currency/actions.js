@@ -1,4 +1,4 @@
-import { fixerApi, freeCurrencyAPI } from 'src/axios/axios_fixer'
+import { fixerApi, freeCurrencyAPI } from 'src/axios/axios_api'
 import { date } from 'src/js/date'
 
 const actions = {
@@ -8,12 +8,12 @@ const actions = {
     if (currencies !== null) {
       var json = JSON.parse(currencies)
       var baseDate = new Date(json.date)
-      
-      if ((baseDate.getDay() === date.today.getDay()) && 
+
+      if ((baseDate.getDay() <= date.today.getDay() - 1) &&
         (baseDate.getMonth() === date.today.getMonth()) &&
         (baseDate.getFullYear() === date.today.getFullYear())
       ) {
-        commit('setBaseCurrencies', currencies)
+        commit('setBaseCurrencies', json)
         return
       }
     }
@@ -27,11 +27,10 @@ const actions = {
       })
     })
   },
-  async convertCurrencyRate({commit}, payload) {
+  async convertCurrencyRate ({commit}, payload) {
     return new Promise((resolve, reject) => {
       freeCurrencyAPI.get('/convert?q=' + payload).then(response => {
-        console.log(response)
-        resolve(response.data)
+        resolve(response)
       }, error => {
         reject(error)
       })

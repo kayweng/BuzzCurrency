@@ -2,18 +2,18 @@
   <el-container direction="vertical" class="container-fluid">
     <landing-nav></landing-nav>
     <el-container direction="vertical">
-      <el-main class="main">
-        <el-row class="main-row">
+      <el-main class="container-body">
+        <el-row class="container-body-row">
           <el-col :span="24">
             <div class="empty-row"></div>
             <h2>EASY EXCHANGE YOUR CURRENCY</h2>
           </el-col>
         </el-row>
       </el-main>
-      <el-footer style="min-height: 44px;">
+      <el-footer class="default-row">
         <el-row>
           <el-col :span="12">
-            <small class="italic white-smoke">You found a better way to exchange currency now</small>
+            <small class="italic white">We are not money changer, we merely provide a better way of currency exchange.</small>
           </el-col>
           <el-col :span="12">
             <div class="right">
@@ -34,33 +34,30 @@
 <style scoped>
 
   .container-fluid{
-      color: white;
-      padding-left: 15px;
-      background-image: url("/static/img/background/bg_home.jpg");
-      background-size: cover;                      
-      background-repeat: no-repeat;
-      background-position: center center;
+    min-height: 100vh;
+    color: white;
+    padding-left: 15px;
+    background-image: url("/static/img/background/bg_home.jpg");
+    background-size: cover;                      
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   h2{
-      background: -webkit-linear-gradient(to right, white, #808B96);
-      background: linear-gradient(to right, white, #808B96);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(to right, white, #808B96);
+    background: linear-gradient(to right, white, #808B96);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .main {
+  .container-body {
     position: relative;
   }
 
-  .main-row {
+  .container-body-row {
     position: absolute;
     bottom: 0%;
-  }
-
-  .container-fluid{
-    min-height: 100vh;
   }
 
   /* Large desktops and laptops */
@@ -107,7 +104,6 @@
 
 <script>
   import LandingNav from 'src/components/LandingNav.vue'
-  import CurrencyConverter from './CurrencyConverter.vue'
   
   export default {
     components: {
@@ -120,9 +116,6 @@
       },
       emailUs () {
         window.location.href = "mailto:customer_support@buzzcurrency.com?";
-      },
-      convertCurrency () {
-
       }
     }
   }

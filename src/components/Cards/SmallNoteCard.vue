@@ -12,30 +12,37 @@
 </template>
 
 <style scoped>
-    .currency{
-       border: 0;
-       padding: 4px;
-       background: white;
-       min-height: 60px;
-       display: table;
-       margin-right: 20px;
-       margin-bottom: 5px;
-       min-width: 140px;
-       max-width: 200px;
-    }
+  .currency{
+    border: 0;
+    padding: 4px;
+    background: white;
+    min-height: 60px;
+    display: table;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    min-width: 140px;
+    max-width: 200px;
+  }
+  
+  .rate:hover{
+    cursor: pointer;
+    zoom: 1.2;
+    color: #154360;
+    text-decoration: underline;
+  }
 
-    span {
-        display: table-cell;
-        vertical-align: middle;
-    }
+  span {
+    display: table-cell;
+    vertical-align: middle;
+  }
 
-    span.code{
-        padding-left: 5px;
-    }
+  span.code{
+    padding-left: 5px;
+  }
 
-    span.rate{
-        color: #2980B9;
-    }
+  span.rate{
+    color: #2980B9;
+  }
 </style>
 
 <script>

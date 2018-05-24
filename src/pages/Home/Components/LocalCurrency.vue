@@ -1,16 +1,16 @@
 <template>
   <el-container direction="vertical" class="container-fluid">
     <el-row class="center">
-      <h4>Currency Data <span style="font-size: 10px;">1 {{ $store.state.currency.currencyBasedCode }}</span></h4>
+      <h4>{{ $store.state.currency.currencyBasedCode }} Currency Data</h4>
     </el-row>
     <el-row class="container-currency">
-      <div class="currencies">
+      <div class="currencies center">
         <transition name="fade" tag="div" mode="out-in">
           <carousel v-if="baseCurrencyRates.length > 0">
             <slide v-for="(arr, i) in carouselPages" :key="i">
               <transition-group name="fade" tag="div">
                 <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
-                  <small-note-card :rate="rate"></small-note-card>
+                  <small-note-card class="small-note-hover" :rate="rate"></small-note-card>
                 </div>
               </transition-group>
               </slide>
@@ -30,12 +30,6 @@
 
 <style scoped>
     
-  h3 {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-align: center;
-  }
-
   .container-fluid{
     background-color: #F7F9F9;
   }
@@ -45,21 +39,10 @@
     min-height: 300px;
   }
 
-  i{
-    text-align: center;
-    color: black;
-    font-size: 20px;
-  }
-
   .currencies{
     min-width: 100%;
     max-width: 100%;
-    padding: 30px;
-    text-align: center;
-  }
-
-  .VueCarousel-slide{
-    min-height: 200px;
+    padding: 50px;
   }
 
 </style>
@@ -123,6 +106,7 @@
     },
     mounted () {
       this.$loading.startLoading('loadBaseCurrency')
+      
       this.getBaseCurrencies().then(response => {
         this.$loading.endLoading('loadBaseCurrency')
       }, error => {

@@ -1,6 +1,5 @@
 const mutations = {
   setBaseCurrencies (state, data) {
-    console.log(data)
     // allocate data to local storage
     localStorage.setItem('baseCurrencyJSON', JSON.stringify(data))
     // set state currency string

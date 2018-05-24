@@ -2,7 +2,7 @@
   <fade-render-transition>
     <el-container direction="vertical" class="container-fluid center">
       <el-row>
-        <h5><i class="fa fa-calculator" />&nbsp;&nbsp;Currency Converter</h5>
+        <h4><i class="fa fa-calculator" />&nbsp;&nbsp;Currency Converter</h4>
       </el-row>
       <el-row class="row">
         <el-col :span="6"></el-col>
@@ -17,36 +17,45 @@
                             label="From Amount"
                             placeholder= "0.00"
                             :maxLength="20"
-                            v-model="model.fromAmount">
+                            @blur="$v.model.frAmount.$touch()"
+                            :class="{'input-error': $v.model.frAmount.$error }"
+                            v-model="model.frAmount">
                   </fg-input>
                 </el-col>
-                <el-col :span="2">
-                  <i class="fa fa-exchange"></i>
-                </el-col>
+                <el-col :span="2">&nbsp;</el-col>
                 <el-col :span="11">
                   <fg-input type="number"
                             name="to amount"
                             label="To Amount"
                             placeholder= "0.00"
                             :maxLength="20"
-                            readonly 
+                            readonly
+                            :class="{'border-green': model.toAmount !== null}"
                             v-model="model.toAmount">
                   </fg-input>
                 </el-col>
               </el-row>
               <!-- Currency Code -->
               <el-row>
-                <el-col :span="11">
-                  <currency-select class="select-default full-width" @changed="model.fromCurrency = $event"></currency-select>
+                <el-col :span="11" :class="{'input-error': $v.model.frCurrency.$error }">
+                  <currency-select  class="select-default element-fluid" 
+                                    v-model="model.frCurrency"
+                                    @changed="model.frCurrency = $event" ></currency-select>
                 </el-col>
-                <el-col :span="2">&nbsp;</el-col>
-                <el-col :span="11">
-                  <currency-select class="select-default full-width" @changed="model.toCurrency = $event"></currency-select>
+                <el-col :span="2">
+                  <button class="btn btn-link" @click="shiftCurrencyCodes">
+                    <i class="fa fa-exchange"></i>
+                  </button>
+                </el-col>
+                <el-col :span="11" :class="{'input-error': $v.model.toCurrency.$error }">
+                  <currency-select  class="select-default element-fluid"  
+                                    v-model="model.toCurrency"
+                                    @changed="model.toCurrency = $event" ></currency-select>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col :span="24">
-                  <el-button type="primary" @click="convertedCurrencyAmount" round>Convert</el-button>
+                  <button class="btn btn-wd btn-primary btn-round" @click="convertCurrency">Convert</button>
                 </el-col>
               </el-row>
             </el-container>
@@ -59,23 +68,17 @@
 </template>
 
 <style scoped>
+
   .container-fluid {
     padding: 25px;
   }
-
-  i{
-    margin-top: 44px;
-  }
-
-  .converter-result{
-    padding-top: 50px;
-  }
+  
 </style>
 
 <script>
   import { FadeRenderTransition, CurrencySelect } from 'src/components/index'
   import { mapActions } from 'vuex'
-  import { required } from 'vuelidate/lib/validators'
+  import { required, numeric } from 'vuelidate/lib/validators'
 
   export default {
     components: {
@@ -85,32 +88,60 @@
     data () {
       return {
         model: {
-          fromAmount: null,
+          frAmount: null,
           toAmount: null,
-          fromCurrency: '',
-          toCurrency: ''
+          frCurrency: null,
+          toCurrency: null
         }
       }
     },
     validations: {
-      'model.fromAmount': required,
-      'model.fromCurrency': required,
-      'model.toCurency': required
+      model: {
+        frAmount: { required, numeric },
+        frCurrency: { required },
+        toCurrency: { required }
+      }
     },
     methods: {
       ...mapActions([
         'convertCurrencyRate'
       ]),
-      convertedCurrencyAmount () {
-        // console.log(this.$v.model)
-        // if (this.$v.model.$invalid || this.$v.model.$error) {
-        //   this.$v.model.$touch()
-        //   return
-        // }
+      convertCurrency () {
+        if (this.$v.model.$invalid || this.$v.model.$error) {
+          this.$v.model.$touch()
+          return
+        }
 
-        this.convertCurrencyRate(this.model.fromCurrency + '_' + this.model.toCurrency).then(response => {
-          console.log(response)
+        this.convertCurrencyRate(this.model.frCurrency + '_' + this.model.toCurrency).then(response => {
+          if(response.data !== null && response.data.results !== null) {
+            const key = Object.keys(response.data.results)[0]
+
+            if (response.data.results[key] !== null){
+              var rate = response.data.results[key]['val']
+              this.model.toAmount = Number(this.model.frAmount * rate).toFixed(2)
+            }
+          }
+        }, error =>{
+          console.log(error)
         })
+      },
+      shiftCurrencyCodes () {
+        if (this.$v.model.frCurrency.$invalid) {
+          this.$v.model.frCurrency.$touch()
+          return
+        }
+
+        if (this.$v.model.toCurrency.$invalid) {
+          this.$v.model.toCurrency.$touch()
+          return
+        }
+        
+        const fr = this.model.frCurrency
+        const to = this.model.toCurrency
+       
+        this.model.frCurrency = to
+        this.model.toCurrency = fr
+        this.model.toAmount = null
       }
     }
   }

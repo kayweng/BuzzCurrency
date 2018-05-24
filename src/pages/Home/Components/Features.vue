@@ -1,7 +1,7 @@
 <template>
   <el-container direction="vertical" class="container-fluid">
-    <el-row>
-      <h2>Key Features</h2>
+    <el-row class="center">
+      <h1>Features</h1>
     </el-row>
     <el-row>
       <el-col :lg="6" :md="6" :sm="12" :xs="24" v-for="(item, index) in items" :key="index">
@@ -15,16 +15,12 @@
 </template>
 
 <style scoped>
-  h2 {
-      padding-top: 15px;
-      padding-bottom: 30px;
-      text-align: center;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  }
 
   .container-fluid{
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-top: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 25px;
     min-height: 100px;
   }
 
@@ -39,16 +35,16 @@
         items: [
           {img: 'benefits/genuine_user.png',
             title: 'Genuine User',
-            message: 'Genuine user who has been verified and identified by our team to ensure who is trustable in currency exchange activity.'},
+            message: 'Genuine user who has been verified and identified by our team to ensure who is trustable in currency exchange.'},
           {img: 'benefits/cashflow.png',
             title: 'Exchange Rate',
-            message: 'You can offers a competitive currency rate to everyone and accept great exchange rates from someone.'},
+            message: 'You can offers a competitive currency rate to everyone and accept great exchange rates from someone too.'},
           {img: 'benefits/meetup.png',
-            title: 'Meet up',
-            message: 'Meet up with your buddy to exchange currencies at preferable places such as cafe, restaurant or shopping mall,etc.'},
+            title: 'Meetup',
+            message: 'Meetup for currency exchange at preferable places such as cafe, restaurant or shopping mall,etc.'},
           {img: 'benefits/aml.png',
             title: 'Anti Money Laundaring',
-            message: 'To make a better currency exchange environment, we enforce anti money laundering rules for all currency exchange activity.'},
+            message: 'To make a better currency exchange environment, we enforce anti money laundering rules for all currency exchange.'},
           {img: 'benefits/alert.png',
             title: 'Rate Alert',
             message: 'You can setup alerts for desire rates. We will send you an email alert.'},
@@ -56,8 +52,8 @@
             title: 'Anytime, Anywhere',
             message: 'You can query for exchange currency at anytime and anywhere'},
           {img: 'benefits/coworking.png',
-            title: 'Business Partner',
-            message: 'We works together with business partners to provide better services and latest currency info.'},
+            title: 'Co-op',
+            message: 'Working with us to create a better currency exchange platform.'},
           {img: 'benefits/no_hidden_fee.png',
             title: 'No Fees',
             message: 'We promise no extra charge and hidden fees on all currency exchange activity.'}

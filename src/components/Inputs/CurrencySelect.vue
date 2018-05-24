@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="selectedCurrency" @change="$emit('changed',selectedCurrency)" placeholder="Select">
+  <el-select v-model="fieldModelValue" placeholder="Select">
     <el-option
       v-for="(item, index) in currencies"
       :key="index" 
@@ -13,10 +13,17 @@
 
 <script>
   export default {
-    data () {
-      return {
-        selectedCurrency: ''
+    props: ['value'],
+    computed: {
+      fieldModelValue: {
+        get() {
+          return this.value;
+        },
+        set(newValue) {
+          this.$emit('changed', newValue);
+        }
       }
     }
+    
   }
 </script>
