@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="col-12 text-center">
+  <el-container direction="vertical">
+    <el-row class="col-12 center">
       <div :class="{'text-success': confirmPasswordResult.success, 'text-danger': !confirmPasswordResult.success  }">
         {{ confirmPasswordResult.message }}
       </div>
@@ -13,8 +13,8 @@
           <button type="button" @click="resetVerficationCode" class="btn btn-simple btn-link btn-sm">Resend verification code</button>
         </div>
       </div>
-    </div>
-  </div>
+    </el-row>
+  </el-container>
 </template>
 
 <script>
@@ -22,7 +22,7 @@
     props: ['confirmPasswordResult'],
     methods: {
       resetWizardForm () {
-        this.$emit('reset')
+        this.$emit('reset', true)
       },
       resetVerficationCode () {
         this.$router.push('/reset-password')

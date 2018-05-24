@@ -3,7 +3,7 @@
     <form method="#" action="#">
       <fade-render-transition>
         <card :title="'Create New Password'">
-            
+          <!-- Old Password -->
           <fg-input label="Old Password"
               v-show="!isReset"
               type="password"
@@ -14,7 +14,7 @@
           </fg-input>
           <span v-if="!$v.model.oldPassword.requiredIf" class="error-message">The old password field is required</span>
           <span v-if="!$v.model.oldPassword.minLength" class="error-message">The old password field length must have at least {{$v.model.oldPassword.$params.minLength.min}}</span>
-
+          <!-- New Password -->
           <fg-input label="New Password"
               type="password"
               name="new password"
@@ -24,7 +24,7 @@
           </fg-input>
           <span v-if="!$v.model.newPassword.required" class="error-message">The new password field is required</span>
           <span v-if="!$v.model.newPassword.minLength" class="error-message">The new password field length must have at least {{$v.model.newPassword.$params.minLength.min}}</span>
-
+          <!-- Confirm Password -->
           <fg-input label="Confirm Password"
               type="password"
               name="confirm password"

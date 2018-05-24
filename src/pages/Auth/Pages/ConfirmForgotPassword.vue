@@ -4,7 +4,7 @@
        <div class="row d-flex justify-content-center">
          <div class="col-12">
           <div class="card card-wizard">
-            <form-wizard step-size="sm" 
+            <form-wizard step-size="sm" ref="wizardForm"
                         error-color="#f79483"
                         color="#2874A6">
               <h3 slot="title" class="text-center">Create New Password</h3>   
@@ -38,7 +38,7 @@
                           :tabId="4"
                           :before-change="() => validateStep('createNewPassword')"
                           icon="nc-icon nc-check-2">
-                <create-password ref="createNewPassword" @on-reset="reset" :confirmPasswordResult="confirmPasswordResult"></create-password>
+                <create-password ref="createNewPassword" @on-reset="resetForm" :confirmPasswordResult="confirmPasswordResult"></create-password>
               </tab-content>
 
               <div class="empty-row"></div>
@@ -138,7 +138,7 @@
                 message: error.message
               }
             })
-            console.log(this.confirmPasswordResult)
+            
             return true
           } else {
             this.swalError('Your provided info may not valid.<br/>Please correct it and try again.')
@@ -157,8 +157,9 @@
         this.model.newPassword = val.newPassword
         this.model.confirmPassword = val.confirmPassword
       },
-      reset () {
-        // this.$refs['wizardForm'].reset()
+      resetForm () {
+        this.model.resetState()
+        this.$refs['wizardForm'].reset()
       },
       beforeMount () {
         this.model.resetState()

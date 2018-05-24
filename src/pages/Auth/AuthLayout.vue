@@ -1,20 +1,20 @@
 <template>
-  <div class="wrapper wrapper-full-page">
+  <el-container direction="vertical" class="wrapper wrapper-full-page">
     <notifications></notifications>
     <landing-nav></landing-nav>
-    <div class="full-page" :data-color="backgroundColor" :class="pageClass">
+    <el-container class="full-page" direction="vertical" :data-color="backgroundColor" :class="pageClass">
       <div class="content">
         <div class="container">
-          <div class="row d-flex justify-content-center align-items-center">
+          <el-row class="row d-flex justify-content-center align-items-center">
             <div :class="contentClass">
               <slot></slot>
             </div>
-          </div>
+          </el-row>
         </div>
       </div>
-      <div class="full-page-background" style="background-image: url(static/img/background/bg_auth.jpg) "></div>
-    </div>
-  </div>
+      <div class="full-page-background" style="background-image: url(static/img/background/bg_auth.jpg)"></div>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
@@ -38,11 +38,6 @@
       backgroundColor: {
         type: String,
         default: 'black'
-      }
-    },
-    data () {
-      return {
-        showMenu: true
       }
     },
     methods: {

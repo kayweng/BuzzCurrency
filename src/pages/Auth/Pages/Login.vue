@@ -4,7 +4,7 @@
       <fade-render-transition>
         <card :title="'Sign In'">
           <!-- Login Inputs -->
-          <div>
+          <div direction="vertical">
             <!-- email -->
             <fg-input type="email"
                       name="email"
@@ -43,10 +43,10 @@
           </div>
           <div class="empty-row"></div>
           <!-- Buttons -->
-          <div class="text-center">
+          <div class="center">
             <button @click.enter.prevent="submitForm" type="submit" class="btn btn-fill btn-primary btn-round btn-wd ">Login</button>
           </div>
-          <div slot="footer" class="row text-center">
+          <div slot="footer" class="row center">
               <div class="col-sm-6 col-12">
                 <router-link to="/reset-password" class="btn btn-simple btn-link btn-sm">Forgot password</router-link>
               </div>

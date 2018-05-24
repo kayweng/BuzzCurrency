@@ -110,7 +110,7 @@
       this.getBaseCurrencies().then(response => {
         this.$loading.endLoading('loadBaseCurrency')
       }, error => {
-        console.log(error)
+        throw new Error(error)
       })
     }
   }

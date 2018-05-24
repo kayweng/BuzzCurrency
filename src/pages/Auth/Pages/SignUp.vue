@@ -127,9 +127,7 @@
               </div>
             </div>
           </div>
-
           <br/>
-
           <!-- Agreement -->
           <div class="row">
             <check-box v-model="model.agreement" :class="{'input-error': $v.model.agreement.$error }">
@@ -139,17 +137,13 @@
               </div>
             </check-box>
           </div>
-
           <br/>
-
           <!-- Recaptcha -->
           <div class="row center-item">
               <div class="g-recaptcha" data-sitekey="6LfwwUkUAAAAAGcTAv-UXTyeRdH2UKoydww1wsab"></div>
               <input type="hidden" v-model="model.reCaptcha" />
           </div>
-
           <br/>
-
           <!-- Buttons -->
           <div class="row">
             <div class="text-center col-12">

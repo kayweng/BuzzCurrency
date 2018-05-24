@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <div class="col-md-4 offset-md-4 col-6 offset-3 text-center">
+  <el-container direction="vertical">
+    <el-row class="col-md-4 offset-md-4 col-6 offset-3 center">
       <fg-input label="Enter Code"
                 pattern="\d*"
                 name="code"
                 :maxLength="6"
                 @blur="$v.code.$touch()"
-                :class="{'input-error': $v.code.$error, 'text-center': true }"
+                :class="{'input-error': $v.code.$error, 'center': true }"
                 v-model="code">
       </fg-input>
-    </div>
-    <div class="col-12 text-center error-message">
+    </el-row>
+    <el-row class="center error-message">
       <span v-if="!$v.code.required" class="error-message">The verification code field is required</span>
       <span v-if="$v.code.required && !$v.code.numeric" class="error-message">The verification code field accept numeric only</span>
-    </div>
-  </div>
+    </el-row>
+  </el-container>
 </template>
 
 <script>
