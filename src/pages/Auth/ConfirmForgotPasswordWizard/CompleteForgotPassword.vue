@@ -21,11 +21,11 @@
   export default {
     props: ['confirmPasswordResult'],
     methods: {
-      resetWizardForm () {
-        this.$emit('reset', true)
-      },
       resetVerficationCode () {
         this.$router.push('/reset-password')
+      },
+      resetWizardForm () {
+        this.$emit('resetWizardForm', null)
       }
     }
   }

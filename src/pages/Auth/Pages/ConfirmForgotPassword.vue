@@ -38,7 +38,7 @@
                           :tabId="4"
                           :before-change="() => validateStep('createNewPassword')"
                           icon="nc-icon nc-check-2">
-                <create-password ref="createNewPassword" @on-reset="resetForm" :confirmPasswordResult="confirmPasswordResult"></create-password>
+                <create-password ref="createNewPassword" v-on:resetWizardForm="resetForm" :confirmPasswordResult="confirmPasswordResult"></create-password>
               </tab-content>
 
               <div class="empty-row"></div>
@@ -157,7 +157,7 @@
         this.model.newPassword = val.newPassword
         this.model.confirmPassword = val.confirmPassword
       },
-      resetForm () {
+      resetForm (val) {
         this.model.resetState()
         this.$refs['wizardForm'].reset()
       },
