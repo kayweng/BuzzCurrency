@@ -1,5 +1,5 @@
 <template>
-    <landing-layout pageClass="login-page" :contentClass="'col-lg-5 col-md-6 col-sm-8'">>
+    <landing-layout pageClass="login-page" :contentClass="'col-lg-5 col-md-6 col-sm-8'">
       <form method="#" action="#">
         <fade-render-transition>
           <card :title="'Forgot Password'">

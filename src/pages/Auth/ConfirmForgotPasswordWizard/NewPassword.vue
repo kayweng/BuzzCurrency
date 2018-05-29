@@ -58,6 +58,10 @@
 
         this.$emit('on-validated', this.model)
         return true
+      },
+      reset () {
+        this.model.newPassword = null
+        this.model.confirmPassword = null
       }
     }
   }

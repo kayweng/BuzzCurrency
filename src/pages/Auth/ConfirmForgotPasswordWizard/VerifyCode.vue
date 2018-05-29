@@ -10,10 +10,10 @@
                 v-model="code">
       </fg-input>
     </el-row>
-    <el-row class="center error-message">
+    <div class="center error-message">
       <span v-if="!$v.code.required" class="error-message">The verification code field is required</span>
       <span v-if="$v.code.required && !$v.code.numeric" class="error-message">The verification code field accept numeric only</span>
-    </el-row>
+    </div>
   </el-container>
 </template>
 
@@ -41,6 +41,9 @@
 
         this.$emit('on-validated', this.code)
         return true
+      },
+      reset () {
+        this.code = null
       }
     }
   }

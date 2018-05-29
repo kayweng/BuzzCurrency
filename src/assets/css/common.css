@@ -33,7 +33,7 @@ h4{
 }
 
 .default-row{
-  min-height: 44px;
+  min-height: 44px!important;
 }
 
 /* font style */
@@ -188,14 +188,13 @@ h4{
 
 .btn-join{
   background-color:#FFFFFF;
-  border-color: lightcyan;
+  border: 2px solid #409EFF;
   height: 40px;
   color: darkblue;
-  box-shadow: 1px 1px white;
 }
 
 .btn-join:hover{
-  background-color: darkblue !important;
+  background-color: #409EFF !important;
   border: 2px solid white;
   color: white !important;
 }
@@ -203,11 +202,11 @@ h4{
 .btn-signup{
   background-color: transparent;
   border: 2px solid #1F618D;
-  color: orangered !important;
+  color: #2471A3 !important;
 }
 
 .btn-signup:hover{
-  background-color: orangered !important;
+  background-color: #2471A3 !important;
   border: 2px solid white;
   color: white !important;
 }
@@ -215,11 +214,11 @@ h4{
 .btn-login{
   background-color: transparent;
   border: 0px !important;
-  color: orangered !important;
+  color: #2471A3 !important;
 }
 
 .btn-login:hover{
-  background-color: orangered !important;
+  background-color: #2471A3 !important;
   border: 0px !important;
   color: white !important;
 }
@@ -298,7 +297,7 @@ h4{
 .error-message{
   color: #f79483 !important;
   font-size: .75rem;
-  min-height: 18px;
+  min-height: 18px!important;
   margin-left: 2px;
 }
 

@@ -17,11 +17,14 @@
 <style scoped>
 
   .container-fluid{
-    padding-top: 25px;
     padding-left: 50px;
     padding-right: 50px;
     padding-bottom: 25px;
     min-height: 100px;
+  }
+
+  .card-item {
+    padding-top: 50px;
   }
 
 </style>

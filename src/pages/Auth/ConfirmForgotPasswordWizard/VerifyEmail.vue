@@ -10,10 +10,10 @@
                 v-model="email">
       </fg-input>
     </el-row>
-    <el-row class="center error-message">
+    <div class="center error-message">
       <span v-if="!$v.email.required" class="error-message">The email field is required</span>
       <span v-if="!$v.email.email" class="error-message">Invalid email format</span>
-    </el-row>
+    </div>
   </el-container>
 </template>
 
@@ -41,6 +41,9 @@
 
         this.$emit('on-validated', this.email)
         return true
+      },
+      reset () {
+        this.email = null
       }
     }
   }

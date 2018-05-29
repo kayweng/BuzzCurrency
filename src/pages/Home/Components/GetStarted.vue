@@ -5,7 +5,7 @@
       <p>Register an account to explores more currency rates in our platform and remember authenticate yourself to be a genuine user for enjoy more features.</p>
     </el-row>
     <el-row>
-      <router-link class="btn btn-join btn-wd" to="/signup" tag="button">Join now</router-link>
+      <router-link class="btn btn-join btn-round btn-wd" to="/signup" tag="button">Join now</router-link>
     </el-row>
   </el-container>
 </template>

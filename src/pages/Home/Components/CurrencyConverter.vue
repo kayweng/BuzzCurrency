@@ -5,13 +5,13 @@
         <h4><i class="fa fa-calculator" />&nbsp;&nbsp;Currency Converter</h4>
       </el-row>
       <el-row class="row">
-        <el-col :span="6"></el-col>
-        <el-col :span="12">
+        <el-col :lg="6" :xs="2" ></el-col>
+        <el-col :lg="12" :xs="20">
           <card class="card-form">
             <el-container direction="vertical" class="center">
               <!-- Amount -->
               <el-row>
-                <el-col :span="11">
+                <el-col :sm="10" :xs="8">
                   <fg-input type="number"
                             name="from amount"
                             label="From Amount"
@@ -22,8 +22,8 @@
                             v-model="model.frAmount">
                   </fg-input>
                 </el-col>
-                <el-col :span="2">&nbsp;</el-col>
-                <el-col :span="11">
+                <el-col :sm="2" :xs="4">&nbsp;</el-col>
+                <el-col :sm="10" :xs="8">
                   <fg-input type="number"
                             name="to amount"
                             label="To Amount"
@@ -37,17 +37,17 @@
               </el-row>
               <!-- Currency Code -->
               <el-row>
-                <el-col :span="11" :class="{'input-error': $v.model.frCurrency.$error }">
+                <el-col :sm="10" :xs="8" :class="{'input-error': $v.model.frCurrency.$error }">
                   <currency-select  class="select-default element-fluid" 
                                     v-model="model.frCurrency"
                                     @changed="model.frCurrency = $event" ></currency-select>
                 </el-col>
-                <el-col :span="2">
+                <el-col :sm="2" :xs="4">
                   <button class="btn btn-link" @click="shiftCurrencyCodes">
                     <i class="fa fa-exchange"></i>
                   </button>
                 </el-col>
-                <el-col :span="11" :class="{'input-error': $v.model.toCurrency.$error }">
+                <el-col :sm="10" :xs="8" :class="{'input-error': $v.model.toCurrency.$error }">
                   <currency-select  class="select-default element-fluid"  
                                     v-model="model.toCurrency"
                                     @changed="model.toCurrency = $event" ></currency-select>
@@ -61,7 +61,7 @@
             </el-container>
           </card>
         </el-col>
-        <el-col :span="6"></el-col> 
+        <el-col :lg="6" :xs="2"></el-col> 
       </el-row>
     </el-container>
   </fade-render-transition>

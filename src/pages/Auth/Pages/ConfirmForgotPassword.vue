@@ -160,6 +160,9 @@
       resetForm (val) {
         this.model.resetState()
         this.$refs['wizardForm'].reset()
+        this.$refs['verifyEmail'].reset()
+        this.$refs['verifyCode'].reset()
+        this.$refs['newPassword'].reset()
       },
       beforeMount () {
         this.model.resetState()

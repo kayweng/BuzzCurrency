@@ -6,16 +6,14 @@
     <el-row class="container-currency">
       <div class="currencies center">
         <transition name="fade" tag="div" mode="out-in">
-          <carousel v-if="baseCurrencyRates.length > 0">
-            <slide v-for="(arr, i) in carouselPages" :key="i">
-              <transition-group name="fade" tag="div">
-                <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
-                  <small-note-card class="small-note-hover" :rate="rate"></small-note-card>
-                </div>
-              </transition-group>
-              </slide>
-          </carousel>
-          <div class="center" v-if="baseCurrencyRates.length === 0">
+          <el-carousel v-if="baseCurrencyRates.length > 0">
+            <el-carousel-item v-for="(arr, i) in carouselPages" :key="i">
+              <div style="display:inline-block;" v-for="(rate, j) in arr" :key="j">
+                <small-note-card class="small-note-hover" :rate="rate"></small-note-card>
+              </div>
+            </el-carousel-item>
+            </el-carousel>
+          <div class="center" v-else>
             <v-loading loader='loadBaseCurrency'>
               <template slot='spinner'>
                 <loading-spinner height='30px' width='30px' />
@@ -31,7 +29,7 @@
 <style scoped>
     
   .container-fluid{
-    background-color: #F7F9F9;
+    background-color: #E5E8E8;
   }
 
   .container-currency > div:not(.fixer) {
@@ -42,7 +40,7 @@
   .currencies{
     min-width: 100%;
     max-width: 100%;
-    padding: 50px;
+    padding: 25px;
   }
 
 </style>
@@ -50,14 +48,11 @@
 <script>
   import { mapGetters, mapActions } from 'vuex'
   import { SmallNoteCard } from 'src/components/index'
-  import { Carousel, Slide } from 'vue-carousel'
   import loadingSpinner from 'vuex-loading/src/spinners/spinner.vue'
 
   export default {
     components: {
       SmallNoteCard,
-      Carousel,
-      Slide,
       loadingSpinner
     },
     methods: {
@@ -76,16 +71,16 @@
 
         switch (this.deviceType) {
           case 'large-device':
-            count = 16
+            count = 21  // 7*3
             break
           case 'medium-device':
-            count = 12
+            count = 15 // 5*3
             break
           case 'small-device':
-            count = 6
+            count = 9 // 3*3
             break
           case 'mobile':
-            count = 3
+            count = 6 // 2*3
             break
         }
        

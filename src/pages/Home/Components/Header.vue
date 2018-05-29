@@ -17,12 +17,16 @@
           </el-col>
           <el-col :span="12">
             <div class="right">
-              <button class="btn btn-social btn-round btn-outline btn-email white" title="Email us" @click="emailUs">
-                <i class="fa fa-envelope-o"></i>
-              </button>
-              <button class="btn btn-social btn-round btn-outline btn-facebook white" title="Buzz Currency Official Facebook Page" @click="openFacebookPage">
-                <i class="fa fa-facebook"></i>
-              </button>
+              <el-tooltip class="item" effect="dark" content="Send Email To Us" placement="top-start">
+                <button class="btn btn-social btn-round btn-outline btn-email white" @click="emailUs">
+                  <i class="fa fa-envelope-o"></i>
+                </button>
+              </el-tooltip>
+              <el-tooltip class="item" effect="dark" content="Visit Our Facebook" placement="top-start">
+                <button class="btn btn-social btn-round btn-outline btn-facebook white" title="Buzz Currency Official Facebook Page" @click="openFacebookPage">
+                  <i class="fa fa-facebook"></i>
+                </button>
+              </el-tooltip>
             </div>
           </el-col>
         </el-row>

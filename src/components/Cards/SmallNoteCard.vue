@@ -23,13 +23,6 @@
     min-width: 140px;
     max-width: 200px;
   }
-  
-  .rate:hover{
-    cursor: pointer;
-    zoom: 1.2;
-    color: #154360;
-    text-decoration: underline;
-  }
 
   span {
     display: table-cell;

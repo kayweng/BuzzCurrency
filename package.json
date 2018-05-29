@@ -32,7 +32,6 @@
     "v-tooltip": "^2.0.0-rc.25",
     "vee-validate": "^2.0.5",
     "vue": "^2.5.13",
-    "vue-carousel": "^0.6.9",
     "vue-clickaway": "^2.1.0",
     "vue-form-wizard": "^0.8.1",
     "vue-nav-tabs": "^0.5.6",

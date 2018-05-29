@@ -10287,7 +10287,7 @@ star {
 
 .login-page > .content,
 .lock-page > .content {
-  padding-top: 20vh;
+  padding-top: 10vh;
 }
 
 .lock-page .card-lock {
