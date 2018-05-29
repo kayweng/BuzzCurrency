@@ -7,11 +7,11 @@
       <el-row class="row">
         <el-col :lg="6" :xs="2" ></el-col>
         <el-col :lg="12" :xs="20">
-          <card class="card-form">
-            <el-container direction="vertical" class="center">
+          <card class="card-form center">
+            <el-container direction="vertical">
               <!-- Amount -->
               <el-row>
-                <el-col :sm="10" :xs="8">
+                <el-col :sm="11" :xs="8">
                   <fg-input type="number"
                             name="from amount"
                             label="From Amount"
@@ -22,8 +22,8 @@
                             v-model="model.frAmount">
                   </fg-input>
                 </el-col>
-                <el-col :sm="2" :xs="4">&nbsp;</el-col>
-                <el-col :sm="10" :xs="8">
+                <el-col :sm="2" :xs="6">&nbsp;</el-col>
+                <el-col :sm="11" :xs="8">
                   <fg-input type="number"
                             name="to amount"
                             label="To Amount"
@@ -37,17 +37,17 @@
               </el-row>
               <!-- Currency Code -->
               <el-row>
-                <el-col :sm="10" :xs="8" :class="{'input-error': $v.model.frCurrency.$error }">
+                <el-col :sm="11" :xs="8" :class="{'input-error': $v.model.frCurrency.$error }">
                   <currency-select  class="select-default element-fluid" 
                                     v-model="model.frCurrency"
                                     @changed="model.frCurrency = $event" ></currency-select>
                 </el-col>
-                <el-col :sm="2" :xs="4">
+                <el-col :sm="2" :xs="6">
                   <button class="btn btn-link" @click="shiftCurrencyCodes">
                     <i class="fa fa-exchange"></i>
                   </button>
                 </el-col>
-                <el-col :sm="10" :xs="8" :class="{'input-error': $v.model.toCurrency.$error }">
+                <el-col :sm="11" :xs="8" :class="{'input-error': $v.model.toCurrency.$error }">
                   <currency-select  class="select-default element-fluid"  
                                     v-model="model.toCurrency"
                                     @changed="model.toCurrency = $event" ></currency-select>
