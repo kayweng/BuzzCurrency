@@ -3,6 +3,17 @@
     <form method="#" action="#">
       <fade-render-transition :duration="200">
         <card :title="'Create Account'">
+          <div class="center">
+            <el-collapse v-model="activeCollapse" accordion>
+              <el-collapse-item title="or signup with" name="1">
+                <div class="empty-row"></div>
+                <button type="button" class="btn btn-facebook" @click="signupWithFacebook">
+                  <i class="fa fa-facebook"></i>
+                  Facebook
+                </button>
+              </el-collapse-item>
+            </el-collapse>
+          </div>
           <!-- User Info -->
           <div class="row">
             <!-- first name -->
@@ -92,7 +103,8 @@
                 <span v-if="$v.model.birthdate.required && !$v.model.birthdate.between">You must be age of 18 or order to sign up</span>
               </div>
             </div>
-            <div class="empty-row"></div>
+            <div class="empty-row">
+            </div>
           </div> 
           <hr/>
           <div class="row">
@@ -159,6 +171,19 @@
   </landing-layout>
 </template>
 
+<style lang="scss">
+  .el-collapse-item {
+    .el-collapse-item__header {
+      font-size: 12px;
+      height: 24px;
+      line-height: 24px;
+    }
+    .el-collapse-item__arrow {
+      line-height: 24px;
+    }
+  }
+</style>
+
 <script>
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
   import SignUpModel from 'src/models/signUpModel'
@@ -175,15 +200,19 @@
       return {
         terms: 'By proceeding, I agree that you can collect, use and disclose the information provided by me in accordance with your <a href="#/policy">Privacy Policy</a> which I have read and understand.',
         calendarDate: null,
-        model: new SignUpModel()
+        model: new SignUpModel(),
+        activeCollapse: ['1']
       }
     },
     validations: {
       model: SignUpModel.validationScheme()
     },
     methods: {
+      signupWithFacebook () {
+
+      },
       showMobileHint () {
-        this.showNotifyMessage('Please add country code to a mobile number.', 3000, 'info', 'fa fa-mobile')
+        this.showNotifyMessage('Please add country code to a mobile number. Example: +609871234', 3000, 'info', 'fa fa-mobile')
       },
       resetForm () {
         swal({

@@ -5,6 +5,8 @@ import {
   Input, InputNumber, DatePicker, Button, Checkbox, Select, Option, 
   Carousel, CarouselItem,
   Tooltip,
+  Collapse, CollapseItem,
+  Table, TableColumn,
   Container, Row, Col, 
   Header, Aside, Main, Footer 
 } from 'element-ui'
@@ -27,6 +29,8 @@ const GlobalComponents = {
     Vue.component(Carousel.name, Carousel)
     Vue.component(CarouselItem.name, CarouselItem)
     Vue.component(Tooltip.name, Tooltip)
+    Vue.component(Collapse.name, Collapse)
+    Vue.component(CollapseItem.name, CollapseItem)
     Vue.component(Container.name, Container)
     Vue.component(Row.name, Row)
     Vue.component(Col.name, Col)
