@@ -7,10 +7,7 @@
             <el-collapse v-model="activeCollapse" accordion>
               <el-collapse-item title="or signup with" name="1">
                 <div class="empty-row"></div>
-                <button type="button" class="btn btn-facebook" @click="signupWithFacebook">
-                  <i class="fa fa-facebook"></i>
-                  Facebook
-                </button>
+                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
               </el-collapse-item>
             </el-collapse>
           </div>
@@ -171,6 +168,16 @@
   </landing-layout>
 </template>
 
+<style scoped>
+  .fb-signin-button {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background-color: #4267b2;
+    color: #fff;
+  }
+</style>
+
 <style lang="scss">
   .el-collapse-item {
     .el-collapse-item__header {
@@ -189,7 +196,7 @@
   import SignUpModel from 'src/models/signUpModel'
   import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
-  
+
   export default {
     components: {
       FadeRenderTransition,
@@ -208,9 +215,6 @@
       model: SignUpModel.validationScheme()
     },
     methods: {
-      signupWithFacebook () {
-
-      },
       showMobileHint () {
         this.showNotifyMessage('Please add country code to a mobile number. Example: +609871234', 3000, 'info', 'fa fa-mobile')
       },
