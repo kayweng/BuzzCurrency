@@ -4,10 +4,13 @@
       <fade-render-transition :duration="200">
         <card :title="'Create Account'">
           <div class="center">
-            <el-collapse v-model="activeCollapse" accordion>
+            <el-collapse accordion>
               <el-collapse-item title="or signup with" name="1">
                 <div class="empty-row"></div>
-                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                <button type="button" class="btn btn-facebook btn-wd" @click="signupWithFacebook">
+                  <i class="fa fa-facebook"></i>
+                  Signup with facebook
+                </button>
               </el-collapse-item>
             </el-collapse>
           </div>
@@ -196,6 +199,7 @@
   import SignUpModel from 'src/models/signUpModel'
   import swal from 'sweetalert2'
   import LandingLayout from 'src/pages/Auth/AuthLayout.vue'
+  import facebook from 'src/js/facebook.js'
 
   export default {
     components: {
@@ -208,13 +212,40 @@
         terms: 'By proceeding, I agree that you can collect, use and disclose the information provided by me in accordance with your <a href="#/policy">Privacy Policy</a> which I have read and understand.',
         calendarDate: null,
         model: new SignUpModel(),
-        activeCollapse: ['1']
+        fbConnected: false
       }
     },
     validations: {
       model: SignUpModel.validationScheme()
     },
     methods: {
+      populateFacebookUserInfo () {
+        facebook.retrieveMeFacebookInfo().then(response => {
+          console.log(response)
+          this.model.email = response.email
+          this.model.firstName = response.first_name
+          this.model.lastName = response.last_name
+          
+          if (this.model.birthdate) {
+            this.model.birthdate= response.birthdate 
+          }
+
+          if (this.model.birthdate) {
+            this.model.mobile= response.mobile 
+          }
+        })
+      },
+      signupWithFacebook () {
+        if (!this.fbConnected) {
+          facebook.loginFacebook().then(response => {
+            if(response.status === 'connected') {
+              this.populateFacebookUserInfo()
+            }
+          })
+        } else {
+          this.populateFacebookUserInfo()
+        }
+      },
       showMobileHint () {
         this.showNotifyMessage('Please add country code to a mobile number. Example: +609871234', 3000, 'info', 'fa fa-mobile')
       },
@@ -283,6 +314,13 @@
       calendarDate: function (val) {
         this.model.birthdate = val
       }
+    },
+    mounted () {
+      facebook.getLoginStatus().then(response => {
+        if (response === 'connected') {
+          this.fbConnected = true
+        }
+      })
     },
     beforeMount () {
       this.model.resetState()
