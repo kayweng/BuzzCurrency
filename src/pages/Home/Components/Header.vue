@@ -1,6 +1,6 @@
 <template>
   <el-container direction="vertical" class="container-fluid">
-    <landing-nav></landing-nav>
+    <landing-nav :title="'Buzz Money'" :icon="'fa fa-forumbee'"></landing-nav>
     <el-container direction="vertical">
       <el-main class="container-body">
         <el-row class="container-body-row">

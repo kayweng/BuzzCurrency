@@ -1,7 +1,7 @@
 <template>
     <div class="landing-div">
-        <i class="fa fa-forumbee" style="font-size:16px;color:white;"></i>
-        <router-link to="/" tag="label" class="pointer">Buzz Currency</router-link>
+        <i :class="icon" style="font-size:16px;color:white;"></i>
+        <router-link to="/" tag="label" class="pointer">{{ title }}</router-link>
         <div class="button-inline">
             <router-link to="/signup" tag="button" class="btn btn-round btn-signup">Sign Up</router-link>
             <router-link to="/login" tag="button" class="btn btn-outline btn-round btn-login">Sign In</router-link>
@@ -35,6 +35,10 @@
 
 <script>
   export default {
-    name: 'landing-nav'
+    name: 'landing-nav',
+    props: {
+      title: String,
+      icon: String
+    }
   }
 </script>

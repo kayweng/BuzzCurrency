@@ -5,7 +5,7 @@
         <card :title="'Create Account'">
           <div class="center">
             <el-collapse accordion>
-              <el-collapse-item title="or signup with" name="1">
+              <el-collapse-item title="Are you on with facebook ?" name="1">
                 <div class="empty-row"></div>
                 <button type="button" class="btn btn-facebook btn-wd" @click="signupWithFacebook">
                   <i class="fa fa-facebook"></i>
@@ -195,6 +195,7 @@
 </style>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   import { FadeRenderTransition, Checkbox } from 'src/components/index'
   import SignUpModel from 'src/models/signUpModel'
   import swal from 'sweetalert2'
@@ -219,20 +220,55 @@
       model: SignUpModel.validationScheme()
     },
     methods: {
+      ...mapActions([
+        'getUserProfileInfo',
+      ]),
       populateFacebookUserInfo () {
         facebook.retrieveMeFacebookInfo().then(response => {
           console.log(response)
-          this.model.email = response.email
-          this.model.firstName = response.first_name
-          this.model.lastName = response.last_name
-          
-          if (this.model.birthdate) {
-            this.model.birthdate= response.birthdate 
+
+          if(!response.email) {
+            this.showNotifyMessage('Invalid email address', 3000, 'danger')
+            return
           }
 
-          if (this.model.birthdate) {
+          this.model.email = response.email
+
+          if (response.first_name) {
+            this.model.firstName = response.first_name
+          }
+
+          if (response.last_name) {
+            this.model.lastName = response.last_name
+          }
+
+          if (response.birthday) {
+            this.calendarDate = new Date(response.birthday)
+            this.model.birthdate= new Date(response.birthday)
+          }
+
+          if (response.mobile) {
             this.model.mobile= response.mobile 
           }
+
+          if (
+              (this.$v.model.email.$invalid || this.$v.model.email.$error) ||
+              (this.$v.model.firstName.$invalid || this.$v.model.firstName.$error) ||
+              (this.$v.model.lastName.$invalid || this.$v.model.lastName.$error) ||
+              (this.$v.model.birthdate.$invalid || this.$v.model.birthdate.$error) ||
+              (this.$v.model.mobile.$invalid || this.$v.model.mobile.$error)
+            ) {
+              this.showNotifyMessage('Signup with facebook failed. The signup process requires all mandatory info, please create account with complete info.', 10000, 'danger')
+              this.$v.model.$touch()
+              return
+            }
+
+          // check user exists
+          this.getUserProfileInfo(this.model.email).then(response => {
+            console.log(response)
+          }, error => {
+            console.log(error)
+          })
         })
       },
       signupWithFacebook () {
@@ -247,7 +283,7 @@
         }
       },
       showMobileHint () {
-        this.showNotifyMessage('Please add country code to a mobile number. Example: +609871234', 3000, 'info', 'fa fa-mobile')
+        this.showNotifyMessage('Please add country code to a mobile number. Example: +609871234', 3000, 'primary', 'fa fa-mobile')
       },
       resetForm () {
         swal({

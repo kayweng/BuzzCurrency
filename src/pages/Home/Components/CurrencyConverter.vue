@@ -5,8 +5,8 @@
         <h4><i class="fa fa-calculator" />&nbsp;&nbsp;Currency Converter</h4>
       </el-row>
       <el-row class="row">
-        <el-col :lg="6" :xs="2" ></el-col>
-        <el-col :lg="12" :xs="20">
+        <el-col :lg="6" :md="6" :sm="2" :xs="2" ></el-col>
+        <el-col :lg="12" :md="12" :sm="20" :xs="20">
           <card class="card-form center">
             <el-container direction="vertical">
               <!-- Amount -->
@@ -61,7 +61,7 @@
             </el-container>
           </card>
         </el-col>
-        <el-col :lg="6" :xs="2"></el-col> 
+        <el-col :lg="6" :md="6" :sm="2" :xs="2"></el-col> 
       </el-row>
     </el-container>
   </fade-render-transition>

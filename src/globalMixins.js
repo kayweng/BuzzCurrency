@@ -75,9 +75,9 @@ export default {
         },
         timeout: duration || 3000,
         icon: icon || 'nc-icon nc-bulb-63',
-        horizontalAlign: hAlign || 'right',
-        verticalAlign: vAlign || 'top',
-        type: type || 'primary'
+        horizontalAlign: hAlign || 'right', // right | center | left
+        verticalAlign: vAlign || 'top', // top | bottom
+        type: type || 'primary' // info | warning | danger | success | primary
       })
     },
 

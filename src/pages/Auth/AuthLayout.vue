@@ -1,7 +1,7 @@
 <template>
   <el-container direction="vertical" class="wrapper wrapper-full-page">
     <notifications></notifications>
-    <landing-nav></landing-nav>
+    <landing-nav :title="'Buzz Money'" :icon="'fa fa-forumbee'"></landing-nav>
     <el-container class="full-page" direction="vertical" :data-color="backgroundColor" :class="pageClass">
       <div class="content">
         <div class="container">
